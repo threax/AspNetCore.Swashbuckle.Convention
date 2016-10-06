@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AspNetCore.Swashbuckle.Convention")]
+[assembly: AssemblyProduct("Threax.AspNetCore.Swashbuckle.Convention")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("30bf16aa-6074-4ae2-9d08-367df40f2cdf")]
+[assembly: Guid("26a28ce4-9896-4637-8b57-75e79ab97fb1")]

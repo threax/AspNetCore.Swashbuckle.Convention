@@ -7,8 +7,8 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>30bf16aa-6074-4ae2-9d08-367df40f2cdf</ProjectGuid>
-    <RootNamespace>AspNetCore.Swashbuckle.Convention</RootNamespace>
+    <ProjectGuid>26a28ce4-9896-4637-8b57-75e79ab97fb1</ProjectGuid>
+    <RootNamespace>Threax.AspNetCore.Swashbuckle.Convention</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
