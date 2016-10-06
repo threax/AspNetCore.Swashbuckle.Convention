@@ -18,10 +18,13 @@ namespace Microsoft.Extensions.DependencyInjection
         /// needed. This includes auto discovery of xml comments if they reside in the same folder as the
         /// program's main executable and are named the same as the executable, but with .xml as the extension.
         /// </summary>
+        /// <remarks>
+        /// You might need to enable xml comments in your project settings to get the comments working.
+        /// </remarks>
         /// <param name="services">The service colletion.</param>
         /// <param name="apiInfo">The swagger info for your api.</param>
         /// <returns></returns>
-        public static IServiceCollection SetupConventionalSwagger(this IServiceCollection services, Info apiInfo)
+        public static IServiceCollection AddConventionalSwagger(this IServiceCollection services, Info apiInfo)
         {
             services.AddSwaggerGen();
             services.ConfigureSwaggerGen(options =>
