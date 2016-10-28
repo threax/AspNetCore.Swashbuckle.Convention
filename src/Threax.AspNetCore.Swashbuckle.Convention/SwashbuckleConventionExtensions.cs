@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using System.IO;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Threax.AspNetCore.Swashbuckle.Convention;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -23,20 +24,30 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         /// <param name="services">The service colletion.</param>
         /// <param name="apiInfo">The swagger info for your api.</param>
+        /// <param name="options">Additional options, can be null for defaults.</param>
         /// <returns></returns>
-        public static IServiceCollection AddConventionalSwagger(this IServiceCollection services, Info apiInfo)
+        public static IServiceCollection AddConventionalSwagger(this IServiceCollection services, Info apiInfo, SwashbuckleConventionOptions options = null)
         {
-            services.AddSwaggerGen();
-            services.ConfigureSwaggerGen(options =>
+            if(options == null)
             {
-                options.SingleApiVersion(apiInfo);
+                options = new SwashbuckleConventionOptions();
+            }
+
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerGen(o =>
+            {
+                o.SingleApiVersion(apiInfo);
                 string pathToDoc = Path.ChangeExtension(Assembly.GetEntryAssembly().Location, "xml");
                 if (File.Exists(pathToDoc))
                 {
-                    options.IncludeXmlComments(pathToDoc);
+                    o.IncludeXmlComments(pathToDoc);
                 }
-                options.DescribeAllEnumsAsStrings();
-                options.UseComponentModel();
+                o.DescribeAllEnumsAsStrings();
+                o.UseComponentModel();
+                if (options.HasJwtBearerAuth)
+                {
+                    o.OperationFilter<AddJwtBearerHeaderParameter>();
+                }
             });
 
             return services;

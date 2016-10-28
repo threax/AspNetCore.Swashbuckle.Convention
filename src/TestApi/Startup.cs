@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.Swagger.Model;
+using Threax.AspNetCore.Swashbuckle.Convention;
 
 namespace TestApi
 {
@@ -46,7 +47,10 @@ namespace TestApi
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddConventionalSwagger(ApiInfo);
+            services.AddConventionalSwagger(ApiInfo, new SwashbuckleConventionOptions()
+            {
+                HasJwtBearerAuth = false
+            });
 
             services.AddMvc();
         }
