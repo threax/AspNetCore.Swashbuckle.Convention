@@ -1,19 +1,19 @@
-﻿{
+{
   "version": "1.0.0-*",
-
   "dependencies": {
     "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
     "NETStandard.Library": "1.6.0",
     "Swashbuckle": "6.0.0-beta902",
     "System.Reflection.Extensions": "4.0.1"
   },
-
   "frameworks": {
     "netstandard1.6": {
       "imports": "dnxcore50"
     },
     "net452": {
-
     }
+  },
+  "buildOptions": {
+    "xmlDoc": true
   }
 }
