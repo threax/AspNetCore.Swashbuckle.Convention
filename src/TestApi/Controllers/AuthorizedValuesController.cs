@@ -11,8 +11,21 @@ namespace TestApi.Controllers
     /// This controller provides api access to values.
     /// </summary>
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    [Authorize]
+    public class AuthorizedValuesController : Controller
     {
+        /// <summary>
+        /// Get a list of all values. This one has been marked AllowAnonymous and should not need a bearer.
+        /// </summary>
+        /// <returns>All the values</returns>
+        // GET api/values
+        [HttpGet("Anon")]
+        [AllowAnonymous]
+        public IEnumerable<string> GetAnon()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
         /// <summary>
         /// Get a list of all values.
         /// </summary>
@@ -20,18 +33,6 @@ namespace TestApi.Controllers
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        /// <summary>
-        /// Get a list of all values. This one has been marked Authorize and should require a bearer token.
-        /// </summary>
-        /// <returns>All the values</returns>
-        // GET api/values
-        [HttpGet("Authorized")]
-        [Authorize]
-        public IEnumerable<string> GetAuthorized()
         {
             return new string[] { "value1", "value2" };
         }

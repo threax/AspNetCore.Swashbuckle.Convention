@@ -47,10 +47,7 @@ namespace TestApi
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddConventionalSwagger(ApiInfo, new SwashbuckleConventionOptions()
-            {
-                HasJwtBearerAuth = false
-            });
+            services.AddConventionalSwagger(ApiInfo);
 
             services.AddMvc();
         }
