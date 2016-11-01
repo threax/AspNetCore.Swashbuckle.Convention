@@ -15,8 +15,8 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "Threax.AspNetCore.Swashbuckle.Convention": "1.2.1-*",
-    "threax.AspNetCore.ExceptionToJson": "1.2.0-*"
+    "Threax.AspNetCore.Swashbuckle.Convention": "1.4.0-*",
+    "Threax.AspNetCore.ExceptionToJson": "1.4.0-*"
   },
 
   "tools": {
