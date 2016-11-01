@@ -35,23 +35,29 @@ namespace Threax.AspNetCore.Swashbuckle.Convention
             var cad = context.ApiDescription.ActionDescriptor as ControllerActionDescriptor;
             if (cad != null)
             {
-                //var controllerAttrs = cad.ControllerTypeInfo.CustomAttributes;
                 var methodAttrs = cad.MethodInfo.CustomAttributes;
 
                 var addResponse = methodAttrs.Any(i => i.AttributeType == typeof(AutoValidateAttribute));
 
+                if (operation.Responses == null)
+                {
+                    operation.Responses = new Dictionary<String, Response>();
+                }
+
                 if (addResponse)
                 {
-                    if (operation.Responses == null)
-                    {
-                        operation.Responses = new Dictionary<String, Response>();
-                    }
                     operation.Responses.Add("400", new Response()
                     {
                         Description = "Model Validation Error",
                         Schema = context.SchemaRegistry.GetOrRegister(typeof(ModelStateErrorResult)),
                     });
                 }
+
+                operation.Responses.Add("500", new Response()
+                {
+                    Description = "Internal Server Error",
+                    Schema = context.SchemaRegistry.GetOrRegister(typeof(ExceptionResult)),
+                });
             }
         }
     }

@@ -15,5 +15,12 @@ namespace Threax.AspNetCore.Swashbuckle.Convention
         /// Defaults to true.
         /// </summary>
         public bool HasJwtBearerAuth { get; set; } = true;
+
+        /// <summary>
+        /// Set this to true (default) if the api you are describing is using the 
+        /// ExceptionToJson Mvc extension. This will add 400 and 500 error responses
+        /// to the swagger document and force the error models to generate schema.
+        /// </summary>
+        public bool HasJsonExceptions { get; set; } = true;
     }
 }
