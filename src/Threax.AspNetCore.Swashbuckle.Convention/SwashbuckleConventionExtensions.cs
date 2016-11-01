@@ -47,6 +47,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 if (options.HasJwtBearerAuth)
                 {
                     o.OperationFilter<AddJwtBearerHeaderParameter>();
+                    o.OperationFilter<AddResponsesForValidation>();
                 }
             });
 

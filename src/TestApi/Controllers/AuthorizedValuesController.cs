@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
 
 namespace TestApi.Controllers
 {
@@ -12,6 +13,7 @@ namespace TestApi.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [Authorize]
+    [Produces("application/json")]
     public class AuthorizedValuesController : Controller
     {
         /// <summary>
@@ -55,6 +57,7 @@ namespace TestApi.Controllers
         /// <param name="value"></param>
         // POST api/values
         [HttpPost]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.Created)]
         public void Post([FromBody]string value)
         {
         }

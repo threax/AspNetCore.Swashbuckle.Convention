@@ -11,6 +11,7 @@ namespace TestApi.Controllers
     /// This controller provides api access to values.
     /// </summary>
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class ValuesController : Controller
     {
         /// <summary>
