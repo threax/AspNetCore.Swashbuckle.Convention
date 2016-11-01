@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.Swagger.Model;
 using Threax.AspNetCore.Swashbuckle.Convention;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Converters;
 
 namespace TestApi
 {
@@ -49,7 +51,15 @@ namespace TestApi
 
             services.AddConventionalSwagger(ApiInfo);
 
-            services.AddMvc();
+            services.AddMvc(o =>
+            {
+                o.UseExceptionErrorFilters(true);
+            })
+            .AddJsonOptions(o =>
+            {
+                o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                o.SerializerSettings.Converters.Add(new StringEnumConverter());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
