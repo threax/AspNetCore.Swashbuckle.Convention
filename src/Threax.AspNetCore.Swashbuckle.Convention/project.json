@@ -1,11 +1,11 @@
 {
-  "version": "1.2.0-*",
+  "version": "1.2.1-*",
   "dependencies": {
     "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
     "NETStandard.Library": "1.6.0",
     "Swashbuckle": "6.0.0-beta902",
     "System.Reflection.Extensions": "4.0.1",
-    "threax.AspNetCore.ExceptionToJson": "1.0.0-*"
+    "threax.AspNetCore.ExceptionToJson": "1.2.0-*"
   },
   "frameworks": {
     "netstandard1.6": {
