@@ -72,7 +72,10 @@ namespace TestApi
 
             app.UseApplicationInsightsExceptionTelemetry();
 
-            app.UseConventionalSwagger(ApiInfo);
+            app.UseConventionalSwagger(new SwaggerConventionOptions()
+            {
+                ApiInfo = ApiInfo,
+            });
 
             app.UseMvc();
         }

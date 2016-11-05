@@ -64,7 +64,22 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="app"></param>
         /// <param name="apiInfo"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseConventionalSwagger(this IApplicationBuilder app, Info apiInfo, bool useSwaggerUi = true)
+        public static IApplicationBuilder UseConventionalSwagger(this IApplicationBuilder app, Info info)
+        {
+            return app.UseConventionalSwagger(new SwaggerConventionOptions()
+            {
+                ApiInfo = info
+            });
+        }
+
+        /// <summary>
+        /// This instructs the app to use your swagger convention. It will also auto discover the name of the app's
+        /// virtual directory for swagger ui.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseConventionalSwagger(this IApplicationBuilder app, SwaggerConventionOptions options)
         {
             var baseUrlPath = "";
             var serverAddressFeature = app.ServerFeatures[typeof(IServerAddressesFeature)] as IServerAddressesFeature;
@@ -79,9 +94,9 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             app.UseSwagger();
-            if (useSwaggerUi)
+            if (options.UseSwaggerUi)
             {
-                app.UseSwaggerUi($"swagger/ui", $"{baseUrlPath}/swagger/{apiInfo.Version}/swagger.json");
+                app.UseSwaggerUi($"{options.CustomBaseUrlPath}/ui", $"{baseUrlPath}{options.CustomBaseUrlPath}/{options.ApiInfo.Version}/swagger.json");
             }
 
             return app;
