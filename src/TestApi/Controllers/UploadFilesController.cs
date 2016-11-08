@@ -93,5 +93,20 @@ namespace TestApi.Controllers
             size += file.Length;
             return size;
         }
+
+        /// <summary>
+        /// Get the content, should have file set for its 200 response schema.
+        /// </summary>
+        /// <remarks>
+        /// This is not implemented and will throw an exception if called.
+        /// </remarks>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        [HttpGet("{*file}")]
+        [Produces("text/html")]
+        public FileStreamResult GetContent(String file)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

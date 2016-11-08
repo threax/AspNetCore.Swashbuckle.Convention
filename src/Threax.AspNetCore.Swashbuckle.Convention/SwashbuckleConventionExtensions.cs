@@ -47,6 +47,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 //Operation filters
                 o.OperationFilter<AddFileParamTypes>(); //Add this first so it can be modified
+                o.OperationFilter<AddFileResponseType>();
                 if (options.HasJwtBearerAuth)
                 {
                     o.OperationFilter<AddJwtBearerHeaderParameter>();

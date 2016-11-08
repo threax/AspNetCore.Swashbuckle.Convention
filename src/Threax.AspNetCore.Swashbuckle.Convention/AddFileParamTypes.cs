@@ -25,9 +25,6 @@ namespace Threax.AspNetCore.Swashbuckle.Convention
             var cad = context.ApiDescription.ActionDescriptor as ControllerActionDescriptor;
             if (cad != null)
             {
-                var controllerAttrs = cad.ControllerTypeInfo.CustomAttributes;
-                var methodAttrs = cad.MethodInfo.CustomAttributes;
-
                 var methodParams = cad.MethodInfo.GetParameters();
                 var hasIFormFile = false;
 
