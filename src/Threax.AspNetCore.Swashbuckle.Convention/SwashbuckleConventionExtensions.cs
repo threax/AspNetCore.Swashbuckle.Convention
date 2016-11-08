@@ -44,6 +44,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
                 o.DescribeAllEnumsAsStrings();
                 o.UseComponentModel();
+
+                //Operation filters
+                o.OperationFilter<AddFileParamTypes>(); //Add this first so it can be modified
                 if (options.HasJwtBearerAuth)
                 {
                     o.OperationFilter<AddJwtBearerHeaderParameter>();
