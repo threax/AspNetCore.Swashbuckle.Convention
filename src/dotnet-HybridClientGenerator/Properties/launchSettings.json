@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Threax.AspNetCore.ClientGenerator": {
+    "dotnet-HybridClientGenerator": {
       "commandName": "Project",
       "commandLineArgs": "in=http://localhost:5000/swagger/v1/swagger.json out=client.ts client schemas"
     }

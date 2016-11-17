@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Threax.AspNetCore.ClientGenerator")]
+[assembly: AssemblyProduct("dotnet_HybridClientGenerator")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c6992b36-b17e-4bce-9a79-44b3dfba1912")]
+[assembly: Guid("d3551993-1157-43c5-af48-b766cece9d5e")]
