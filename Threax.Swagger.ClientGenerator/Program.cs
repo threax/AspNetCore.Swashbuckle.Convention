@@ -1,4 +1,6 @@
-﻿using NJsonSchema.CodeGeneration;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using NJsonSchema.CodeGeneration;
 using NJsonSchema.CodeGeneration.TypeScript;
 using NSwag;
 using NSwag.CodeGeneration.CodeGenerators;
@@ -18,48 +20,89 @@ namespace Threax.Swagger.ClientGenerator
     {
         static void Main(string[] args)
         {
-            Task.WaitAll(AsyncMain(args));
-
-        }
-
-        static async Task AsyncMain(String[] args)
-        { 
-            string documentPath = args[0];
-            string swaggerData;
-
-            if (args.Length > 1)
+            Dictionary<String, String> parsedArgs = new Dictionary<string, string>();
+            foreach (var arg in args)
             {
-                swaggerData = args[1];
+                var split = arg.Split('=');
+                if (split.Length == 1)
+                {
+                    parsedArgs.Add(split[0], null);
+                }
+                if (split.Length > 1)
+                {
+                    parsedArgs.Add(split[0], split[1]);
+                }
+            }
+
+            if (parsedArgs.ContainsKey("help"))
+            {
+                WriteHelp();
             }
             else
             {
-                if(documentPath.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                Task.WaitAll(AsyncMain(parsedArgs));
+            }
+        }
+
+        static void WriteHelp()
+        {
+            Console.WriteLine("The following arguments can be provided in name=value format.");
+            Console.WriteLine("in=path - The path to the swagger doc, can be a local path or a url. This is required.");
+            Console.WriteLine("out=path - The path to output file. This is required.");
+            Console.WriteLine("client - Include this argument to generate a client.");
+            Console.WriteLine("schemas - Include this argument to generate schemas");
+        }
+
+        static async Task AsyncMain(Dictionary<String, String> parsedArgs)
+        {
+            string swaggerDocPath = parsedArgs["in"];
+            string outPath = parsedArgs["out"];
+
+            string swaggerData;
+            if (swaggerDocPath.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+            {
+                using (HttpClient httpClient = new HttpClient())
                 {
-                    using (HttpClient httpClient = new HttpClient())
-                    {
-                        swaggerData = await httpClient.GetStringAsync(documentPath);
-                    }
+                    swaggerData = await httpClient.GetStringAsync(swaggerDocPath);
                 }
-                else
+            }
+            else
+            {
+                using (StreamReader sr = new StreamReader(File.Open(swaggerDocPath, FileMode.Open, FileAccess.Read, FileShare.Read)))
                 {
-                    using(StreamReader sr = new StreamReader(File.Open(documentPath, FileMode.Open, FileAccess.Read, FileShare.Read)))
-                    {
-                        swaggerData = await sr.ReadToEndAsync();
-                    }
+                    swaggerData = await sr.ReadToEndAsync();
                 }
             }
 
-            SwaggerToTypeScriptClientCommand Command = new SwaggerToTypeScriptClientCommand();
-            Command.Settings.TypeScriptGeneratorSettings.TemplateFactory = new FetchTemplateFactory(Command.Settings.TypeScriptGeneratorSettings.TemplateFactory);
-            Command.OperationGenerationMode = OperationGenerationMode.MultipleClientsFromPathSegments;
-            Command.Template = TypeScriptTemplate.Fetch;
-            Command.TypeStyle = TypeScriptTypeStyle.Interface;
-            Command.Input = SwaggerDocument.FromJson(swaggerData, documentPath);
-            var code = await Command.RunAsync();
-
-            using (var sr = new StreamWriter(File.Open("test.ts", FileMode.Create, FileAccess.Write, FileShare.None)))
+            String client = null;
+            if (parsedArgs.ContainsKey("client"))
             {
-                await sr.WriteAsync(code);
+                SwaggerToTypeScriptClientCommand Command = new SwaggerToTypeScriptClientCommand();
+                Command.Settings.TypeScriptGeneratorSettings.TemplateFactory = new FetchTemplateFactory(Command.Settings.TypeScriptGeneratorSettings.TemplateFactory);
+                Command.OperationGenerationMode = OperationGenerationMode.MultipleClientsFromPathSegments;
+                Command.Template = TypeScriptTemplate.Fetch;
+                Command.TypeStyle = TypeScriptTypeStyle.Interface;
+                Command.Input = SwaggerDocument.FromJson(swaggerData, swaggerDocPath);
+                client = await Command.RunAsync();
+            }
+
+            String schemas = null;
+            if (parsedArgs.ContainsKey("schemas"))
+            {
+                var swagger = JObject.Parse(swaggerData);
+                schemas = $"export var Schemas = {swagger["definitions"]}";
+            }
+
+            using (var sr = new StreamWriter(File.Open(outPath, FileMode.Create, FileAccess.Write, FileShare.None)))
+            {
+                if (client != null)
+                {
+                    await sr.WriteLineAsync(client);
+                }
+                if(schemas != null)
+                {
+                    await sr.WriteLineAsync(schemas);
+                }
             }
         }
     }
