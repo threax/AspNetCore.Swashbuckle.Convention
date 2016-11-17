@@ -20,6 +20,7 @@ namespace Threax.AspNetCore.ClientGenerator
 
         public ITemplate CreateTemplate(string package, string template, object model)
         {
+            //var templateModel = new ClientTemplateModel()
             if (package == "TypeScript" && template == "FetchClient")
             {
                 return new FetchClientTemplate((ClientTemplateModel)model);
