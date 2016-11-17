@@ -40,12 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FetchClientTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FetchClientTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FetchClientTemplate.Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
