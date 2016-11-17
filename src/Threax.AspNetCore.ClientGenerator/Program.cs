@@ -85,7 +85,7 @@ namespace Threax.AspNetCore.ClientGenerator
             if (parsedArgs.ContainsKey("client"))
             {
                 SwaggerToTypeScriptClientCommand Command = new SwaggerToTypeScriptClientCommand();
-                //Command.Settings.TypeScriptGeneratorSettings.TemplateFactory = new FetchTemplateFactory(Command.Settings.TypeScriptGeneratorSettings.TemplateFactory);
+                Command.Settings.TypeScriptGeneratorSettings.TemplateFactory = new FetchTemplateFactory(Command.Settings.TypeScriptGeneratorSettings.TemplateFactory);
                 Command.OperationGenerationMode = OperationGenerationMode.MultipleClientsFromPathSegments;
                 Command.Template = TypeScriptTemplate.Fetch;
                 Command.TypeStyle = TypeScriptTypeStyle.Interface;
