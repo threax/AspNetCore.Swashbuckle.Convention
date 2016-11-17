@@ -11,7 +11,7 @@ namespace TestApi.Controllers
     /// <summary>
     /// This controller provides api access to values.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [Authorize]
     [Produces("application/json")]
     public class AuthorizedValuesController : Controller
@@ -34,7 +34,7 @@ namespace TestApi.Controllers
         /// <returns>All the values</returns>
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> AllValues()
         {
             return new string[] { "value1", "value2" };
         }
@@ -46,7 +46,7 @@ namespace TestApi.Controllers
         /// <returns></returns>
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Value(int id)
         {
             return "value";
         }

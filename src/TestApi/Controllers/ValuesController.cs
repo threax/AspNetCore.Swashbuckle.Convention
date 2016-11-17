@@ -10,7 +10,7 @@ namespace TestApi.Controllers
     /// <summary>
     /// This controller provides api access to values.
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [Produces("application/json")]
     public class ValuesController : Controller
     {
@@ -20,7 +20,7 @@ namespace TestApi.Controllers
         /// <returns>All the values</returns>
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetAll()
         {
             return new string[] { "value1", "value2" };
         }

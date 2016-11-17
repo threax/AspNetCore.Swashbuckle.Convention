@@ -16,9 +16,18 @@ using System.Threading.Tasks;
 
 namespace Threax.AspNetCore.ClientGenerator
 {
+    class ClientGeneratorException : Exception
+    {
+        public ClientGeneratorException(String message)
+            :base(message)
+        {
+
+        }
+    }
+
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             Dictionary<String, String> parsedArgs = new Dictionary<string, string>();
             foreach (var arg in args)
@@ -48,11 +57,18 @@ namespace Threax.AspNetCore.ClientGenerator
                 {
                     throw ex.InnerException;
                 }
+                catch (ClientGeneratorException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return 1;
+                }
             }
+            return 0;
         }
 
         static void WriteHelp()
         {
+            Console.WriteLine("Tool Current Working dir " + Path.GetFullPath("."));
             Console.WriteLine("The following arguments can be provided in name=value format.");
             Console.WriteLine("in=path - The path to the swagger doc, can be a local path or a url. This is required.");
             Console.WriteLine("out=path - The path to output file. This is required.");
@@ -62,8 +78,16 @@ namespace Threax.AspNetCore.ClientGenerator
 
         static async Task AsyncMain(Dictionary<String, String> parsedArgs)
         {
-            string swaggerDocPath = parsedArgs["in"];
-            string outPath = parsedArgs["out"];
+            string swaggerDocPath;
+            if (!parsedArgs.TryGetValue("in", out swaggerDocPath))
+            {
+                throw new ClientGeneratorException("You must provide a in=path arugment that provides the path to the swagger doc (url or local path).");
+            }
+            string outPath;
+            if(!parsedArgs.TryGetValue("out", out outPath))
+            {
+                throw new ClientGeneratorException("You must provide a out=path arugment that provides the path to the output file, must be a typescript (.ts) file.");
+            }
 
             string swaggerData;
             if (swaggerDocPath.StartsWith("http", StringComparison.OrdinalIgnoreCase))

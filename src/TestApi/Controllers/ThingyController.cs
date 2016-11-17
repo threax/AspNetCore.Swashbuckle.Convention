@@ -8,12 +8,12 @@ using Threax.AspNetCore.ExceptionToJson;
 
 namespace TestApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class ThingyController : Controller
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<Thingy> Get()
+        public IEnumerable<Thingy> GetAll()
         {
             throw new NotSupportedException();
         }
