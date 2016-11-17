@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Threax.Swagger.ClientGenerator")]
+[assembly: AssemblyTitle("TemplateGenerator")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Threax.Swagger.ClientGenerator")]
+[assembly: AssemblyProduct("TemplateGenerator")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("314c8bc8-daa1-4f88-8588-277ec909f583")]
+[assembly: Guid("d29b3712-0fbc-43ab-abaf-74b6bfde3271")]
 
 // Version information for an assembly consists of the following four values:
 //

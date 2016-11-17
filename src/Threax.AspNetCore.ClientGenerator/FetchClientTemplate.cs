@@ -18,8 +18,8 @@ namespace Threax.Swagger.ClientGenerator
     /// <summary>
     /// Class to produce the template output
     /// </summary>
-    
-    #line 1 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
+
+#line 1 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "14.0.0.0")]
     internal partial class FetchClientTemplate : FetchClientTemplateBase
     {
@@ -30,248 +30,261 @@ namespace Threax.Swagger.ClientGenerator
         public virtual string TransformText()
         {
             this.Write("\r\n");
-            
-            #line 6 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(Model.HasOperations){
-            
-            #line default
-            #line hidden
-            
-            #line 7 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(Model.GenerateClientInterfaces){
-            
-            #line default
-            #line hidden
-            this.Write("export interface I");
-            
-            #line 8 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
-            
-            #line default
-            #line hidden
-            this.Write(" {\r\n");
-            
-            #line 9 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-foreach(var operation in Model.Operations){
-            
-            #line default
-            #line hidden
-            
-            #line 10 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(operation.HasDocumentation){
-            
-            #line default
-            #line hidden
-            this.Write("    /**\r\n");
-            
-            #line 11 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(operation.HasSummary){
-            
-            #line default
-            #line hidden
-            this.Write("     * ");
-            
-            #line 11 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.Summary));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 12 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 12 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-foreach(var parameter in operation.Parameters){
-            
-            #line default
-            #line hidden
-            
-            #line 13 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(parameter.HasDescription){
-            
-            #line default
-            #line hidden
-            this.Write("     * @");
-            
-            #line 13 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 13 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Description ?? ""));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 14 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 14 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 14 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(operation.HasResultDescription){
-            
-            #line default
-            #line hidden
-            this.Write("     * @return ");
-            
-            #line 14 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.ResultDescription));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 15 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 15 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(operation.IsDeprecated){
-            
-            #line default
-            #line hidden
-            this.Write("     * @deprecated\r\n");
-            
-            #line 16 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("     */\r\n");
-            
-            #line 17 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("    ");
-            
-            #line 17 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.OperationNameLower));
-            
-            #line default
-            #line hidden
-            this.Write("(");
-            
-            #line 17 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-foreach(var parameter in operation.Parameters){
-            
-            #line default
-            #line hidden
-            
-            #line 17 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(": ");
-            
-            #line 17 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Type));
-            
-            #line default
-            #line hidden
-            
-            #line 17 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(!parameter.IsLast){
-            
-            #line default
-            #line hidden
-            this.Write(", ");
-            
-            #line 17 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 17 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("): Promise<");
-            
-            #line 17 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.ResultType));
-            
-            #line default
-            #line hidden
-            this.Write(">;\r\n");
-            
-            #line 18 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("}\r\n");
-            
-            #line 19 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 21 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(Model.UseAureliaHttpInjection){
-            
-            #line default
-            #line hidden
-            this.Write("@inject(String, HttpClient)\n");
-            
-            #line 22 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("export class ");
-            
-            #line 23 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 23 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(Model.GenerateClientInterfaces){
-            
-            #line default
-            #line hidden
-            this.Write("implements I");
-            
-            #line 23 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 23 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write(@"{
+
+#line 6 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+            if (Model.HasOperations)
+            {
+
+#line default
+#line hidden
+
+#line 7 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                if (Model.GenerateClientInterfaces)
+                {
+
+#line default
+#line hidden
+                    this.Write("export interface I");
+
+#line 8 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
+
+#line default
+#line hidden
+                    this.Write(" {\r\n");
+
+#line 9 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    foreach (var operation in Model.Operations)
+                    {
+
+#line default
+#line hidden
+
+#line 10 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (operation.HasDocumentation)
+                        {
+
+#line default
+#line hidden
+                            this.Write("    /**\r\n");
+
+#line 11 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            if (operation.HasSummary)
+                            {
+
+#line default
+#line hidden
+                                this.Write("     * ");
+
+#line 11 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(operation.Summary));
+
+#line default
+#line hidden
+                                this.Write("\r\n");
+
+#line 12 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+
+#line default
+#line hidden
+
+#line 12 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            foreach (var parameter in operation.Parameters)
+                            {
+
+#line default
+#line hidden
+
+#line 13 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                if (parameter.HasDescription)
+                                {
+
+#line default
+#line hidden
+                                    this.Write("     * @");
+
+#line 13 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                    this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                    this.Write(" ");
+
+#line 13 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                    this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Description ?? ""));
+
+#line default
+#line hidden
+                                    this.Write("\r\n");
+
+#line 14 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                }
+
+#line default
+#line hidden
+
+#line 14 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+
+#line default
+#line hidden
+
+#line 14 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            if (operation.HasResultDescription)
+                            {
+
+#line default
+#line hidden
+                                this.Write("     * @return ");
+
+#line 14 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(operation.ResultDescription));
+
+#line default
+#line hidden
+                                this.Write("\r\n");
+
+#line 15 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+
+#line default
+#line hidden
+
+#line 15 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            if (operation.IsDeprecated)
+                            {
+
+#line default
+#line hidden
+                                this.Write("     * @deprecated\r\n");
+
+#line 16 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+
+#line default
+#line hidden
+                            this.Write("     */\r\n");
+
+#line 17 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+
+#line default
+#line hidden
+                        this.Write("    ");
+
+#line 17 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(operation.OperationNameLower));
+
+#line default
+#line hidden
+                        this.Write("(");
+
+#line 17 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        foreach (var parameter in operation.Parameters)
+                        {
+
+#line default
+#line hidden
+
+#line 17 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                            this.Write(": ");
+
+#line 17 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Type));
+
+#line default
+#line hidden
+
+#line 17 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            if (!parameter.IsLast)
+                            {
+
+#line default
+#line hidden
+                                this.Write(", ");
+
+#line 17 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+
+#line default
+#line hidden
+
+#line 17 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+
+#line default
+#line hidden
+                        this.Write("): Promise<");
+
+#line 17 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(operation.ResultType));
+
+#line default
+#line hidden
+                        this.Write(">;\r\n");
+
+#line 18 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("}\r\n");
+
+#line 19 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                }
+
+#line default
+#line hidden
+                this.Write("\r\n");
+
+#line 21 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                if (Model.UseAureliaHttpInjection)
+                {
+
+#line default
+#line hidden
+                    this.Write("@inject(String, HttpClient)\r\n");
+
+#line 23 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                }
+
+#line default
+#line hidden
+                this.Write("export class ");
+
+#line 24 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
+
+#line default
+#line hidden
+                this.Write(" ");
+
+#line 24 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                if (Model.GenerateClientInterfaces)
+                {
+
+#line default
+#line hidden
+                    this.Write("implements I");
+
+#line 24 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
+
+#line default
+#line hidden
+                    this.Write(" ");
+
+#line 24 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                }
+
+#line default
+#line hidden
+                this.Write(@"{
 	private static jsonMimeType = ""application/json"";
     private baseUrl: string; 
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
@@ -282,980 +295,1048 @@ if(Model.GenerateClientInterfaces){
         this.http = http ? http : window;
     }
 ");
-            
-            #line 33 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(Model.IsExtended){
-            
-            #line default
-            #line hidden
-            this.Write("\r\n    protected transformOptions(options: RequestInit) {\r\n        return options;" +
-                    " \r\n    }\r\n\r\n    protected transformResult(url: string, response: Response, proce" +
-                    "ssor: (response: Response) => any) {\r\n        return processor(response);\r\n    }" +
-                    "\r\n");
-            
-            #line 42 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("\r\n\tparseResult<T>(response: Response, data: string, jsonParseReviver: (key: strin" +
-                    "g, value: any) => any): T|string {\r\n\t\tvar result: T|string;\r\n\t\tvar contentHeader" +
-                    " = response.headers.get(\'content-type\');\r\n\t\tif (contentHeader && contentHeader.l" +
-                    "ength >= ");
-            
-            #line 47 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
-            
-            #line default
-            #line hidden
-            this.Write(".jsonMimeType.length && contentHeader.substring(0, ");
-            
-            #line 47 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
-            
-            #line default
-            #line hidden
-            this.Write(".jsonMimeType.length) === ");
-            
-            #line 47 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
-            
-            #line default
-            #line hidden
-            this.Write(".jsonMimeType) {\r\n\t\t\tresult = data === \"\" ? null : <T>JSON.parse(data, jsonParseR" +
-                    "eviver);\r\n\t\t}\r\n\t\telse {\r\n\t\t\tresult = data === \"\" ? null : data;\r\n\t\t}\r\n\t\treturn r" +
-                    "esult;\r\n\t}\r\n\r\n");
-            
-            #line 56 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-foreach(var operation in Model.Operations){
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 58 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(operation.HasDocumentation){
-            
-            #line default
-            #line hidden
-            this.Write("    /**\r\n");
-            
-            #line 59 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(operation.HasSummary){
-            
-            #line default
-            #line hidden
-            this.Write("     * ");
-            
-            #line 59 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.Summary));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 60 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 60 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-foreach(var parameter in operation.Parameters){
-            
-            #line default
-            #line hidden
-            
-            #line 61 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(parameter.HasDescription){
-            
-            #line default
-            #line hidden
-            this.Write("     * @");
-            
-            #line 61 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(" ");
-            
-            #line 61 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Description ?? ""));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 62 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 62 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 62 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(operation.HasResultDescription){
-            
-            #line default
-            #line hidden
-            this.Write("     * @return ");
-            
-            #line 62 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.ResultDescription));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 63 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 63 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(operation.IsDeprecated){
-            
-            #line default
-            #line hidden
-            this.Write("     * @deprecated\r\n");
-            
-            #line 64 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("     */\r\n");
-            
-            #line 65 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("    ");
-            
-            #line 65 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.OperationNameLower));
-            
-            #line default
-            #line hidden
-            this.Write("(");
-            
-            #line 65 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-foreach(var parameter in operation.Parameters){
-            
-            #line default
-            #line hidden
-            
-            #line 65 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(": ");
-            
-            #line 65 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Type));
-            
-            #line default
-            #line hidden
-            
-            #line 65 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(!parameter.IsLast){
-            
-            #line default
-            #line hidden
-            this.Write(", ");
-            
-            #line 65 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 65 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("): Promise<");
-            
-            #line 65 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.ResultType));
-            
-            #line default
-            #line hidden
-            this.Write("> {\r\n        let url_ = this.baseUrl + \"/");
-            
-            #line 66 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.Path));
-            
-            #line default
-            #line hidden
-            
-            #line 66 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(operation.QueryParameters.Any()){
-            
-            #line default
-            #line hidden
-            this.Write("?");
-            
-            #line 66 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("\"; \r\n\r\n");
-            
-            #line 68 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-foreach(var parameter in operation.PathParameters){
-            
-            #line default
-            #line hidden
-            this.Write("        if (");
-            
-            #line 69 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(" === undefined || ");
-            
-            #line 69 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(" === null)\r\n            throw new Error(\"The parameter \'");
-            
-            #line 70 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write("\' must be defined.\");\r\n");
-            
-            #line 71 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  if(parameter.IsDateArray){
-            
-            #line default
-            #line hidden
-            this.Write("        url_ = url_.replace(\"{");
-            
-            #line 72 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
-            
-            #line default
-            #line hidden
-            this.Write("}\", encodeURIComponent(");
-            
-            #line 72 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(".map(s_ => s_.toJSON()).join())); \r\n");
-            
-            #line 73 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }else if(parameter.IsDate){
-            
-            #line default
-            #line hidden
-            this.Write("        url_ = url_.replace(\"{");
-            
-            #line 74 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
-            
-            #line default
-            #line hidden
-            this.Write("}\", encodeURIComponent(\"\" + ");
-            
-            #line 74 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(".toJSON())); \r\n");
-            
-            #line 75 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }else if(parameter.IsArray){
-            
-            #line default
-            #line hidden
-            this.Write("        url_ = url_.replace(\"{");
-            
-            #line 76 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
-            
-            #line default
-            #line hidden
-            this.Write("}\", encodeURIComponent(");
-            
-            #line 76 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(".join())); \r\n");
-            
-            #line 77 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }else{
-            
-            #line default
-            #line hidden
-            this.Write("        url_ = url_.replace(\"{");
-            
-            #line 78 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
-            
-            #line default
-            #line hidden
-            this.Write("}\", encodeURIComponent(\"\" + ");
-            
-            #line 78 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(")); \r\n");
-            
-            #line 79 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }
-            
-            #line default
-            #line hidden
-            
-            #line 80 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 82 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-foreach(var parameter in operation.QueryParameters){
-            
-            #line default
-            #line hidden
-            
-            #line 83 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  if (parameter.IsRequired) { 
-        if(parameter.IsNullable){
-            
-            #line default
-            #line hidden
-            this.Write("        if (");
-            
-            #line 85 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(" === undefined)\r\n            throw new Error(\"The parameter \'");
-            
-            #line 86 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write("\' must be defined.\");\r\n        else\r\n");
-            
-            #line 88 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-      }else{
-            
-            #line default
-            #line hidden
-            this.Write("        if (");
-            
-            #line 89 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(" === undefined || ");
-            
-            #line 89 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(" === null)\r\n            throw new Error(\"The parameter \'");
-            
-            #line 90 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write("\' must be defined and cannot be null.\");\r\n        else\r\n");
-            
-            #line 92 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-      }
-    }else{
-        if(parameter.IsNullable){
-            
-            #line default
-            #line hidden
-            this.Write("        if (");
-            
-            #line 95 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(" !== undefined)\r\n");
-            
-            #line 96 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-      }else{
-            
-            #line default
-            #line hidden
-            this.Write("        if (");
-            
-            #line 97 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(" === null)\r\n            throw new Error(\"The parameter \'");
-            
-            #line 98 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write("\' cannot be null.\");\r\n        else if (");
-            
-            #line 99 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(" !== undefined)\r\n");
-            
-            #line 100 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-      }
-    }
-            
-            #line default
-            #line hidden
-            
-            #line 102 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  if(parameter.IsDateArray){
-            
-            #line default
-            #line hidden
-            this.Write("            ");
-            
-            #line 103 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(".forEach(item => { url_ += \"");
-            
-            #line 103 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
-            
-            #line default
-            #line hidden
-            this.Write("=\" + encodeURIComponent(\"\" + item.toJSON()) + \"&\"; });\r\n");
-            
-            #line 104 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }else if(parameter.IsDate){
-            
-            #line default
-            #line hidden
-            this.Write("            url_ += \"");
-            
-            #line 105 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
-            
-            #line default
-            #line hidden
-            this.Write("=\" + encodeURIComponent(\"\" + ");
-            
-            #line 105 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(".toJSON()) + \"&\"; \r\n");
-            
-            #line 106 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }else if(parameter.IsArray){
-            
-            #line default
-            #line hidden
-            this.Write("            ");
-            
-            #line 107 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(".forEach(item => { url_ += \"");
-            
-            #line 107 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
-            
-            #line default
-            #line hidden
-            this.Write("=\" + encodeURIComponent(\"\" + item) + \"&\"; });\r\n");
-            
-            #line 108 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }else{
-            
-            #line default
-            #line hidden
-            this.Write("            url_ += \"");
-            
-            #line 109 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
-            
-            #line default
-            #line hidden
-            this.Write("=\" + encodeURIComponent(\"\" + ");
-            
-            #line 109 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(") + \"&\"; \r\n");
-            
-            #line 110 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }
-}
-if(!operation.IsGetOrHead){
-            
-            #line default
-            #line hidden
-            this.Write("        ");
-            
-            #line 113 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(RequestBodyGenerator.Render(operation, 2)));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 114 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("        return this.http.fetch(url_, ");
-            
-            #line 115 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(Model.IsExtended){
-            
-            #line default
-            #line hidden
-            this.Write("this.transformOptions(");
-            
-            #line 115 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("{\r\n");
-            
-            #line 116 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(!operation.IsGetOrHead){
-            
-            #line default
-            #line hidden
-            this.Write("\t\t\tbody: content_,\r\n");
-            
-            #line 118 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("            method: \"");
-            
-            #line 119 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.HttpMethodUpper.ToUpperInvariant()));
-            
-            #line default
-            #line hidden
-            this.Write("\",\r\n            headers: {\r\n");
-            
-            #line 121 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-foreach(var parameter in operation.HeaderParameters){
-            
-            #line default
-            #line hidden
-            this.Write("                \"");
-            
-            #line 122 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\": ");
-            
-            #line 122 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
-            
-            #line default
-            #line hidden
-            this.Write(", \r\n");
-            
-            #line 123 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            
-            #line 124 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(!operation.HasFormParameters){
-            
-            #line default
-            #line hidden
-            this.Write("                \"Content-Type\": \"application/json; charset=UTF-8\"\r\n");
-            
-            #line 126 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("            }\r\n        }");
-            
-            #line 128 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(Model.IsExtended){
-            
-            #line default
-            #line hidden
-            this.Write(")");
-            
-            #line 128 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write(").then((response) => {\r\n");
-            
-            #line 129 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(Model.IsExtended){
-            
-            #line default
-            #line hidden
-            this.Write("            return this.transformResult(url_, response, (response) => this.proces" +
-                    "s");
-            
-            #line 130 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.OperationNameUpper));
-            
-            #line default
-            #line hidden
-            this.Write("(response));\r\n");
-            
-            #line 131 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}else{
-            
-            #line default
-            #line hidden
-            this.Write("            return this.process");
-            
-            #line 132 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.OperationNameUpper));
-            
-            #line default
-            #line hidden
-            this.Write("(response);\r\n");
-            
-            #line 133 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("        });\r\n    }\r\n\r\n    private process");
-            
-            #line 137 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.OperationNameUpper));
-            
-            #line default
-            #line hidden
-            this.Write("(response: Response) {\r\n        return response.text().then((data) => {\r\n        " +
-                    "    const status = response.status.toString(); \r\n\r\n");
-            
-            #line 141 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-foreach(var response in operation.Responses){
-            
-            #line default
-            #line hidden
-            this.Write("            if (status === \"");
-            
-            #line 142 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
-            
-            #line default
-            #line hidden
-            this.Write("\") {\r\n");
-            
-            #line 143 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(response.HasType){
-            
-            #line default
-            #line hidden
-            this.Write("                let result");
-            
-            #line 144 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
-            
-            #line default
-            #line hidden
-            this.Write(": ");
-            
-            #line 144 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(response.Type));
-            
-            #line default
-            #line hidden
-            this.Write(" = null; \r\n");
-            
-            #line 145 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  if(response.IsDate){
-            
-            #line default
-            #line hidden
-            this.Write("                result");
-            
-            #line 146 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
-            
-            #line default
-            #line hidden
-            this.Write(" = new Date(data);\r\n");
-            
-            #line 147 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }else{
-            
-            #line default
-            #line hidden
-            
-            #line 148 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-      if(response.UseDtoClass){
-            
-            #line default
-            #line hidden
-            this.Write("                let resultData");
-            
-            #line 149 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
-            
-            #line default
-            #line hidden
-            this.Write(" = data === \"\" ? null : JSON.parse(data, this.jsonParseReviver);\r\n               " +
-                    " ");
-            
-            #line 150 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ConversionUtilities.Tab(response.DataConversionCode, 4)));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 151 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-      }else{
-            
-            #line default
-            #line hidden
-            this.Write("                result");
-            
-            #line 152 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
-            
-            #line default
-            #line hidden
-            this.Write(" = data === \"\" ? null : <");
-            
-            #line 152 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(response.Type));
-            
-            #line default
-            #line hidden
-            this.Write(">this.parseResult(response, data, this.jsonParseReviver);\r\n");
-            
-            #line 153 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-      }
-            
-            #line default
-            #line hidden
-            
-            #line 154 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }
-            
-            #line default
-            #line hidden
-            
-            #line 155 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  if(response.IsSuccess){
-            
-            #line default
-            #line hidden
-            this.Write("                return result");
-            
-            #line 156 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
-            
-            #line default
-            #line hidden
-            this.Write("; \r\n");
-            
-            #line 157 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }else{
-            
-            #line default
-            #line hidden
-            this.Write("                throw result");
-            
-            #line 158 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
-            
-            #line default
-            #line hidden
-            this.Write("; \r\n");
-            
-            #line 159 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }
-}
-            
-            #line default
-            #line hidden
-            this.Write("            }\r\n            else\r\n");
-            
-            #line 163 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("            {\r\n");
-            
-            #line 164 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-if(operation.HasDefaultResponse){
-            
-            #line default
-            #line hidden
-            this.Write("                let result: ");
-            
-            #line 165 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.DefaultResponse.Type));
-            
-            #line default
-            #line hidden
-            this.Write(" = null; \r\n");
-            
-            #line 166 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  if(operation.DefaultResponse.IsDate){
-            
-            #line default
-            #line hidden
-            this.Write("                result = new Date(data);\r\n");
-            
-            #line 168 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }else{
-            
-            #line default
-            #line hidden
-            
-            #line 169 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-      if(operation.DefaultResponse.UseDtoClass){
-            
-            #line default
-            #line hidden
-            this.Write("                let resultData = data === \"\" ? null : JSON.parse(data, this.jsonP" +
-                    "arseReviver);\r\n            ");
-            
-            #line 171 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ConversionUtilities.Tab(operation.DefaultResponse.DataConversionCode, 3)));
-            
-            #line default
-            #line hidden
-            this.Write("\r\n");
-            
-            #line 172 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-      }else{
-            
-            #line default
-            #line hidden
-            this.Write("                result = data === \"\" ? null : <");
-            
-            #line 173 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(operation.DefaultResponse.Type));
-            
-            #line default
-            #line hidden
-            this.Write(">this.parseResult(response, data, this.jsonParseReviver);\r\n");
-            
-            #line 174 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-      }
-            
-            #line default
-            #line hidden
-            
-            #line 175 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }
-            
-            #line default
-            #line hidden
-            
-            #line 176 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  if(operation.DefaultResponse.IsSuccess){
-            
-            #line default
-            #line hidden
-            this.Write("                return result; \r\n");
-            
-            #line 178 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }else{
-            
-            #line default
-            #line hidden
-            this.Write("                throw result; \r\n");
-            
-            #line 180 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-  }
-}else{
-            
-            #line default
-            #line hidden
-            this.Write("                throw new Error(\"error_no_callback_for_the_received_http_status\")" +
-                    "; \r\n");
-            
-            #line 183 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("            }\r\n        });\r\n    }\r\n");
-            
-            #line 187 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
-            this.Write("}\r\n");
-            
-            #line 188 "C:\Development\Threax.AspNetCore.Convention\Threax.Swagger.ClientGenerator\FetchClientTemplate.tt"
-}
-            
-            #line default
-            #line hidden
+
+#line 34 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                if (Model.IsExtended)
+                {
+
+#line default
+#line hidden
+                    this.Write("\r\n    protected transformOptions(options: RequestInit) {\r\n        return options;" +
+                            " \r\n    }\r\n\r\n    protected transformResult(url: string, response: Response, proce" +
+                            "ssor: (response: Response) => any) {\r\n        return processor(response);\r\n    }" +
+                            "\r\n");
+
+#line 43 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                }
+
+#line default
+#line hidden
+                this.Write("\r\n\tparseResult<T>(response: Response, data: string, jsonParseReviver: (key: strin" +
+                        "g, value: any) => any): T|string {\r\n\t\tvar result: T|string;\r\n\t\tvar contentHeader" +
+                        " = response.headers.get(\'content-type\');\r\n\t\tif (contentHeader && contentHeader.l" +
+                        "ength >= ");
+
+#line 48 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
+
+#line default
+#line hidden
+                this.Write(".jsonMimeType.length && contentHeader.substring(0, ");
+
+#line 48 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
+
+#line default
+#line hidden
+                this.Write(".jsonMimeType.length) === ");
+
+#line 48 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                this.Write(this.ToStringHelper.ToStringWithCulture(Model.Class));
+
+#line default
+#line hidden
+                this.Write(".jsonMimeType) {\r\n\t\t\tresult = data === \"\" ? null : <T>JSON.parse(data, jsonParseR" +
+                        "eviver);\r\n\t\t}\r\n\t\telse {\r\n\t\t\tresult = data === \"\" ? null : data;\r\n\t\t}\r\n\t\treturn r" +
+                        "esult;\r\n\t}\r\n\r\n");
+
+#line 57 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                foreach (var operation in Model.Operations)
+                {
+
+#line default
+#line hidden
+                    this.Write("\r\n");
+
+#line 59 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    if (operation.HasDocumentation)
+                    {
+
+#line default
+#line hidden
+                        this.Write("    /**\r\n");
+
+#line 60 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (operation.HasSummary)
+                        {
+
+#line default
+#line hidden
+                            this.Write("     * ");
+
+#line 60 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(operation.Summary));
+
+#line default
+#line hidden
+                            this.Write("\r\n");
+
+#line 61 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+
+#line default
+#line hidden
+
+#line 61 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        foreach (var parameter in operation.Parameters)
+                        {
+
+#line default
+#line hidden
+
+#line 62 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            if (parameter.HasDescription)
+                            {
+
+#line default
+#line hidden
+                                this.Write("     * @");
+
+#line 62 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                this.Write(" ");
+
+#line 62 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Description ?? ""));
+
+#line default
+#line hidden
+                                this.Write("\r\n");
+
+#line 63 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+
+#line default
+#line hidden
+
+#line 63 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+
+#line default
+#line hidden
+
+#line 63 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (operation.HasResultDescription)
+                        {
+
+#line default
+#line hidden
+                            this.Write("     * @return ");
+
+#line 63 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(operation.ResultDescription));
+
+#line default
+#line hidden
+                            this.Write("\r\n");
+
+#line 64 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+
+#line default
+#line hidden
+
+#line 64 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (operation.IsDeprecated)
+                        {
+
+#line default
+#line hidden
+                            this.Write("     * @deprecated\r\n");
+
+#line 65 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+
+#line default
+#line hidden
+                        this.Write("     */\r\n");
+
+#line 66 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("    ");
+
+#line 66 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(operation.OperationNameLower));
+
+#line default
+#line hidden
+                    this.Write("(");
+
+#line 66 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    foreach (var parameter in operation.Parameters)
+                    {
+
+#line default
+#line hidden
+
+#line 66 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                        this.Write(": ");
+
+#line 66 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Type));
+
+#line default
+#line hidden
+
+#line 66 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (!parameter.IsLast)
+                        {
+
+#line default
+#line hidden
+                            this.Write(", ");
+
+#line 66 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+
+#line default
+#line hidden
+
+#line 66 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("): Promise<");
+
+#line 66 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(operation.ResultType));
+
+#line default
+#line hidden
+                    this.Write("> {\r\n        let url_ = this.baseUrl + \"/");
+
+#line 67 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(operation.Path));
+
+#line default
+#line hidden
+
+#line 67 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    if (operation.QueryParameters.Any())
+                    {
+
+#line default
+#line hidden
+                        this.Write("?");
+
+#line 67 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("\"; \r\n\r\n");
+
+#line 69 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    foreach (var parameter in operation.PathParameters)
+                    {
+
+#line default
+#line hidden
+                        this.Write("        if (");
+
+#line 70 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                        this.Write(" === undefined || ");
+
+#line 70 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                        this.Write(" === null)\r\n            throw new Error(\"The parameter \'");
+
+#line 71 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                        this.Write("\' must be defined.\");\r\n");
+
+#line 72 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (parameter.IsDateArray)
+                        {
+
+#line default
+#line hidden
+                            this.Write("        url_ = url_.replace(\"{");
+
+#line 73 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
+
+#line default
+#line hidden
+                            this.Write("}\", encodeURIComponent(");
+
+#line 73 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                            this.Write(".map(s_ => s_.toJSON()).join())); \r\n");
+
+#line 74 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+                        else if (parameter.IsDate)
+                        {
+
+#line default
+#line hidden
+                            this.Write("        url_ = url_.replace(\"{");
+
+#line 75 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
+
+#line default
+#line hidden
+                            this.Write("}\", encodeURIComponent(\"\" + ");
+
+#line 75 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                            this.Write(".toJSON())); \r\n");
+
+#line 76 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+                        else if (parameter.IsArray)
+                        {
+
+#line default
+#line hidden
+                            this.Write("        url_ = url_.replace(\"{");
+
+#line 77 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
+
+#line default
+#line hidden
+                            this.Write("}\", encodeURIComponent(");
+
+#line 77 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                            this.Write(".join())); \r\n");
+
+#line 78 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+                        else
+                        {
+
+#line default
+#line hidden
+                            this.Write("        url_ = url_.replace(\"{");
+
+#line 79 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
+
+#line default
+#line hidden
+                            this.Write("}\", encodeURIComponent(\"\" + ");
+
+#line 79 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                            this.Write(")); \r\n");
+
+#line 80 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+
+#line default
+#line hidden
+
+#line 81 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("\r\n");
+
+#line 83 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    foreach (var parameter in operation.QueryParameters)
+                    {
+
+#line default
+#line hidden
+
+#line 84 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (parameter.IsRequired)
+                        {
+                            if (parameter.IsNullable)
+                            {
+
+#line default
+#line hidden
+                                this.Write("        if (");
+
+#line 86 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                this.Write(" === undefined)\r\n            throw new Error(\"The parameter \'");
+
+#line 87 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                this.Write("\' must be defined.\");\r\n        else\r\n");
+
+#line 89 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+                            else
+                            {
+
+#line default
+#line hidden
+                                this.Write("        if (");
+
+#line 90 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                this.Write(" === undefined || ");
+
+#line 90 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                this.Write(" === null)\r\n            throw new Error(\"The parameter \'");
+
+#line 91 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                this.Write("\' must be defined and cannot be null.\");\r\n        else\r\n");
+
+#line 93 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+                        }
+                        else
+                        {
+                            if (parameter.IsNullable)
+                            {
+
+#line default
+#line hidden
+                                this.Write("        if (");
+
+#line 96 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                this.Write(" !== undefined)\r\n");
+
+#line 97 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+                            else
+                            {
+
+#line default
+#line hidden
+                                this.Write("        if (");
+
+#line 98 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                this.Write(" === null)\r\n            throw new Error(\"The parameter \'");
+
+#line 99 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                this.Write("\' cannot be null.\");\r\n        else if (");
+
+#line 100 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                                this.Write(" !== undefined)\r\n");
+
+#line 101 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+                        }
+
+#line default
+#line hidden
+
+#line 103 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (parameter.IsDateArray)
+                        {
+
+#line default
+#line hidden
+                            this.Write("            ");
+
+#line 104 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                            this.Write(".forEach(item => { url_ += \"");
+
+#line 104 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
+
+#line default
+#line hidden
+                            this.Write("=\" + encodeURIComponent(\"\" + item.toJSON()) + \"&\"; });\r\n");
+
+#line 105 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+                        else if (parameter.IsDate)
+                        {
+
+#line default
+#line hidden
+                            this.Write("            url_ += \"");
+
+#line 106 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
+
+#line default
+#line hidden
+                            this.Write("=\" + encodeURIComponent(\"\" + ");
+
+#line 106 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                            this.Write(".toJSON()) + \"&\"; \r\n");
+
+#line 107 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+                        else if (parameter.IsArray)
+                        {
+
+#line default
+#line hidden
+                            this.Write("            ");
+
+#line 108 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                            this.Write(".forEach(item => { url_ += \"");
+
+#line 108 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
+
+#line default
+#line hidden
+                            this.Write("=\" + encodeURIComponent(\"\" + item) + \"&\"; });\r\n");
+
+#line 109 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+                        else
+                        {
+
+#line default
+#line hidden
+                            this.Write("            url_ += \"");
+
+#line 110 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
+
+#line default
+#line hidden
+                            this.Write("=\" + encodeURIComponent(\"\" + ");
+
+#line 110 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                            this.Write(") + \"&\"; \r\n");
+
+#line 111 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+                    }
+                    if (!operation.IsGetOrHead)
+                    {
+
+#line default
+#line hidden
+                        this.Write("        ");
+
+#line 114 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(RequestBodyGenerator.Render(operation, 2)));
+
+#line default
+#line hidden
+                        this.Write("\r\n");
+
+#line 115 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("        return this.http.fetch(url_, ");
+
+#line 116 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    if (Model.IsExtended)
+                    {
+
+#line default
+#line hidden
+                        this.Write("this.transformOptions(");
+
+#line 116 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("{\r\n");
+
+#line 117 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    if (!operation.IsGetOrHead)
+                    {
+
+#line default
+#line hidden
+                        this.Write("\t\t\tbody: content_,\r\n");
+
+#line 119 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("            method: \"");
+
+#line 120 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(operation.HttpMethodUpper.ToUpperInvariant()));
+
+#line default
+#line hidden
+                    this.Write("\",\r\n            headers: {\r\n");
+
+#line 122 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    foreach (var parameter in operation.HeaderParameters)
+                    {
+
+#line default
+#line hidden
+                        this.Write("                \"");
+
+#line 123 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Name));
+
+#line default
+#line hidden
+                        this.Write("\": ");
+
+#line 123 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(parameter.VariableNameLower));
+
+#line default
+#line hidden
+                        this.Write(", \r\n");
+
+#line 124 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+
+#line 125 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    if (!operation.HasFormParameters)
+                    {
+
+#line default
+#line hidden
+                        this.Write("                \"Content-Type\": \"application/json; charset=UTF-8\"\r\n");
+
+#line 127 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("            }\r\n        }");
+
+#line 129 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    if (Model.IsExtended)
+                    {
+
+#line default
+#line hidden
+                        this.Write(")");
+
+#line 129 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write(").then((response) => {\r\n");
+
+#line 130 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    if (Model.IsExtended)
+                    {
+
+#line default
+#line hidden
+                        this.Write("            return this.transformResult(url_, response, (response) => this.proces" +
+                                "s");
+
+#line 131 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(operation.OperationNameUpper));
+
+#line default
+#line hidden
+                        this.Write("(response));\r\n");
+
+#line 132 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+                    else
+                    {
+
+#line default
+#line hidden
+                        this.Write("            return this.process");
+
+#line 133 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(operation.OperationNameUpper));
+
+#line default
+#line hidden
+                        this.Write("(response);\r\n");
+
+#line 134 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("        });\r\n    }\r\n\r\n    private process");
+
+#line 138 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    this.Write(this.ToStringHelper.ToStringWithCulture(operation.OperationNameUpper));
+
+#line default
+#line hidden
+                    this.Write("(response: Response) {\r\n        return response.text().then((data) => {\r\n        " +
+                            "    const status = response.status.toString(); \r\n\r\n");
+
+#line 142 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    foreach (var response in operation.Responses)
+                    {
+
+#line default
+#line hidden
+                        this.Write("            if (status === \"");
+
+#line 143 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
+
+#line default
+#line hidden
+                        this.Write("\") {\r\n");
+
+#line 144 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (response.HasType)
+                        {
+
+#line default
+#line hidden
+                            this.Write("                let result");
+
+#line 145 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
+
+#line default
+#line hidden
+                            this.Write(": ");
+
+#line 145 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            this.Write(this.ToStringHelper.ToStringWithCulture(response.Type));
+
+#line default
+#line hidden
+                            this.Write(" = null; \r\n");
+
+#line 146 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            if (response.IsDate)
+                            {
+
+#line default
+#line hidden
+                                this.Write("                result");
+
+#line 147 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
+
+#line default
+#line hidden
+                                this.Write(" = new Date(data);\r\n");
+
+#line 148 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+                            else
+                            {
+
+#line default
+#line hidden
+
+#line 149 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                if (response.UseDtoClass)
+                                {
+
+#line default
+#line hidden
+                                    this.Write("                let resultData");
+
+#line 150 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                    this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
+
+#line default
+#line hidden
+                                    this.Write(" = data === \"\" ? null : JSON.parse(data, this.jsonParseReviver);\r\n               " +
+                                            " ");
+
+#line 151 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                    this.Write(this.ToStringHelper.ToStringWithCulture(ConversionUtilities.Tab(response.DataConversionCode, 4)));
+
+#line default
+#line hidden
+                                    this.Write("\r\n");
+
+#line 152 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                }
+                                else
+                                {
+
+#line default
+#line hidden
+                                    this.Write("                result");
+
+#line 153 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                    this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
+
+#line default
+#line hidden
+                                    this.Write(" = data === \"\" ? null : <");
+
+#line 153 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                    this.Write(this.ToStringHelper.ToStringWithCulture(response.Type));
+
+#line default
+#line hidden
+                                    this.Write(">this.parseResult(response, data, this.jsonParseReviver);\r\n");
+
+#line 154 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                }
+
+#line default
+#line hidden
+
+#line 155 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+
+#line default
+#line hidden
+
+#line 156 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            if (response.IsSuccess)
+                            {
+
+#line default
+#line hidden
+                                this.Write("                return result");
+
+#line 157 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
+
+#line default
+#line hidden
+                                this.Write("; \r\n");
+
+#line 158 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+                            else
+                            {
+
+#line default
+#line hidden
+                                this.Write("                throw result");
+
+#line 159 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(response.StatusCode));
+
+#line default
+#line hidden
+                                this.Write("; \r\n");
+
+#line 160 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+                        }
+
+#line default
+#line hidden
+                        this.Write("            }\r\n            else\r\n");
+
+#line 164 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("            {\r\n");
+
+#line 165 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    if (operation.HasDefaultResponse)
+                    {
+
+#line default
+#line hidden
+                        this.Write("                let result: ");
+
+#line 166 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        this.Write(this.ToStringHelper.ToStringWithCulture(operation.DefaultResponse.Type));
+
+#line default
+#line hidden
+                        this.Write(" = null; \r\n");
+
+#line 167 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (operation.DefaultResponse.IsDate)
+                        {
+
+#line default
+#line hidden
+                            this.Write("                result = new Date(data);\r\n");
+
+#line 169 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+                        else
+                        {
+
+#line default
+#line hidden
+
+#line 170 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            if (operation.DefaultResponse.UseDtoClass)
+                            {
+
+#line default
+#line hidden
+                                this.Write("                let resultData = data === \"\" ? null : JSON.parse(data, this.jsonP" +
+                                        "arseReviver);\r\n            ");
+
+#line 172 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(ConversionUtilities.Tab(operation.DefaultResponse.DataConversionCode, 3)));
+
+#line default
+#line hidden
+                                this.Write("\r\n");
+
+#line 173 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+                            else
+                            {
+
+#line default
+#line hidden
+                                this.Write("                result = data === \"\" ? null : <");
+
+#line 174 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                                this.Write(this.ToStringHelper.ToStringWithCulture(operation.DefaultResponse.Type));
+
+#line default
+#line hidden
+                                this.Write(">this.parseResult(response, data, this.jsonParseReviver);\r\n");
+
+#line 175 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                            }
+
+#line default
+#line hidden
+
+#line 176 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+
+#line default
+#line hidden
+
+#line 177 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        if (operation.DefaultResponse.IsSuccess)
+                        {
+
+#line default
+#line hidden
+                            this.Write("                return result; \r\n");
+
+#line 179 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+                        else
+                        {
+
+#line default
+#line hidden
+                            this.Write("                throw result; \r\n");
+
+#line 181 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                        }
+                    }
+                    else
+                    {
+
+#line default
+#line hidden
+                        this.Write("                throw new Error(\"error_no_callback_for_the_received_http_status\")" +
+                                "; \r\n");
+
+#line 184 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                    }
+
+#line default
+#line hidden
+                    this.Write("            }\r\n        });\r\n    }\r\n");
+
+#line 188 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+                }
+
+#line default
+#line hidden
+                this.Write("}\r\n");
+
+#line 189 "C:\Development\Threax.AspNetCore.Convention\TemplateGenerator\FetchClientTemplate.tt"
+            }
+
+#line default
+#line hidden
             this.Write("\r\n");
             return this.GenerationEnvironment.ToString();
         }
     }
-    
-    #line default
-    #line hidden
+
+#line default
+#line hidden
     #region Base class
     /// <summary>
     /// Base class for this transformation
@@ -1355,7 +1436,7 @@ if(operation.HasDefaultResponse){
             }
             // If we're starting off, or if the previous text ended with a newline,
             // we have to append the current indent first.
-            if (((this.GenerationEnvironment.Length == 0) 
+            if (((this.GenerationEnvironment.Length == 0)
                         || this.endsWithNewline))
             {
                 this.GenerationEnvironment.Append(this.currentIndentField);
@@ -1473,7 +1554,7 @@ if(operation.HasDefaultResponse){
         /// </summary>
         public class ToStringInstanceHelper
         {
-            private System.IFormatProvider formatProviderField  = global::System.Globalization.CultureInfo.InvariantCulture;
+            private System.IFormatProvider formatProviderField = global::System.Globalization.CultureInfo.InvariantCulture;
             /// <summary>
             /// Gets or sets format provider to be used by ToStringWithCulture method.
             /// </summary>
@@ -1481,13 +1562,13 @@ if(operation.HasDefaultResponse){
             {
                 get
                 {
-                    return this.formatProviderField ;
+                    return this.formatProviderField;
                 }
                 set
                 {
                     if ((value != null))
                     {
-                        this.formatProviderField  = value;
+                        this.formatProviderField = value;
                     }
                 }
             }
@@ -1501,7 +1582,7 @@ if(operation.HasDefaultResponse){
                     throw new global::System.ArgumentNullException("objectToConvert");
                 }
                 System.Type t = objectToConvert.GetType();
-                System.Reflection.MethodInfo method = t.GetTypeInfo().GetMethod("ToString", new System.Type[] {
+                System.Reflection.MethodInfo method = t.GetMethod("ToString", new System.Type[] {
                             typeof(System.IFormatProvider)});
                 if ((method == null))
                 {
