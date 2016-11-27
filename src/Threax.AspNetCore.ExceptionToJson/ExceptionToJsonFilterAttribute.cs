@@ -33,70 +33,54 @@ namespace Threax.AspNetCore.ExceptionToJson
 
         public override void OnException(ExceptionContext context)
         {
-            try
+            //Validation exception becomes a Bad Request (400) and gets a ModelState simplified and serialized to json.
+            var validationException = context.Exception as ValidationException;
+            if (validationException != null)
             {
-                //Validation exception becomes a Bad Request (400) and gets a ModelState simplified and serialized to json.
-                var validationException = context.Exception as ValidationException;
-                if (validationException != null)
+                context.Result = new ObjectResult(new ModelStateErrorResult(context.ModelState, validationException.Message))
                 {
-                    context.Result = new ObjectResult(new ModelStateErrorResult(context.ModelState, validationException.Message))
-                    {
-                        StatusCode = (int)HttpStatusCode.BadRequest
-                    };
+                    StatusCode = (int)HttpStatusCode.BadRequest
+                };
 
-                    return;
-                }
-
-                //ExceptionErrorResult becomes a ErrorResult with the given status code
-                var exceptionErrorResult = context.Exception as ErrorResultException;
-                if (exceptionErrorResult != null)
-                {
-                    context.Result = new ObjectResult(new ErrorResult(exceptionErrorResult.Message))
-                    {
-                        StatusCode = (int)exceptionErrorResult.StatusCode
-                    };
-
-                    return;
-                }
-
-                //File not found becomes a Not Found (404).
-                var fileNotFoundException = context.Exception as FileNotFoundException;
-                if (fileNotFoundException != null)
-                {
-                    context.Result = new StatusCodeResult((int)HttpStatusCode.NotFound);
-
-                    return;
-                }
-
-                //Other exception types become Internal Server Error (500) and are detailed or not depending on settings.
-                if (detailedInternalServerError)
-                {
-                    context.Result = new ObjectResult(new ExceptionResult(context.Exception))
-                    {
-                        StatusCode = (int)HttpStatusCode.InternalServerError
-                    };
-                }
-                else
-                {
-                    context.Result = new ObjectResult(new ErrorResult("Internal Server Error"))
-                    {
-                        StatusCode = (int)HttpStatusCode.InternalServerError
-                    };
-                }
+                return;
             }
-            finally
+
+            //ExceptionErrorResult becomes a ErrorResult with the given status code
+            var exceptionErrorResult = context.Exception as ErrorResultException;
+            if(exceptionErrorResult != null)
             {
-                if(AllowResultFilters && context.Result is ObjectResult)
+                context.Result = new ObjectResult(new ErrorResult(exceptionErrorResult.Message))
                 {
-                    context.Exception = null;
-                }
+                    StatusCode = (int)exceptionErrorResult.StatusCode
+                };
+
+                return;
+            }
+
+            //File not found becomes a Not Found (404).
+            var fileNotFoundException = context.Exception as FileNotFoundException;
+            if(fileNotFoundException != null)
+            {
+                context.Result = new StatusCodeResult((int)HttpStatusCode.NotFound);
+
+                return;
+            }
+
+            //Other exception types become Internal Server Error (500) and are detailed or not depending on settings.
+            if (detailedInternalServerError)
+            {
+                context.Result = new ObjectResult(new ExceptionResult(context.Exception))
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
+            }
+            else
+            {
+                context.Result = new ObjectResult(new ErrorResult("Internal Server Error"))
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
             }
         }
-
-        /// <summary>
-        /// If this is set to true any exceptions that generate an ObjectResult will null their exceptions
-        /// allowing ResultFilters to run.
-        /// </summary>
-        public bool AllowResultFilters { get; set; } = true;
     }
 }

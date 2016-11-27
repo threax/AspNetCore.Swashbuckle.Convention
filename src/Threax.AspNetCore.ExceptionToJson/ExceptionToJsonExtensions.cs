@@ -11,20 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static MvcOptions UseExceptionErrorFilters(this MvcOptions options, bool detailedErrors = false)
         {
-            options.UseExceptionErrorFilters(new ExceptionToJsonOptions()
-            {
-                DetailedErrors = detailedErrors
-            });
-            return options;
-        }
-
-        public static MvcOptions UseExceptionErrorFilters(this MvcOptions options, ExceptionToJsonOptions jOptions)
-        {
-            options.Filters.Add(new ExceptionToJsonFilterAttribute(jOptions.DetailedErrors)
-            {
-                AllowResultFilters = jOptions.AllowResultFilters,
-                Order = jOptions.Order
-            });
+            options.Filters.Add(new ExceptionToJsonFilterAttribute(detailedErrors));
             return options;
         }
     }
