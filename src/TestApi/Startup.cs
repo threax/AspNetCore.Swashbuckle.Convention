@@ -14,7 +14,7 @@ using Newtonsoft.Json.Converters;
 
 namespace TestApi
 {
-    public class Startup
+    class Startup
     {
         public Startup(IHostingEnvironment env)
         {

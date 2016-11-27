@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Threax.AspNetCore.Swashbuckle.Convention
 {
+    /// <summary>
+    /// Options for the Swagger convention.
+    /// </summary>
     public class SwaggerConventionOptions
     {
         /// <summary>

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace TestApi
 {
-    public class Program
+    class Program
     {
         public static void Main(string[] args)
         {

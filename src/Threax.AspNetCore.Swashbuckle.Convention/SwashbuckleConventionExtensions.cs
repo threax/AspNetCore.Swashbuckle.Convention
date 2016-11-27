@@ -12,6 +12,9 @@ using Threax.AspNetCore.Swashbuckle.Convention;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
+    /// <summary>
+    /// Extensions class for IServiceCollection for the Swashbuckle convention.
+    /// </summary>
     public static class SwashbuckleConventionExtensions
     {
         /// <summary>
@@ -65,8 +68,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// This instructs the app to use your swagger convention. It will also auto discover the name of the app's
         /// virtual directory for swagger ui.
         /// </summary>
-        /// <param name="app"></param>
-        /// <param name="apiInfo"></param>
+        /// <param name="app">The extended IApplicationBuilder</param>
+        /// <param name="info">The Info for the api.</param>
         /// <returns></returns>
         public static IApplicationBuilder UseConventionalSwagger(this IApplicationBuilder app, Info info)
         {

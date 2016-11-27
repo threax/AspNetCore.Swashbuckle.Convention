@@ -30,10 +30,10 @@ namespace TestApi.Controllers
 
         //Want to support multiple files, but can't get it working right now.
 
-        /// <summary>
-        /// Upload files.
-        /// </summary>
-        /// <param name="files">The files uploaded.</param>
+        ///// <summary>
+        ///// Upload files.
+        ///// </summary>
+        ///// <param name="files">The files uploaded.</param>
         //[HttpPost]
         //public long UploadFiles([FromBody] IList<IFormFile> files)
         //{

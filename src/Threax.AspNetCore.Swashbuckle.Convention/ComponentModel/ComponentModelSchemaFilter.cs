@@ -10,8 +10,16 @@ using System.Reflection;
 
 namespace Threax.AspNetCore.Swashbuckle.Convention
 {
+    /// <summary>
+    /// This filter adds info to the schema based on component model attributes.
+    /// </summary>
     public class ComponentModelSchemaFilter : ISchemaFilter
     {
+        /// <summary>
+        /// Apply schema
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="context"></param>
         public void Apply(Schema model, SchemaFilterContext context)
         {
             var objectDisplayName = context.SystemType.GetTypeInfo().GetCustomAttributes(typeof(DisplayNameAttribute), true).FirstOrDefault() as DisplayNameAttribute;
