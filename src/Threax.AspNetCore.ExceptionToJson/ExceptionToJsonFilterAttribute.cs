@@ -37,7 +37,7 @@ namespace Threax.AspNetCore.ExceptionToJson
             var validationException = context.Exception as ValidationException;
             if (validationException != null)
             {
-                context.Result = new JsonResult(new ModelStateErrorResult(context.ModelState, validationException.Message))
+                context.Result = new ObjectResult(new ModelStateErrorResult(context.ModelState, validationException.Message))
                 {
                     StatusCode = (int)HttpStatusCode.BadRequest
                 };
@@ -49,7 +49,7 @@ namespace Threax.AspNetCore.ExceptionToJson
             var exceptionErrorResult = context.Exception as ErrorResultException;
             if(exceptionErrorResult != null)
             {
-                context.Result = new JsonResult(new ErrorResult(exceptionErrorResult.Message))
+                context.Result = new ObjectResult(new ErrorResult(exceptionErrorResult.Message))
                 {
                     StatusCode = (int)exceptionErrorResult.StatusCode
                 };
@@ -69,14 +69,14 @@ namespace Threax.AspNetCore.ExceptionToJson
             //Other exception types become Internal Server Error (500) and are detailed or not depending on settings.
             if (detailedInternalServerError)
             {
-                context.Result = new JsonResult(new ExceptionResult(context.Exception))
+                context.Result = new ObjectResult(new ExceptionResult(context.Exception))
                 {
                     StatusCode = (int)HttpStatusCode.InternalServerError
                 };
             }
             else
             {
-                context.Result = new JsonResult(new ErrorResult("Internal Server Error"))
+                context.Result = new ObjectResult(new ErrorResult("Internal Server Error"))
                 {
                     StatusCode = (int)HttpStatusCode.InternalServerError
                 };

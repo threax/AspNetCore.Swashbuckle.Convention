@@ -9,7 +9,7 @@ using Threax.AspNetCore.ExceptionToJson;
 namespace TestApi.Controllers
 {
     [Route("api/[controller]/[action]")]
-    public class ThingyController : Controller
+    public class ErrorController : Controller
     {
         // GET api/values
         [HttpGet]
