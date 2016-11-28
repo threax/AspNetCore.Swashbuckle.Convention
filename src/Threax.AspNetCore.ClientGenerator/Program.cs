@@ -51,11 +51,14 @@ namespace Threax.AspNetCore.ClientGenerator
             {
                 try
                 {
-                    Task.WaitAll(AsyncMain(parsedArgs));
-                }
-                catch (AggregateException ex)
-                {
-                    throw ex.InnerException;
+                    try
+                    {
+                        Task.WaitAll(AsyncMain(parsedArgs));
+                    }
+                    catch (AggregateException ex)
+                    {
+                        throw ex.InnerException;
+                    }
                 }
                 catch (ClientGeneratorException ex)
                 {
