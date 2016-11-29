@@ -10,7 +10,10 @@ namespace TestHalcyonApi.ViewModels
 {
     [HalModel()]
     [HalActionLink("self", typeof(ThingyController), "List")]
-    [HalActionLink("listthingies", typeof(ThingyController), "Get")]
+    [HalActionLink("list", typeof(ThingyController), "Get")]
+    [HalActionLink("add", typeof(ThingyController), "Add")]
+    [HalActionLink("testauthorize", typeof(ThingyController), "Authorize")]
+    [HalActionLink("testroles", typeof(ThingyController), "Roles")]
     public class ThingyCollectionView : CollectionView<ThingyView>
     {
         
