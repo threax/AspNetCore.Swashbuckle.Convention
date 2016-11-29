@@ -32,7 +32,7 @@ namespace HateoasTest.Controllers
             return testContext.TestSubData;
         }
 
-        [HttpGet("{subThingyId}")]
+        [HttpGet("{SubThingyId}")]
         public SubThingy Get(int subThingyId)
         {
             return testContext.TestSubData.First(i => i.SubThingyId == subThingyId);
@@ -45,13 +45,13 @@ namespace HateoasTest.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{subThingyId}")]
+        [HttpPut("{SubThingyId}")]
         public void Update(int subThingyId, [FromBody]SubThingy value)
         {
         }
 
         // DELETE api/values/5
-        [HttpDelete("{subThingyId}")]
+        [HttpDelete("{SubThingyId}")]
         public void Delete(int subThingyId)
         {
         }

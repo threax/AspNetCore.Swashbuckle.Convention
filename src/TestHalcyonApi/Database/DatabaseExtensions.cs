@@ -25,6 +25,9 @@ namespace TestHalcyonApi.Database
                 cfg.CreateMap<IEnumerable<Thingy>, ThingyCollectionView>()
                    .ForMember(dest => dest.Items,
                               opts => opts.MapFrom(src => src));
+                cfg.CreateMap<IEnumerable<SubThingy>, SubThingyCollectionView>()
+                   .ForMember(dest => dest.Items,
+                              opts => opts.MapFrom(src => src));
             });
             services.AddScoped<IMapper>(i => mapperConfig.CreateMapper());
             services.AddScoped<IHalModelViewMapper>(s =>
