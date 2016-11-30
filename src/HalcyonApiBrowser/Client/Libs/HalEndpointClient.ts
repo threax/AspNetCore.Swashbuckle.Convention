@@ -53,7 +53,8 @@ export class Embed<T>{
 
 /**
  * This class represents a single visit to a hal api endpoint. It will contain the data
- * that was requested and the links from that data.
+ * that was requested and the links from that data. The hal properties are removed
+ * from the data, so if you get it it won't contain that info.
  */
 export class HalEndpointClient<T> {
     private static jsonMimeType = "application/json";
@@ -94,15 +95,21 @@ export class HalEndpointClient<T> {
         return result;
     }
 
-    private data: HalData; //This is our typed data, but as a hal object
+    private data: T; //This is our typed data the hal properties are removed
     private fetcher: Fetcher;
+    private embeds;
+    private links;
 
     /**
      * Constructor.
      * @param {HalData} data - The raw hal data object.
      */
     constructor(data: HalData, fetcher: Fetcher) {
-        this.data = data;
+        this.embeds = data._embedded;
+        delete data._embedded;
+        this.links = data._links;
+        delete data._links;
+        this.data = <any>data; //HalData is the actual data, trick compiler
         this.fetcher = fetcher;
     }
 
@@ -113,7 +120,7 @@ export class HalEndpointClient<T> {
     public GetData(): T {
         //Tricky typecase, but HalDatas are also Ts in this instance.
         //Not here or relevant at runtime anyway.
-        return <T><any>this.data;
+        return this.data;
     }
 
     /**
@@ -122,7 +129,7 @@ export class HalEndpointClient<T> {
      * @returns - The embed specified by name or undefined.
      */
     public GetEmbed<T>(name: string): Embed<T> {
-        return new Embed<T>(name, this.data._embedded[name], this.fetcher);
+        return new Embed<T>(name, this.embeds[name], this.fetcher);
     }
 
     /**
@@ -131,7 +138,7 @@ export class HalEndpointClient<T> {
      * @returns True if found, false otherwise.
      */
     public HasEmbed(name: string): boolean {
-        return this.data._embedded[name] !== undefined;
+        return this.embeds[name] !== undefined;
     }
 
     /**
@@ -142,8 +149,8 @@ export class HalEndpointClient<T> {
     public GetAllEmbeds<T>(): Embed<T>[] {
         //No generators, create array
         var embeds: Embed<T>[] = [];
-        for (var key in this.data._embedded) {
-            var embed = new Embed<T>(key, this.data._embedded[key], this.fetcher);
+        for (var key in this.embeds) {
+            var embed = new Embed<T>(key, this.embeds[key], this.fetcher);
             embeds.push(embed);
         }
         return embeds;
@@ -172,7 +179,7 @@ export class HalEndpointClient<T> {
      * @returns The link or undefined if the link does not exist.
      */
     public GetLink(ref: string): HalLink {
-        return this.data._links[ref];
+        return this.links[ref];
     }
 
     /**
@@ -181,7 +188,7 @@ export class HalEndpointClient<T> {
      * @returns - True if the link exists, false otherwise
      */
     public HasLink(ref: string): boolean {
-        return this.data._links[ref] !== undefined;
+        return this.links[ref] !== undefined;
     }
 
     /**
@@ -191,8 +198,8 @@ export class HalEndpointClient<T> {
     public GetAllLinks(): HalLinkInfo[] {
         //If only we had generators, have to load entire collection
         var linkInfos: HalLinkInfo[] = [];
-        for (var key in this.data._links) {
-            var link: HalLink = this.data._links[key];
+        for (var key in this.links) {
+            var link: HalLink = this.links[key];
             linkInfos.push({
                 href: link.href,
                 method: link.method,
