@@ -49,7 +49,7 @@ namespace HateoasTest.Controllers
         /// <param name="value"></param>
         [HttpPost("[action]")]
         [Authorize]
-        public void Authorize([FromBody]Thingy value)
+        public void AuthorizedProperties([FromBody]Thingy value)
         {
         }
 
@@ -59,7 +59,7 @@ namespace HateoasTest.Controllers
         /// <param name="value"></param>
         [HttpPost("[action]")]
         [Authorize(Roles="NeverHaveThisRole")]
-        public void Roles([FromBody]Thingy value)
+        public void RoleProperties([FromBody]Thingy value)
         {
         }
 
@@ -81,22 +81,13 @@ namespace HateoasTest.Controllers
             return testContext.TestSubData.Where(i => i.ThingyId == thingyId);
         }
 
-        [HttpPost("{ThingyId}/SubThingy")]
-        public void AddTestSubData(int testDataId)
+        [HttpGet("{ThingyId}/[action]")]
+        public IActionResult RawHalRequest(int thingyId)
         {
+            var data = Get(thingyId);
+            var response = new HALResponse(new Object());
 
-        }
-
-        [HttpPut("{ThingyId}/SubThingy/{SubThingyId}")]
-        public void UpdateTestSubData(int testDataId, int subThingyId)
-        {
-
-        }
-
-        [HttpDelete("{ThingyId}/SubThingy/{SubThingyId}")]
-        public void DeleteTestSubData(int testDataId, int subThingyId)
-        {
-            
+            return response.ToActionResult(this);
         }
     }
 }
