@@ -8,7 +8,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 
 namespace TestHalcyonApi.ViewModels
 {
-    [HalModel()]
+    [HalModel]
     [HalActionLink("self", typeof(ThingyController), "List")]
     [HalActionLink("list", typeof(ThingyController), "Get")]
     [HalActionLink("add", typeof(ThingyController), "Add")]

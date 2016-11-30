@@ -13,7 +13,7 @@ namespace TestHalcyonApi.ViewModels
     /// <summary>
     /// A simple test model.
     /// </summary>
-    [HalModel()]
+    [HalModel]
     [HalActionLink("self", typeof(ThingyController), "Get")]
     [HalActionLink("get", typeof(ThingyController), "Get")]
     [HalActionLink("update", typeof(ThingyController), "Update")]

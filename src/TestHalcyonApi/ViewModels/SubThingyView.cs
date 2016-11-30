@@ -9,7 +9,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 
 namespace TestHalcyonApi.ViewModels
 {
-    [HalModel()]
+    [HalModel]
     [HalActionLink("self", typeof(SubThingyController), "Get")]
     [HalActionLink("get", typeof(SubThingyController), "Get")]
     [HalActionLink("update", typeof(SubThingyController), "Update")]

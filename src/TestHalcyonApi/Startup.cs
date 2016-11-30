@@ -16,6 +16,7 @@ namespace TestHalcyonApi
 {
     public class Startup
     {
+        private AppConfig appConfig = new AppConfig();
         private bool isDev;
         private Info apiInfo = new Info()
         {
@@ -36,6 +37,7 @@ namespace TestHalcyonApi
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            ConfigurationBinder.Bind(Configuration.GetSection("AppConfig"), appConfig);
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -43,7 +45,10 @@ namespace TestHalcyonApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddConventionalHalcyon();
+            services.AddConventionalHalcyon(new HalcyonConventionOptions()
+            {
+                BaseUrl = appConfig.BaseUrl
+            });
             services.UseAppDatabase();
 
             services.AddMvc(o =>

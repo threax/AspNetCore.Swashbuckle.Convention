@@ -8,7 +8,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 
 namespace TestHalcyonApi.ViewModels
 {
-    [HalModel()]
+    [HalModel]
     [HalActionLink("self", typeof(SubThingyController), "List")]
     [HalActionLink("listsubthingies", typeof(SubThingyController), "Get")]
     public class SubThingyCollectionView : CollectionView<SubThingyView>
