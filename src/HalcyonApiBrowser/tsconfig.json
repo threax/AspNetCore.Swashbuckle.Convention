@@ -11,8 +11,7 @@
     "types": [ "es6-promise" ],
     "paths": {
       "hr.*": [
-        "node_modules/HtmlRapier/src/*",
-        "node_modules/htmlrapier.json-editor/*"
+        "node_modules/HtmlRapier/src/*"
       ],
       "hr.bootstrap.*": [
         "node_modules/HtmlRapier.Bootstrap/lib/*",

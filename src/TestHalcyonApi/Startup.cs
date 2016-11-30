@@ -63,6 +63,16 @@ namespace TestHalcyonApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            //This is a demo api, don't unlock cors in production like this
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .AllowCredentials();
+            });
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
