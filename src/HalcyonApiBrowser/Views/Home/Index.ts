@@ -3,5 +3,6 @@ import { HalcyonBrowserController } from 'clientlibs.HalcyonBrowserController';
 
 PageStart.init()
     .then(config => {
-        HalcyonBrowserController.Builder(config).create("halcyonbrowser");
+        var browsers = HalcyonBrowserController.Builder().create("halcyonbrowser");
+        browsers[0].showResults(config.EntryPoint);
     });

@@ -10,55 +10,6 @@ interface HalData {
 }
 
 /**
- * This class provides info for hal links.
- * @param {any} links The links to wrap.
- * @returns
- */
-export class HalLinks {
-    private links: any;
-
-    constructor(links: any) {
-        this.links = links;
-    }
-
-    /**
-     * Get a single named link.
-     * @param {string} ref - The name of the link to recover.
-     * @returns The link or undefined if the link does not exist.
-     */
-    public GetLink(ref: string): HalLink {
-        return this.links[ref];
-    }
-
-    /**
-     * Check to see if a link exists in this collection.
-     * @param {string} ref - The name of the link (the ref).
-     * @returns - True if the link exists, false otherwise
-     */
-    public HasLink(ref: string): boolean {
-        return this.links[ref] !== undefined;
-    }
-
-    /**
-     * Get all links in this collection. Will transform them to a HalLinkInfo, these are copies of the original links with ref added.
-     * @returns
-     */
-    public GetAllLinks(): HalLinkInfo[] {
-        //If only we had generators, have to load entire collection
-        var linkInfos: HalLinkInfo[] = [];
-        for (var key in this.links) {
-            var link: HalLink = this.links[key];
-            linkInfos.push({
-                href: link.href,
-                method: link.method,
-                rel: key
-            });
-        }
-        return linkInfos;
-    }
-}
-
-/**
  * A single hal link how they appear in the collection.
  * @param {any} embeds
  */
@@ -77,24 +28,26 @@ export interface HalLinkInfo {
     rel: string
 }
 
-/**
- * This class represents embeds in a hal object.
- * @param {any} embeds
- * @returns
- */
-export class HalEmbeds {
-    private embeds: any;
+export class Embed<T>{
+    private name: string;
+    private embeds: HalData[];
+    private fetcher: Fetcher;
 
-    constructor(embeds: any) {
+    constructor(name: string, embeds: HalData[], fetcher: Fetcher) {
+        this.name = name;
         this.embeds = embeds;
+        this.fetcher = fetcher;
     }
 
-    public GetEmbed<T>(name: string): HalEndpointClient<T> {
-        return new HalEndpointClient<T>(<HalData>this.embeds[name]);
-    }
+    public GetAllClients(): HalEndpointClient<T>[] {
+        //No generators, create array
+        var embeddedClients: HalEndpointClient<T>[] = [];
 
-    public HasEmbed(name: string): boolean {
-        return this.embeds[name] !== undefined;
+        for (let i = 0; i < this.embeds.length; ++i) {
+            var embed = new HalEndpointClient<T>(this.embeds[i], this.fetcher);
+            embeddedClients.push(embed);
+        }
+        return embeddedClients;
     }
 }
 
@@ -115,13 +68,13 @@ export class HalEndpointClient<T> {
         return fetcher.fetch(link.href, {
             method: link.method
         })
-        .then(r => HalEndpointClient.processResult<T>(r));
+        .then(r => HalEndpointClient.processResult<T>(r, fetcher));
     }
 
-    private static processResult<T>(response: Response): Promise<HalEndpointClient<T>> {
+    private static processResult<T>(response: Response, fetcher: Fetcher): Promise<HalEndpointClient<T>> {
         return response.text().then((data) => {
             if (response.ok) {
-                return new HalEndpointClient<T>(HalEndpointClient.parseResult(response, data));
+                return new HalEndpointClient<T>(HalEndpointClient.parseResult(response, data), fetcher);
             }
             else {
                 throw new Error("Error Code Returned. Make this error work better.");
@@ -142,13 +95,15 @@ export class HalEndpointClient<T> {
     }
 
     private data: HalData; //This is our typed data, but as a hal object
+    private fetcher: Fetcher;
 
     /**
      * Constructor.
      * @param {HalData} data - The raw hal data object.
      */
-    constructor(data: HalData) {
+    constructor(data: HalData, fetcher: Fetcher) {
         this.data = data;
+        this.fetcher = fetcher;
     }
 
     /**
@@ -162,18 +117,88 @@ export class HalEndpointClient<T> {
     }
 
     /**
-     * Get the hal links returned in the data.
-     * @returns The link collection.
+     * Get an embed.
+     * @param {string} name - The name of the embed.
+     * @returns - The embed specified by name or undefined.
      */
-    public GetLinks(): HalLinks {
-        return new HalLinks(this.data._links);
+    public GetEmbed<T>(name: string): Embed<T> {
+        return new Embed<T>(name, this.data._embedded[name], this.fetcher);
     }
 
     /**
-     * Get the embeds returned in the data.
-     * @returns The embedded data collection.
+     * See if this client has an embed.
+     * @param {string} name - The name of the embed
+     * @returns True if found, false otherwise.
      */
-    public GetEmbeds(): HalEmbeds{
-        return new HalEmbeds(this.data._embedded);
+    public HasEmbed(name: string): boolean {
+        return this.data._embedded[name] !== undefined;
+    }
+
+    /**
+     * Get all the embeds in this client. If they are all the same type specify
+     * T, otherwise use any to get generic objects.
+     * @returns
+     */
+    public GetAllEmbeds<T>(): Embed<T>[] {
+        //No generators, create array
+        var embeds: Embed<T>[] = [];
+        for (var key in this.data._embedded) {
+            var embed = new Embed<T>(key, this.data._embedded[key], this.fetcher);
+            embeds.push(embed);
+        }
+        return embeds;
+    }
+
+    /**
+     * Load a new link, this will return a new HalEndpointClient for the results
+     * of that request. You can keep using the client that you called this function
+     * on to keep making requests if needed. The ref must exist before you can call
+     * this function. Use HasLink to see if it is possible.
+     * @param {string} ref - The link reference to visit.
+     * @returns
+     */
+    public LoadLink<DataType>(ref: string): Promise<HalEndpointClient<DataType>> {
+        if (this.HasLink(ref)) {
+            return HalEndpointClient.Load<DataType>(this.GetLink(ref), this.fetcher);
+        }
+        else {
+            throw new Error('Cannot find ref "' + ref + '".');
+        }
+    }
+
+    /**
+     * Get a single named link.
+     * @param {string} ref - The name of the link to recover.
+     * @returns The link or undefined if the link does not exist.
+     */
+    public GetLink(ref: string): HalLink {
+        return this.data._links[ref];
+    }
+
+    /**
+     * Check to see if a link exists in this collection.
+     * @param {string} ref - The name of the link (the ref).
+     * @returns - True if the link exists, false otherwise
+     */
+    public HasLink(ref: string): boolean {
+        return this.data._links[ref] !== undefined;
+    }
+
+    /**
+     * Get all links in this collection. Will transform them to a HalLinkInfo, these are copies of the original links with ref added.
+     * @returns
+     */
+    public GetAllLinks(): HalLinkInfo[] {
+        //If only we had generators, have to load entire collection
+        var linkInfos: HalLinkInfo[] = [];
+        for (var key in this.data._links) {
+            var link: HalLink = this.data._links[key];
+            linkInfos.push({
+                href: link.href,
+                method: link.method,
+                rel: key
+            });
+        }
+        return linkInfos;
     }
 }
