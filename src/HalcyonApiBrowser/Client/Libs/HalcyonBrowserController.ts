@@ -41,14 +41,14 @@ export class HalcyonBrowserController {
         return new controller.ControllerBuilder<HalcyonBrowserController, void, void>(HalcyonBrowserController);
     }
 
-    //private linkModel: controller.Model<iter.IteratorInterface<HalLinkDisplay>>;
-    private linkModel: controller.Model<HalLinkDisplay[]>;
+    private linkModel: controller.Model<iter.IterableInterface<HalLinkDisplay>>;
+    //private linkModel: controller.Model<HalLinkDisplay[]>;
     private embedsModel: controller.Model<HalClient.Embed<any>[]>;
     private client: HalClient.HalEndpointClient<any>;
 
     constructor(bindings: controller.BindingCollection) {
-        //this.linkModel = bindings.getModel<iter.IteratorInterface<HalLinkDisplay>>("links");
-        this.linkModel = bindings.getModel<HalLinkDisplay[]>("links");
+        this.linkModel = bindings.getModel<iter.IterableInterface<HalLinkDisplay>>("links");
+        //this.linkModel = bindings.getModel<HalLinkDisplay[]>("links");
         this.embedsModel = bindings.getModel<HalClient.Embed<any>[]>("embeds");
     }
 
@@ -56,16 +56,16 @@ export class HalcyonBrowserController {
         this.client = client;
 
         var linkControllerBuilder = LinkController.Builder(this);
-        //var iterator: iter.IterableInterface<HalClient.HalLinkInfo> = new iter.Iterable(client.GetAllLinks());
-        //iterator = iterator.select<HalLinkDisplay>(i => {
-        //    var link: HalLinkDisplay = {
-        //        rel: i.rel,
-        //        href: '/?entry=' + encodeURIComponent(i.href)
-        //    };
-        //    return link;
-        //});
-        //this.linkModel.setData(iterator.iterator(), linkControllerBuilder.createOnCallback());
-        this.linkModel.setData(client.GetAllLinks(), linkControllerBuilder.createOnCallback());
+        var iterator: iter.IterableInterface<HalClient.HalLinkInfo> = new iter.Iterable(client.GetAllLinks());
+        iterator = iterator.select<HalLinkDisplay>(i => {
+            var link: HalLinkDisplay = {
+                rel: i.rel,
+                href: '/?entry=' + encodeURIComponent(i.href)
+            };
+            return link;
+        });
+        this.linkModel.setData(iterator, linkControllerBuilder.createOnCallback());
+        //this.linkModel.setData(client.GetAllLinks(), linkControllerBuilder.createOnCallback());
 
         var embedsBuilder = HalcyonEmbedsController.Builder();
         this.embedsModel.setData(client.GetAllEmbeds(), embedsBuilder.createOnCallback());

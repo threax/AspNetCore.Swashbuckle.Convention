@@ -1,6 +1,11 @@
 ﻿import * as bootstrap from 'hr.bootstrap.all';
 import * as HalEndpointClient from 'clientlibs.HalEndpointClient';
 import * as WindowFetch from 'hr.windowfetch';
+import * as uri from 'hr.uri';
+
+interface Query {
+    entry: string;
+}
 
 export class PageStart {
     private fetcher: WindowFetch.WindowFetch;
@@ -21,7 +26,12 @@ export class PageStart {
     }
 
     __loadResources(): Promise<PageStart> {
-        return HalEndpointClient.HalEndpointClient.Load({ href: 'http://localhost:58151/api', method: 'GET' }, this.fetcher)
+        var query: Query = <Query>uri.getQueryObject();
+        if (query.entry === undefined) {
+            query.entry = 'http://localhost:58151/api';
+        }
+
+        return HalEndpointClient.HalEndpointClient.Load({ href: query.entry, method: 'GET' }, this.fetcher)
             .then(client => this.entryPoint = client)
             .then(data => this);
     }
