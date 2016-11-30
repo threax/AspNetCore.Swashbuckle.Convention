@@ -12,9 +12,14 @@ using AutoMapper;
 using TestHalcyonApi.Database;
 using TestHalcyonApi.Models;
 using Microsoft.AspNetCore.Authorization;
+using Threax.AspNetCore.Halcyon.Ext;
 
 namespace HateoasTest.Controllers
 {
+    /// <summary>
+    /// This is a ThingyController that returns pocos. This should be the way most controllers
+    /// can be built unless you need special logic when processing your links.
+    /// </summary>
     [Route("api/[controller]")]
     public class ThingyController : Controller
     {
@@ -79,15 +84,6 @@ namespace HateoasTest.Controllers
         public IEnumerable<SubThingy> ListTestSubData(int thingyId)
         {
             return testContext.TestSubData.Where(i => i.ThingyId == thingyId);
-        }
-
-        [HttpGet("{ThingyId}/[action]")]
-        public IActionResult RawHalRequest(int thingyId)
-        {
-            var data = Get(thingyId);
-            var response = new HALResponse(new Object());
-
-            return response.ToActionResult(this);
         }
     }
 }
