@@ -118,8 +118,6 @@ export class HalEndpointClient<T> {
      * @returns The data.
      */
     public GetData(): T {
-        //Tricky typecase, but HalDatas are also Ts in this instance.
-        //Not here or relevant at runtime anyway.
         return this.data;
     }
 

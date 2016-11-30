@@ -44,20 +44,34 @@ export class HalcyonBrowserController {
     private linkModel: controller.Model<iter.IterableInterface<HalLinkDisplay>>;
     //private linkModel: controller.Model<HalLinkDisplay[]>;
     private embedsModel: controller.Model<HalClient.Embed<any>[]>;
-    private dataModel: controller.Model<string>;
+    private dataModel: controller.Model<any>;
     private client: HalClient.HalEndpointClient<any>;
 
     constructor(bindings: controller.BindingCollection) {
         this.linkModel = bindings.getModel<iter.IterableInterface<HalLinkDisplay>>("links");
         //this.linkModel = bindings.getModel<HalLinkDisplay[]>("links");
         this.embedsModel = bindings.getModel<HalClient.Embed<any>[]>("embeds");
-        this.dataModel = bindings.getModel<string>("data");
+        this.dataModel = bindings.getModel<any>("data");
     }
 
     showResults(client: HalClient.HalEndpointClient<any>) {
         this.client = client;
 
-        this.dataModel.setData(JSON.stringify(client.GetData()));
+        var data = client.GetData();
+        var dataKeys: string[] = [];
+        for (var key in data) {
+            dataKeys.push(key);
+        }
+        var index = -1;
+        var dataIterator = new iter.Iterable(() => {
+            if (++index < dataKeys.length) {
+                return {
+                    key: dataKeys[index],
+                    value: data[dataKeys[index]]
+                }
+            }
+        });
+        this.dataModel.setData(dataIterator);
 
         var linkControllerBuilder = LinkController.Builder(this);
         var iterator: iter.IterableInterface<HalClient.HalLinkInfo> = new iter.Iterable(client.GetAllLinks());
