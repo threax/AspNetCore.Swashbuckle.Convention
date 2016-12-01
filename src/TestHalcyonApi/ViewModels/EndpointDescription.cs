@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
 using Halcyon.HAL;
 using Newtonsoft.Json;
+using NJsonSchema;
 
 namespace TestHalcyonApi.ViewModels
 {
@@ -17,6 +18,10 @@ namespace TestHalcyonApi.ViewModels
 
         [JsonIgnore]
         public HalSchemaLinkAttribute ResponseSchemaLink { get; set; }
+
+        public JsonSchema4 RequestSchema { get; set; }
+
+        public JsonSchema4 ResponseSchema { get; set; }
 
         public EndpointDescription()
         {

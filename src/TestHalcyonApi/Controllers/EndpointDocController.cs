@@ -13,15 +13,17 @@ namespace TestHalcyonApi.Controllers
     [Route("api/[controller]")]
     public class EndpointDocController : Controller
     {
-        [HttpGet()]
-        public String List([FromServices] IApiDescriptionGroupCollectionProvider descriptionProvider)
-        {
+        ISchemaFinder schemaFinder;
+        IApiDescriptionGroupCollectionProvider descriptionProvider;
 
-            return "";
+        public EndpointDocController(ISchemaFinder schemaFinder, IApiDescriptionGroupCollectionProvider descriptionProvider)
+        {
+            this.schemaFinder = schemaFinder;
+            this.descriptionProvider = descriptionProvider;
         }
 
         [HttpGet("{groupName}/{method}/{*relativePath}")]
-        public EndpointDescription Get([FromServices] IApiDescriptionGroupCollectionProvider descriptionProvider, String groupName, String method, String relativePath)
+        public EndpointDescription Get(String groupName, String method, String relativePath)
         {
             if(relativePath.EndsWith("/") || relativePath.EndsWith("\\"))
             {
@@ -37,6 +39,7 @@ namespace TestHalcyonApi.Controllers
                 if(param.Source.IsFromRequest && param.Source.Id == "Body")
                 {
                     description.RequestSchemaLink = new HalSchemaLinkAttribute("requestSchema", typeof(SchemaController), "Get", param.Type);
+                    description.RequestSchema = schemaFinder.Find(param.Type);
                 }
             }
 
@@ -47,6 +50,7 @@ namespace TestHalcyonApi.Controllers
                 if(methodInfo.ReturnType != typeof(void))
                 {
                     description.ResponseSchemaLink = new HalSchemaLinkAttribute("responseSchema", typeof(SchemaController), "Get", methodInfo.ReturnType);
+                    description.ResponseSchema = schemaFinder.Find(methodInfo.ReturnType);
                 }
             }
 
