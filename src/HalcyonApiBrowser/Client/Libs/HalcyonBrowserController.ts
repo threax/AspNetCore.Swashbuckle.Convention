@@ -48,14 +48,12 @@ export class HalcyonBrowserController {
     }
 
     private linkModel: controller.Model<HalLinkDisplay>;
-    //private linkModel: controller.Model<HalLinkDisplay[]>;
     private embedsModel: controller.Model<HalClient.Embed<any>>;
     private dataModel: controller.Model<any>;
     private client: HalClient.HalEndpointClient<any>;
 
     constructor(bindings: controller.BindingCollection) {
         this.linkModel = bindings.getModel<HalLinkDisplay>("links");
-        //this.linkModel = bindings.getModel<HalLinkDisplay[]>("links");
         this.embedsModel = bindings.getModel<HalClient.Embed<any>>("embeds");
         this.dataModel = bindings.getModel<any>("data");
     }
@@ -78,7 +76,6 @@ export class HalcyonBrowserController {
             return link;
         });
         this.linkModel.setData(linkIter, linkControllerBuilder.createOnCallback(), this.getLinkVariant);
-        //this.linkModel.setData(client.GetAllLinks(), linkControllerBuilder.createOnCallback());
 
         var embedsBuilder = HalcyonEmbedsController.Builder();
         this.embedsModel.setData(client.GetAllEmbeds(), embedsBuilder.createOnCallback());
