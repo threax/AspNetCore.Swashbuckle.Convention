@@ -9,7 +9,7 @@
 <h1>Halcyon Api Browser</h1>
 <div data-hr-controller="halcyonbrowser">
     <h2>Data</h2>
-    <ol data-hr-model="data" data-hr-model-component="dataProperty"></ol>
+    <pre data-hr-model="data" data-hr-model-component="dataProperty"></pre>
     <h2>Links</h2>
     <ol data-hr-model="links" data-hr-model-component="linksComponent"></ol>
     <h2>Embedded Data</h2>
@@ -18,7 +18,7 @@
 
 <template data-hr-component="subBrowser">
     <h4>Data</h4>
-    <ol data-hr-model="data" data-hr-model-component="dataProperty"></ol>
+    <pre data-hr-model="data" data-hr-model-component="dataProperty"></pre>
     <h4>Links</h4>
     <ol data-hr-model="links" data-hr-model-component="linksComponent"></ol>
     <h4>Embedded Data</h4>
@@ -27,9 +27,7 @@
 </template>
 
 <template data-hr-component="dataProperty">
-    <li>
-        {{key}} - {{value}}
-    </li>
+    {{this}}
 </template>
 
 <template data-hr-component="linksComponent">

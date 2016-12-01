@@ -57,21 +57,8 @@ export class HalcyonBrowserController {
     showResults(client: HalClient.HalEndpointClient<any>) {
         this.client = client;
 
-        var data = client.GetData();
-        var dataKeys: string[] = [];
-        for (var key in data) {
-            dataKeys.push(key);
-        }
-        var index = -1;
-        var dataIterator = new iter.Iterable(() => {
-            if (++index < dataKeys.length) {
-                return {
-                    key: dataKeys[index],
-                    value: data[dataKeys[index]]
-                }
-            }
-        });
-        this.dataModel.setData(dataIterator);
+        var dataString = JSON.stringify(client.GetData(), null, 4);
+        this.dataModel.setData(dataString);
 
         var linkControllerBuilder = LinkController.Builder(this);
         var iterator: iter.IterableInterface<HalClient.HalLinkInfo> = new iter.Iterable(client.GetAllLinks());
