@@ -68,7 +68,7 @@ export class HalcyonBrowserController {
 
         var linkControllerBuilder = LinkController.Builder(this);
         var iterator: iter.IterableInterface<HalClient.HalLinkInfo> = new iter.Iterable(client.GetAllLinks());
-        iterator = iterator.select<HalLinkDisplay>(i => {
+        var linkIter = iterator.select<HalLinkDisplay>(i => {
             var link: HalLinkDisplay = {
                 ref: i.rel,
                 href: '/?entry=' + encodeURIComponent(i.href),
@@ -77,7 +77,7 @@ export class HalcyonBrowserController {
             };
             return link;
         });
-        this.linkModel.setData(iterator, linkControllerBuilder.createOnCallback(), this.getLinkVariant);
+        this.linkModel.setData(linkIter, linkControllerBuilder.createOnCallback(), this.getLinkVariant);
         //this.linkModel.setData(client.GetAllLinks(), linkControllerBuilder.createOnCallback());
 
         var embedsBuilder = HalcyonEmbedsController.Builder();

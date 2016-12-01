@@ -13,6 +13,7 @@ using TestHalcyonApi.Database;
 using TestHalcyonApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Threax.AspNetCore.Halcyon.Ext;
+using TestHalcyonApi.ViewModels;
 
 namespace HateoasTest.Controllers
 {
@@ -24,28 +25,31 @@ namespace HateoasTest.Controllers
     public class ThingyController : Controller
     {
         private ThingyContext testContext;
+        private IMapper mapper;
 
-        public ThingyController(ThingyContext testContext)
+        public ThingyController(ThingyContext testContext, IMapper mapper)
         {
             this.testContext = testContext;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public IEnumerable<Thingy> List()
+        public ThingyCollectionView List()
         {
-            return testContext.TestData;
+            return mapper.Map<ThingyCollectionView>(testContext.TestData);
         }
 
         [HttpGet("{ThingyId}")]
-        public Thingy Get(int thingyId)
+        public ThingyView Get(int thingyId)
         {
-            return testContext.TestData.First(i => i.ThingyId == thingyId);
+            return mapper.Map<ThingyView>(testContext.TestData.First(i => i.ThingyId == thingyId));
         }
 
         // POST api/values
         [HttpPost]
-        public void Add([FromBody]Thingy value)
+        public ThingyView Add([FromBody]ThingyView value)
         {
+            return value;
         }
 
         /// <summary>
@@ -54,8 +58,9 @@ namespace HateoasTest.Controllers
         /// <param name="value"></param>
         [HttpPost("[action]")]
         [Authorize]
-        public void AuthorizedProperties([FromBody]Thingy value)
+        public ThingyView AuthorizedProperties([FromBody]ThingyView value)
         {
+            return value;
         }
 
         /// <summary>
@@ -64,14 +69,16 @@ namespace HateoasTest.Controllers
         /// <param name="value"></param>
         [HttpPost("[action]")]
         [Authorize(Roles="NeverHaveThisRole")]
-        public void RoleProperties([FromBody]Thingy value)
+        public ThingyView RoleProperties([FromBody]ThingyView value)
         {
+            return value;
         }
 
         // PUT api/values/5
         [HttpPut("{ThingyId}")]
-        public void Update(int testDataId, [FromBody]Thingy value)
+        public ThingyView Update(int testDataId, [FromBody]ThingyView value)
         {
+            return value;
         }
 
         // DELETE api/values/5
