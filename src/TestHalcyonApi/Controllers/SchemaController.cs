@@ -14,24 +14,21 @@ namespace TestHalcyonApi.Controllers
     [Route("api/[controller]")]
     public class SchemaController : Controller
     {
-        private const String Namespace = "TestHalcyonApi.ViewModels.{0}";
-
         [HttpGet("{schema}")]
         public String Get(String schema)
         {
             //Restrict to only the View Model namespace.
-            var typeName = String.Format(Namespace, schema);
-            var type = Type.GetType(typeName);
+            var type = Type.GetType(schema);
             if(type == null)
             {
-                throw new ErrorResultException($"Cannot find type {typeName}");
+                throw new ErrorResultException($"Cannot find type {schema}.");
             }
 
             //Also make sure we have a HalModelAttribute on the class. 
             var typeInfo = type.GetTypeInfo();
             if (typeInfo.GetCustomAttribute<HalModelAttribute>() == null)
             {
-                throw new ErrorResultException($"Cannot find type {typeName}");
+                throw new ErrorResultException($"Cannot find type {schema}.");
             }
 
             //Finally return the schema

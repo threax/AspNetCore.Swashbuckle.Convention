@@ -4,12 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TestHalcyonApi.Controllers;
 using TestHalcyonApi.Models;
 using Threax.AspNetCore.Halcyon.Ext;
 
 namespace TestHalcyonApi.ViewModels
 {
     [HalModel]
+    [HalSchemaLink("selfschema", typeof(SchemaController), "Get", typeof(SubThingyView))]
     [HalActionLink("self", typeof(SubThingyController), "Get")]
     [HalActionLink("get", typeof(SubThingyController), "Get")]
     [HalActionLink("update", typeof(SubThingyController), "Update")]
