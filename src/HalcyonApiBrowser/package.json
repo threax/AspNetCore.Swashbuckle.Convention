@@ -6,7 +6,7 @@
     "threax-gulp-tk": "^2.2.0"
   },
   "dependencies": {
-    "htmlrapier": "^2.5.3",
+    "htmlrapier": "^2.6.0",
     "jsns": "^2.0.1",
     "htmlrapier.bootstrap": "^2.2.0",
     "bootstrap": "^3.3.7"

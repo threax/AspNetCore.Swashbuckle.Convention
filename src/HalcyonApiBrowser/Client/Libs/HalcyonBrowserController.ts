@@ -5,11 +5,16 @@ import * as iter from 'hr.iterable';
 
 interface HalLinkDisplay {
     href: string,
-    rel: string
+    rel: string,
+    method: string
 }
 
 interface HalDataDisplay {
     raw: string
+}
+
+interface HalRequestData {
+    jsonData: string;
 }
 
 export class LinkController {
@@ -19,20 +24,18 @@ export class LinkController {
 
     private rel: string;
     private parentController: HalcyonBrowserController;
+    private requestDataModel: controller.Model<HalRequestData>;
 
     constructor(bindings: controller.BindingCollection, parentController: HalcyonBrowserController, link: HalClient.HalLinkInfo) {
         this.rel = link.rel;
         this.parentController = parentController;
+        this.requestDataModel = bindings.getModel<HalRequestData>("requestData");
     }
 
-    visit(evt) {
+    submit(evt) {
         evt.preventDefault();
-        //Show loading here
-        this.parentController.getCurrentClient().LoadLink<any>(this.rel)
-            .then(client => {
-                this.parentController.showResults(client);
-            });
-
+        var data = this.requestDataModel.getData();
+        alert(data.jsonData);
     }
 }
 
@@ -41,16 +44,16 @@ export class HalcyonBrowserController {
         return new controller.ControllerBuilder<HalcyonBrowserController, void, void>(HalcyonBrowserController);
     }
 
-    private linkModel: controller.Model<iter.IterableInterface<HalLinkDisplay>>;
+    private linkModel: controller.Model<HalLinkDisplay>;
     //private linkModel: controller.Model<HalLinkDisplay[]>;
-    private embedsModel: controller.Model<HalClient.Embed<any>[]>;
+    private embedsModel: controller.Model<HalClient.Embed<any>>;
     private dataModel: controller.Model<any>;
     private client: HalClient.HalEndpointClient<any>;
 
     constructor(bindings: controller.BindingCollection) {
-        this.linkModel = bindings.getModel<iter.IterableInterface<HalLinkDisplay>>("links");
+        this.linkModel = bindings.getModel<HalLinkDisplay>("links");
         //this.linkModel = bindings.getModel<HalLinkDisplay[]>("links");
-        this.embedsModel = bindings.getModel<HalClient.Embed<any>[]>("embeds");
+        this.embedsModel = bindings.getModel<HalClient.Embed<any>>("embeds");
         this.dataModel = bindings.getModel<any>("data");
     }
 
@@ -65,11 +68,12 @@ export class HalcyonBrowserController {
         iterator = iterator.select<HalLinkDisplay>(i => {
             var link: HalLinkDisplay = {
                 rel: i.rel,
-                href: '/?entry=' + encodeURIComponent(i.href)
+                href: '/?entry=' + encodeURIComponent(i.href),
+                method: i.method
             };
             return link;
         });
-        this.linkModel.setData(iterator, linkControllerBuilder.createOnCallback());
+        this.linkModel.setData(iterator, linkControllerBuilder.createOnCallback(), this.getLinkVariant);
         //this.linkModel.setData(client.GetAllLinks(), linkControllerBuilder.createOnCallback());
 
         var embedsBuilder = HalcyonEmbedsController.Builder();
@@ -78,6 +82,12 @@ export class HalcyonBrowserController {
 
     getCurrentClient() {
         return this.client;
+    }
+
+    private getLinkVariant(item: HalLinkDisplay) {
+        if (item.method !== "GET") {
+            return "form";
+        }
     }
 }
 
@@ -98,7 +108,7 @@ class HalcyonEmbedsController {
     }
 
     constructor(bindings: controller.BindingCollection, context: void, data: HalClient.Embed<any>) {
-        var itemModel = bindings.getModel<HalClient.HalEndpointClient<any>[]>("items");
+        var itemModel = bindings.getModel<HalClient.HalEndpointClient<any>>("items");
         var subBrowserBuilder = HalcyonSubBrowserController.SubBrowserBuilder();
         itemModel.setData(data.GetAllClients(), subBrowserBuilder.createOnCallback());
     }

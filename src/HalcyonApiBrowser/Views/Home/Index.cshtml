@@ -37,7 +37,15 @@
 </template>
 <template data-hr-variant="form">
     <li>
-
+        <form data-hr-on-submit="submit" data-hr-model="requestData">
+            <h4>{{rel}}</h4>
+            <div>
+                <textarea name="jsonData"></textarea>
+            </div>
+            <div>
+                <button type="submit">{{rel}}</button>
+            </div>
+        </form>
     </li>
 </template>
 
