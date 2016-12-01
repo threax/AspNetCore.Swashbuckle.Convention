@@ -14,6 +14,7 @@ namespace TestHalcyonApi.ViewModels
     [HalActionLink("get", typeof(SubThingyController), "Get")]
     [HalActionLink("update", typeof(SubThingyController), "Update")]
     [HalActionLink("delete", typeof(SubThingyController), "Delete")]
+    [HalActionLink("getthingy", typeof(ThingyController), "Get")]
     public class SubThingyView : SubThingy
     {
     }
