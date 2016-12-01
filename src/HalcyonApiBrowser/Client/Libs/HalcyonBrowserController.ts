@@ -5,8 +5,9 @@ import * as iter from 'hr.iterable';
 
 interface HalLinkDisplay {
     href: string,
-    rel: string,
-    method: string
+    ref: string,
+    method: string,
+    getClient(): HalClient.HalEndpointClient<any>;
 }
 
 interface HalDataDisplay {
@@ -19,23 +20,25 @@ interface HalRequestData {
 
 export class LinkController {
     public static Builder(parentController: HalcyonBrowserController) {
-        return new controller.ControllerBuilder<LinkController, HalcyonBrowserController, HalClient.HalLinkInfo>(LinkController, parentController);
+        return new controller.ControllerBuilder<LinkController, HalcyonBrowserController, HalLinkDisplay>(LinkController, parentController);
     }
 
-    private rel: string;
+    private ref: string;
     private parentController: HalcyonBrowserController;
     private requestDataModel: controller.Model<HalRequestData>;
+    private client: HalClient.HalEndpointClient<any>;
 
-    constructor(bindings: controller.BindingCollection, parentController: HalcyonBrowserController, link: HalClient.HalLinkInfo) {
-        this.rel = link.rel;
+    constructor(bindings: controller.BindingCollection, parentController: HalcyonBrowserController, link: HalLinkDisplay) {
+        this.ref = link.ref;
         this.parentController = parentController;
         this.requestDataModel = bindings.getModel<HalRequestData>("requestData");
+        this.client = link.getClient();
     }
 
     submit(evt) {
         evt.preventDefault();
         var data = this.requestDataModel.getData();
-        alert(data.jsonData);
+        this.client.LoadLink(this.ref);
     }
 }
 
@@ -67,9 +70,10 @@ export class HalcyonBrowserController {
         var iterator: iter.IterableInterface<HalClient.HalLinkInfo> = new iter.Iterable(client.GetAllLinks());
         iterator = iterator.select<HalLinkDisplay>(i => {
             var link: HalLinkDisplay = {
-                rel: i.rel,
+                ref: i.rel,
                 href: '/?entry=' + encodeURIComponent(i.href),
-                method: i.method
+                method: i.method,
+                getClient: () => this.client,
             };
             return link;
         });

@@ -65,9 +65,17 @@ export class HalEndpointClient<T> {
      * @param {Fetcher} fetcher - The fetcher to use to load the link
      * @returns A HalEndpointClient for the link.
      */
-    public static Load<T>(link: HalLink, fetcher: Fetcher): Promise<HalEndpointClient<T>> {
+    public static Load<T>(link: HalLink, fetcher: Fetcher, reqBody?: any): Promise<HalEndpointClient<T>> {
+        var body;
+        if (reqBody !== undefined) {
+            body = JSON.stringify(reqBody);
+        }
         return fetcher.fetch(link.href, {
-            method: link.method
+            method: link.method,
+            body: body,
+            headers: {
+                "Content-Type": "application/json; charset=UTF-8"
+            }
         })
         .then(r => HalEndpointClient.processResult<T>(r, fetcher));
     }
@@ -78,7 +86,7 @@ export class HalEndpointClient<T> {
                 return new HalEndpointClient<T>(HalEndpointClient.parseResult(response, data), fetcher);
             }
             else {
-                throw new Error("Error Code Returned. Make this error work better.");
+                throw new Error("Error Code " + response.status + " Returned. Make this error work better.");
             }
         });
     }
@@ -162,9 +170,27 @@ export class HalEndpointClient<T> {
      * @param {string} ref - The link reference to visit.
      * @returns
      */
-    public LoadLink<DataType>(ref: string): Promise<HalEndpointClient<DataType>> {
+    public LoadLink<ResultType>(ref: string): Promise<HalEndpointClient<ResultType>> {
         if (this.HasLink(ref)) {
-            return HalEndpointClient.Load<DataType>(this.GetLink(ref), this.fetcher);
+            return HalEndpointClient.Load<ResultType>(this.GetLink(ref), this.fetcher);
+        }
+        else {
+            throw new Error('Cannot find ref "' + ref + '".');
+        }
+    }
+
+    /**
+     * Load a new link, this will return a new HalEndpointClient for the results
+     * of that request. You can keep using the client that you called this function
+     * on to keep making requests if needed. The ref must exist before you can call
+     * this function. Use HasLink to see if it is possible.
+     * @param {string} ref - The link reference to visit.
+     * @param {string} data - The data to send as the body of the request
+     * @returns
+     */
+    public LoadLinkWith<ResultType, RequestType>(ref: string, data: RequestType): Promise<HalEndpointClient<ResultType>> {
+        if (this.HasLink(ref)) {
+            return HalEndpointClient.Load<ResultType>(this.GetLink(ref), this.fetcher, data);
         }
         else {
             throw new Error('Cannot find ref "' + ref + '".');
