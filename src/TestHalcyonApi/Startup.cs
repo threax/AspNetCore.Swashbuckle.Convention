@@ -11,6 +11,8 @@ using Swashbuckle.Swagger.Model;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using TestHalcyonApi.Database;
+using Threax.AspNetCore.Halcyon.Ext;
+using TestHalcyonApi.Controllers;
 
 namespace TestHalcyonApi
 {
@@ -47,7 +49,8 @@ namespace TestHalcyonApi
         {
             services.AddConventionalHalcyon(new HalcyonConventionOptions()
             {
-                BaseUrl = appConfig.BaseUrl
+                BaseUrl = appConfig.BaseUrl,
+                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController))
             });
             services.UseAppDatabase();
 

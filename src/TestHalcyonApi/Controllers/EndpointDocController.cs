@@ -23,6 +23,11 @@ namespace TestHalcyonApi.Controllers
         [HttpGet("{groupName}/{method}/{*relativePath}")]
         public EndpointDescription Get([FromServices] IApiDescriptionGroupCollectionProvider descriptionProvider, String groupName, String method, String relativePath)
         {
+            if(relativePath.EndsWith("/") || relativePath.EndsWith("\\"))
+            {
+                relativePath = relativePath.Substring(0, relativePath.Length - 1);
+            }
+
             var group = descriptionProvider.ApiDescriptionGroups.Items.First(i => i.GroupName == groupName);
             var action = group.Items.First(i => i.HttpMethod == method && i.RelativePath == relativePath);
 
@@ -31,7 +36,7 @@ namespace TestHalcyonApi.Controllers
             {
                 if(param.Source.IsFromRequest && param.Source.Id == "Body")
                 {
-                    description.RequestBodySchemaLink = new HalSchemaLinkAttribute("requestSchema", typeof(SchemaController), "Get", param.Type);
+                    description.RequestSchemaLink = new HalSchemaLinkAttribute("requestSchema", typeof(SchemaController), "Get", param.Type);
                 }
             }
 
