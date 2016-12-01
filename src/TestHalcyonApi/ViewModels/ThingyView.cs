@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TestHalcyonApi.Controllers;
 using TestHalcyonApi.Models;
 using Threax.AspNetCore.Halcyon.Ext;
 
@@ -22,6 +23,7 @@ namespace TestHalcyonApi.ViewModels
     [HalActionLink("addsubdata", typeof(ThingyController), "AddTestSubData")]
     [HalActionLink("authorizedproperties", typeof(ThingyController), "AuthorizedProperties")]
     [HalActionLink("roleproperties", typeof(ThingyController), "RoleProperties")]
+    [HalSchemaLink("schema.self", typeof(SchemaController), "Get", typeof(ThingyView))]
     public class ThingyView : Thingy
     {
         

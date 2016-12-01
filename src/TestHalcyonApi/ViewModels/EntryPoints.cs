@@ -12,6 +12,7 @@ namespace TestHalcyonApi.ViewModels
     [HalModel]
     [HalActionLink("self", typeof(EntryPointController), "List")]
     [HalActionLink("listthingies", typeof(ThingyController), "List")]
+    [HalSchemaLink("schema.self", typeof(SchemaController), "Get", typeof(EntryPoints))]
     public class EntryPoints
     {
     }
