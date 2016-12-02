@@ -13,18 +13,47 @@ namespace TestHalcyonApi.Controllers
     [Route("api/[controller]")]
     public class EndpointDocController : Controller
     {
-        IEndpointDocFinder endpointDocFinder;
+        ISchemaFinder schemaFinder;
+        IApiDescriptionGroupCollectionProvider descriptionProvider;
 
-        public EndpointDocController(IEndpointDocFinder endpointDocFinder)
+        public EndpointDocController(ISchemaFinder schemaFinder, IApiDescriptionGroupCollectionProvider descriptionProvider)
         {
-            this.endpointDocFinder = endpointDocFinder;
+            this.schemaFinder = schemaFinder;
+            this.descriptionProvider = descriptionProvider;
         }
 
         [HttpGet("{groupName}/{method}/{*relativePath}")]
         [HalRel(HalDocEndpointInfo.DefaultRels.Get)]
         public EndpointDescription Get(String groupName, String method, String relativePath)
         {
-            return endpointDocFinder.FindDoc(groupName, method, relativePath);
+            if(relativePath.EndsWith("/") || relativePath.EndsWith("\\"))
+            {
+                relativePath = relativePath.Substring(0, relativePath.Length - 1);
+            }
+
+            var group = descriptionProvider.ApiDescriptionGroups.Items.First(i => i.GroupName == groupName);
+            var action = group.Items.First(i => i.HttpMethod == method && i.RelativePath == relativePath);
+
+            var description = new EndpointDescription();
+            foreach(var param in action.ParameterDescriptions)
+            {
+                if(param.Source.IsFromRequest && param.Source.Id == "Body")
+                {
+                    description.RequestSchema = schemaFinder.Find(param.Type);
+                }
+            }
+
+            var controllerActionDesc = action.ActionDescriptor as ControllerActionDescriptor;
+            if (controllerActionDesc != null)
+            {
+                var methodInfo = controllerActionDesc.MethodInfo;
+                if(methodInfo.ReturnType != typeof(void))
+                {
+                    description.ResponseSchema = schemaFinder.Find(methodInfo.ReturnType);
+                }
+            }
+
+            return description;
         }
     }
 }
