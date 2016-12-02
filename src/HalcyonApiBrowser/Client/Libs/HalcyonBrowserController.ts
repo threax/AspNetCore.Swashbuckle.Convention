@@ -6,7 +6,7 @@ import * as jsonEditor from 'clientlibs.json-editor-plugin';
 
 interface HalLinkDisplay {
     href: string,
-    ref: string,
+    rel: string,
     method: string,
     getClient(): HalClient.HalEndpointClient<any>;
 }
@@ -29,20 +29,20 @@ export class LinkController {
         return new controller.ControllerBuilder<LinkController, HalcyonBrowserController, HalLinkDisplay>(LinkController, parentController);
     }
 
-    private ref: string;
+    private rel: string;
     private parentController: HalcyonBrowserController;
     private requestDataModel: controller.Model<HalRequestData>;
     private client: HalClient.HalEndpointClient<any>;
     private formModel = null;
 
     constructor(bindings: controller.BindingCollection, parentController: HalcyonBrowserController, link: HalLinkDisplay) {
-        this.ref = link.ref;
+        this.rel = link.rel;
         this.parentController = parentController;
         this.requestDataModel = bindings.getModel<HalRequestData>("requestData");
         this.client = link.getClient();
 
-        if (link.method != "GET" && this.client.HasLinkDoc(this.ref)) {
-            this.client.LoadLinkDoc<HalEndpointDoc>(this.ref)
+        if (link.method != "GET" && this.client.HasLinkDoc(this.rel)) {
+            this.client.LoadLinkDoc<HalEndpointDoc>(this.rel)
                 .then(doc => {
                     this.formModel = jsonEditor.create<any>(bindings.getHandle("editorHolder"), {
                         schema: doc.GetData().requestSchema,
@@ -69,7 +69,7 @@ export class LinkController {
         else {
             data = this.requestDataModel.getData();
         }
-        this.client.LoadLinkWith(this.ref, data)
+        this.client.LoadLinkWith(this.rel, data)
             .then(result => {
                 if (result.HasLink("self")) {
                     var link = result.GetLink("self");
@@ -121,7 +121,7 @@ export class HalcyonBrowserController {
 
     private getLinkDisplay(i: HalClient.HalLinkInfo) {
         var link: HalLinkDisplay = {
-            ref: i.rel,
+            rel: i.rel,
             href: i.href,
             method: i.method,
             getClient: () => this.client,
