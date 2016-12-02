@@ -10,10 +10,8 @@ using Threax.AspNetCore.Halcyon.Ext;
 namespace TestHalcyonApi.ViewModels
 {
     [HalModel]
-    [HalActionLink("self", typeof(ThingyController), "List")]
-    [HalActionLink("list", typeof(ThingyController), "Get")]
-    [HalActionLink("add", typeof(ThingyController), "Add")]
-    [HalSchemaLink("schema.self", typeof(SchemaController), "Get", typeof(ThingyCollectionView))]
+    [HalActionLink(ThingyController.Rels.List, typeof(ThingyController))]
+    [HalActionLink(ThingyController.Rels.Add, typeof(ThingyController))]
     public class ThingyCollectionView : CollectionView<ThingyView>
     {
         

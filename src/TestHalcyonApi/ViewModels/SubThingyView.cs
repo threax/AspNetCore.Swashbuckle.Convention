@@ -11,12 +11,11 @@ using Threax.AspNetCore.Halcyon.Ext;
 namespace TestHalcyonApi.ViewModels
 {
     [HalModel]
-    [HalActionLink("self", typeof(SubThingyController), "Get")]
-    [HalActionLink("get", typeof(SubThingyController), "Get")]
-    [HalActionLink("update", typeof(SubThingyController), "Update")]
-    [HalActionLink("delete", typeof(SubThingyController), "Delete")]
-    [HalActionLink("getthingy", typeof(ThingyController), "Get")]
-    [HalSchemaLink("schema.self", typeof(SchemaController), "Get", typeof(SubThingyView))]
+    [HalActionLink(SubThingyController.Rels.List, typeof(SubThingyController))]
+    [HalActionLink(SubThingyController.Rels.Update, typeof(SubThingyController))]
+    [HalActionLink(SubThingyController.Rels.Delete, typeof(SubThingyController))]
+    [HalActionLink(SubThingyController.Rels.Get, typeof(SubThingyController))]
+    [HalActionLink(ThingyController.Rels.Get, typeof(ThingyController))]
     public class SubThingyView : SubThingy
     {
     }

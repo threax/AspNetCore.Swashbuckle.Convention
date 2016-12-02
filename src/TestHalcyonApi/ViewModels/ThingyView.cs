@@ -15,15 +15,13 @@ namespace TestHalcyonApi.ViewModels
     /// A simple test model.
     /// </summary>
     [HalModel]
-    [HalActionLink("self", typeof(ThingyController), "Get")]
-    [HalActionLink("get", typeof(ThingyController), "Get")]
-    [HalActionLink("update", typeof(ThingyController), "Update")]
-    [HalActionLink("delete", typeof(ThingyController), "Delete")]
-    [HalActionLink("listsubdata", typeof(ThingyController), "ListTestSubData")]
-    [HalActionLink("addsubdata", typeof(SubThingyController), "Add")]
-    [HalActionLink("authorizedproperties", typeof(ThingyController), "AuthorizedProperties")]
-    [HalActionLink("roleproperties", typeof(ThingyController), "RoleProperties")]
-    [HalSchemaLink("schema.self", typeof(SchemaController), "Get", typeof(ThingyView))]
+    [HalActionLink(ThingyController.Rels.Get, typeof(ThingyController))]
+    [HalActionLink(ThingyController.Rels.Update, typeof(ThingyController))]
+    [HalActionLink(ThingyController.Rels.Delete, typeof(ThingyController))]
+    [HalActionLink(ThingyController.Rels.ListTestSubData, typeof(ThingyController))]
+    [HalActionLink(SubThingyController.Rels.Add, typeof(SubThingyController))]
+    [HalActionLink(ThingyController.Rels.AuthorizedProperties, typeof(ThingyController))]
+    [HalActionLink(ThingyController.Rels.RoleProperties, typeof(ThingyController))]
     public class ThingyView : Thingy
     {
         

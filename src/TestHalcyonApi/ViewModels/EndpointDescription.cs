@@ -13,11 +13,11 @@ namespace TestHalcyonApi.ViewModels
     [HalModel]
     public class EndpointDescription : IHalLinkProvider
     {
-        [JsonIgnore]
-        public HalSchemaLinkAttribute RequestSchemaLink { get; set; }
+        //[JsonIgnore]
+        //public HalSchemaLinkAttribute RequestSchemaLink { get; set; }
 
-        [JsonIgnore]
-        public HalSchemaLinkAttribute ResponseSchemaLink { get; set; }
+        //[JsonIgnore]
+        //public HalSchemaLinkAttribute ResponseSchemaLink { get; set; }
 
         public JsonSchema4 RequestSchema { get; set; }
 
@@ -30,14 +30,15 @@ namespace TestHalcyonApi.ViewModels
 
         public IEnumerable<HalLinkAttribute> CreateHalLinks(ILinkProviderContext context)
         {
-            if (RequestSchemaLink != null)
-            {
-                yield return RequestSchemaLink;
-            }
-            if(ResponseSchemaLink != null)
-            {
-                yield return ResponseSchemaLink;
-            }
+            yield break;
+            //if (RequestSchemaLink != null)
+            //{
+            //    yield return RequestSchemaLink;
+            //}
+            //if(ResponseSchemaLink != null)
+            //{
+            //    yield return ResponseSchemaLink;
+            //}
         }
     }
 }

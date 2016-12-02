@@ -12,12 +12,22 @@ using AutoMapper;
 using TestHalcyonApi.Database;
 using TestHalcyonApi.Models;
 using TestHalcyonApi.ViewModels;
+using Threax.AspNetCore.Halcyon.Ext;
 
 namespace HateoasTest.Controllers
 {
     [Route("api/[controller]")]
     public class SubThingyController : Controller
     {
+        public static class Rels
+        {
+            public const String List = "listSubThingies";
+            public const String Get = "getSubThingy";
+            public const String Add = "addSubThingy";
+            public const String Update = "updateSubThingy";
+            public const String Delete = "deleteSubThingy";
+        }
+
         private IMapper mapper;
         private ThingyContext testContext;
 
@@ -28,12 +38,14 @@ namespace HateoasTest.Controllers
         }
 
         [HttpGet]
+        [HalRel(Rels.List)]
         public SubThingyCollectionView List()
         {
             return mapper.Map<SubThingyCollectionView>(testContext.TestSubData);
         }
 
         [HttpGet("{SubThingyId}")]
+        [HalRel(Rels.Get)]
         public SubThingyView Get(int subThingyId)
         {
             return mapper.Map<SubThingyView>(testContext.TestSubData.First(i => i.SubThingyId == subThingyId));
@@ -41,18 +53,21 @@ namespace HateoasTest.Controllers
 
         // POST api/values
         [HttpPost]
+        [HalRel(Rels.Add)]
         public void Add([FromBody]SubThingyView value)
         {
         }
 
         // PUT api/values/5
         [HttpPut("{SubThingyId}")]
+        [HalRel(Rels.Update)]
         public void Update(int subThingyId, [FromBody]SubThingyView value)
         {
         }
 
         // DELETE api/values/5
         [HttpDelete("{SubThingyId}")]
+        [HalRel(Rels.Delete)]
         public void Delete(int subThingyId)
         {
         }
