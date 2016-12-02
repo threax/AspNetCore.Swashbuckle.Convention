@@ -45,19 +45,22 @@ export class LinkController {
 
         if (link.method != "GET" && this.client.HasLinkDoc(this.rel)) {
             this.client.LoadLinkDoc<HalEndpointDoc>(this.rel)
-                .then(doc => {
-                    this.formModel = jsonEditor.create<any>(bindings.getHandle("editorHolder"), {
-                        schema: doc.GetData().requestSchema,
-                        disable_edit_json: true,
-                        disable_properties: true,
-                        disable_collapse: true,
-                        show_errors: "always",
-                        custom_validators: [
-                            (schema, value, path) => this.showCurrentErrorValidator(schema, value, path)
-                        ],
-                    });
-                    this.jsonEditor = this.formModel.getEditor();
-                    this.formModel.setData(this.client.GetData());
+                .then(docClient => {
+                    var doc = docClient.GetData();
+                    if (doc.requestSchema) {
+                        this.formModel = jsonEditor.create<any>(bindings.getHandle("editorHolder"), {
+                            schema: doc.requestSchema,
+                            disable_edit_json: true,
+                            disable_properties: true,
+                            disable_collapse: true,
+                            show_errors: "always",
+                            custom_validators: [
+                                (schema, value, path) => this.showCurrentErrorValidator(schema, value, path)
+                            ],
+                        });
+                        this.jsonEditor = this.formModel.getEditor();
+                        this.formModel.setData(this.client.GetData());
+                    }
                 });
         }
     }
