@@ -76,43 +76,23 @@ namespace HateoasTest.Controllers
             return mapper.Map<ThingyView>(entity);
         }
 
-        /// <summary>
-        /// This should not list in any links since it has an authorize attribute unless you are logged in.
-        /// </summary>
-        /// <param name="value"></param>
-        [HttpPost("[action]")]
-        [Authorize]
-        [HalRel(Rels.AuthorizedProperties)]
-        public ThingyView AuthorizedProperties([FromBody]ThingyView value)
-        {
-            return value;
-        }
-
-        /// <summary>
-        /// This should not list in any links since it has a role the user will not have.
-        /// </summary>
-        /// <param name="value"></param>
-        [HttpPost("[action]")]
-        [Authorize(Roles="NeverHaveThisRole")]
-        [HalRel(Rels.RoleProperties)]
-        public ThingyView RoleProperties([FromBody]ThingyView value)
-        {
-            return value;
-        }
-
         // PUT api/values/5
         [HttpPut("{ThingyId}")]
         [HalRel(Rels.Update)]
-        public ThingyView Update(int testDataId, [FromBody]ThingyView value)
+        public ThingyView Update(int thingyId, [FromBody]ThingyView value)
         {
-            return value;
+            value.ThingyId = thingyId; //Make sure id is correct.
+            var entity = testContext.Thingies.Get(thingyId);
+            mapper.Map(value, entity);
+            return mapper.Map<ThingyView>(entity);
         }
 
         // DELETE api/values/5
         [HttpDelete("{ThingyId}")]
         [HalRel(Rels.Delete)]
-        public void Delete(int testDataId)
+        public void Delete(int thingyId)
         {
+            testContext.Thingies.Remove(thingyId);
         }
 
         [HttpGet("{ThingyId}/SubThingy")]
@@ -120,6 +100,32 @@ namespace HateoasTest.Controllers
         public SubThingyCollectionView ListTestSubData(int thingyId)
         {
             return mapper.Map<SubThingyCollectionView>(testContext.SubThingies.Values.Where(i => i.ThingyId == thingyId));
+        }
+
+        //Some test stuff below here, mostly to test roles, you should never see these since you can't log into the browser
+
+        /// <summary>
+        /// This should not list in any links since it has an authorize attribute unless you are logged in.
+        /// </summary>
+        /// <param name="value"></param>
+        [HttpPost("[action]")]
+        [Authorize]
+        [HalRel(Rels.AuthorizedProperties)]
+        public void AuthorizedProperties()
+        {
+
+        }
+
+        /// <summary>
+        /// This should not list in any links since it has a role the user will not have.
+        /// </summary>
+        /// <param name="value"></param>
+        [HttpPost("[action]")]
+        [Authorize(Roles = "NeverHaveThisRole")]
+        [HalRel(Rels.RoleProperties)]
+        public void RoleProperties()
+        {
+
         }
     }
 }
