@@ -32,6 +32,7 @@ export class LinkController {
     }
 
     private rel: string;
+    private method: string;
     private parentController: HalcyonBrowserController;
     private client: HalClient.HalEndpointClient<any>;
     private formModel = null;
@@ -42,6 +43,7 @@ export class LinkController {
         this.rel = link.rel;
         this.parentController = parentController;
         this.client = link.getClient();
+        this.method = link.method;
 
         if (link.method != "GET" && this.client.HasLinkDoc(this.rel)) {
             this.client.LoadLinkDoc<HalEndpointDoc>(this.rel)
@@ -84,6 +86,20 @@ export class LinkController {
                 .catch(err => {
                     this.currentError = err;
                     this.jsonEditor.onChange();
+                });
+        }
+        else if (this.method === "DELETE") {
+            this.client.LoadLink(this.rel)
+                .then(result => {
+                    if (result.HasLink("self")) {
+                        var link = result.GetLink("self");
+                        if (link.method == "GET") {
+                            window.location.href = "/?entry=" + encodeURIComponent(link.href);
+                        }
+                    }
+                    else {
+                        window.location.href = window.location.href;
+                    }
                 });
         }
         else {
