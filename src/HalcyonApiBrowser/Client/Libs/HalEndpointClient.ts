@@ -56,14 +56,16 @@ interface ServerError {
     message: string
 }
 
-export class HalError extends Error{
+export class HalError implements Error{
     private errorData: ServerError;
     private statusCode: number;
+    public name;
+    public message;
 
     constructor(errorData: ServerError, statusCode: number) {
-        super(errorData.message);
         this.errorData = errorData;
         this.statusCode = statusCode;
+        this.message = errorData.message;
     }
 
     /**
