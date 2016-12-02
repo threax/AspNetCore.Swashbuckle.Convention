@@ -11,34 +11,10 @@ using NJsonSchema;
 namespace TestHalcyonApi.ViewModels
 {
     [HalModel]
-    public class EndpointDescription : IHalLinkProvider
+    public class EndpointDescription
     {
-        //[JsonIgnore]
-        //public HalSchemaLinkAttribute RequestSchemaLink { get; set; }
-
-        //[JsonIgnore]
-        //public HalSchemaLinkAttribute ResponseSchemaLink { get; set; }
-
         public JsonSchema4 RequestSchema { get; set; }
 
         public JsonSchema4 ResponseSchema { get; set; }
-
-        public EndpointDescription()
-        {
-
-        }
-
-        public IEnumerable<HalLinkAttribute> CreateHalLinks(ILinkProviderContext context)
-        {
-            yield break;
-            //if (RequestSchemaLink != null)
-            //{
-            //    yield return RequestSchemaLink;
-            //}
-            //if(ResponseSchemaLink != null)
-            //{
-            //    yield return ResponseSchemaLink;
-            //}
-        }
     }
 }

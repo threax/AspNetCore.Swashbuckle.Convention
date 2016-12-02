@@ -71,7 +71,12 @@ export class LinkController {
         }
         this.client.LoadLinkWith(this.ref, data)
             .then(result => {
-                console.log(result);
+                if (result.HasLink("self")) {
+                    var link = result.GetLink("self");
+                    if (link.method == "GET") {
+                        window.location.href = "/?entry=" + encodeURIComponent(link.href);
+                    }
+                }
             });
     }
 }
