@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Halcyon.HAL.Attributes;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using NJsonSchema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using TestHalcyonApi.ViewModels;
 using Threax.AspNetCore.Halcyon.Ext;
@@ -13,12 +16,10 @@ namespace TestHalcyonApi.Controllers
     [Route("api/[controller]")]
     public class EndpointDocController : Controller
     {
-        ISchemaFinder schemaFinder;
         IApiDescriptionGroupCollectionProvider descriptionProvider;
 
-        public EndpointDocController(ISchemaFinder schemaFinder, IApiDescriptionGroupCollectionProvider descriptionProvider)
+        public EndpointDocController(IApiDescriptionGroupCollectionProvider descriptionProvider)
         {
-            this.schemaFinder = schemaFinder;
             this.descriptionProvider = descriptionProvider;
         }
 
@@ -39,7 +40,7 @@ namespace TestHalcyonApi.Controllers
             {
                 if(param.Source.IsFromRequest && param.Source.Id == "Body")
                 {
-                    description.RequestSchema = schemaFinder.Find(param.Type);
+                    description.RequestSchema = GetSchema(param.Type);
                 }
             }
 
@@ -49,11 +50,24 @@ namespace TestHalcyonApi.Controllers
                 var methodInfo = controllerActionDesc.MethodInfo;
                 if(methodInfo.ReturnType != typeof(void))
                 {
-                    description.ResponseSchema = schemaFinder.Find(methodInfo.ReturnType);
+                    description.ResponseSchema = GetSchema(methodInfo.ReturnType);
                 }
             }
 
             return description;
+        }
+
+        private JsonSchema4 GetSchema(Type type)
+        {
+            //Also make sure we have a HalModelAttribute on the class. 
+            var typeInfo = type.GetTypeInfo();
+            if (typeInfo.GetCustomAttribute<HalModelAttribute>() == null)
+            {
+                throw new InvalidOperationException($"{type.Name} is not a valid schema object. Declare a HalModel attribute on it to mark it valid.");
+            }
+
+            //Finally return the schema
+            return JsonSchema4.FromType(type);
         }
     }
 }
