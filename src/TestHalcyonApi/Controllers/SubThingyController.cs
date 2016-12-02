@@ -54,6 +54,7 @@ namespace HateoasTest.Controllers
         // POST api/values
         [HttpPost]
         [HalRel(Rels.Add)]
+        [AutoValidate]
         public SubThingyView Add([FromBody]SubThingyView value)
         {
             var entity = mapper.Map<SubThingy>(value);
@@ -64,6 +65,7 @@ namespace HateoasTest.Controllers
         // PUT api/values/5
         [HttpPut("{SubThingyId}")]
         [HalRel(Rels.Update)]
+        [AutoValidate]
         public SubThingyView Update(int subThingyId, [FromBody]SubThingyView value)
         {
             value.ThingyId = subThingyId; //Make sure id is correct.

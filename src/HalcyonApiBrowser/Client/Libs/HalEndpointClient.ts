@@ -51,6 +51,52 @@ export class Embed<T>{
     }
 }
 
+interface ServerError {
+    errors: any,
+    message: string
+}
+
+export class HalError extends Error{
+    private errorData: ServerError;
+    private statusCode: number;
+
+    constructor(errorData: ServerError, statusCode: number) {
+        super(errorData.message);
+        this.errorData = errorData;
+        this.statusCode = statusCode;
+    }
+
+    /**
+     * Get a specific validation error. If it does not exist undefined will be retruned.
+     * @param {type} name
+     * @returns
+     */
+    getValidationError(name: string): string | undefined {
+        if (this.hasValidationErrors()) {
+            return this.errorData.errors[name];
+        }
+    }
+
+    hasValidationError(name: string): boolean {
+        if (this.hasValidationErrors()) {
+            return this.errorData.errors[name] !== undefined;
+        }
+        return false;
+    }
+
+    getValidationErrors() {
+        return this.errorData.errors;
+    }
+
+    hasValidationErrors() {
+        return this.errorData.errors !== undefined;
+    }
+
+    getStatusCode() {
+        return this.statusCode;
+    }
+}
+
 /**
  * This class represents a single visit to a hal api endpoint. It will contain the data
  * that was requested and the links from that data. The hal properties are removed
@@ -82,11 +128,18 @@ export class HalEndpointClient<T> {
 
     private static processResult<T>(response: Response, fetcher: Fetcher): Promise<HalEndpointClient<T>> {
         return response.text().then((data) => {
+            var parsedData = HalEndpointClient.parseResult(response, data);
+
             if (response.ok) {
-                return new HalEndpointClient<T>(HalEndpointClient.parseResult(response, data), fetcher);
+                return new HalEndpointClient<T>(parsedData, fetcher);
             }
             else {
-                throw new Error("Error Code " + response.status + " Returned. Make this error work better.");
+                //Does the error look like one of our custom server errors?
+                if ((<any>parsedData).message !== undefined) {
+                    throw new HalError(<any>parsedData, response.status);
+                }
+
+                throw new Error("Generic server error with status " + response.status + " " + response.statusText + " returned.");
             }
         });
     }

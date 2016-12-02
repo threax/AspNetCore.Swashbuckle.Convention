@@ -67,6 +67,7 @@ namespace HateoasTest.Controllers
         // POST api/values
         [HttpPost]
         [HalRel(Rels.Add)]
+        [AutoValidate]
         public ThingyView Add([FromBody]ThingyView value)
         {
             //This is the general idea for an add, but if you were using entity framework you would do the correct calls there
@@ -79,6 +80,7 @@ namespace HateoasTest.Controllers
         // PUT api/values/5
         [HttpPut("{ThingyId}")]
         [HalRel(Rels.Update)]
+        [AutoValidate]
         public ThingyView Update(int thingyId, [FromBody]ThingyView value)
         {
             value.ThingyId = thingyId; //Make sure id is correct.

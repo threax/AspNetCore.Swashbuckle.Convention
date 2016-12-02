@@ -24,6 +24,8 @@ interface HalEndpointDoc {
     responseSchema: any,
 }
 
+var defaultError = { path: null };
+
 export class LinkController {
     public static Builder(parentController: HalcyonBrowserController) {
         return new controller.ControllerBuilder<LinkController, HalcyonBrowserController, HalLinkDisplay>(LinkController, parentController);
@@ -31,14 +33,14 @@ export class LinkController {
 
     private rel: string;
     private parentController: HalcyonBrowserController;
-    private requestDataModel: controller.Model<HalRequestData>;
     private client: HalClient.HalEndpointClient<any>;
     private formModel = null;
+    private jsonEditor;
+    private currentError: Error = null;
 
     constructor(bindings: controller.BindingCollection, parentController: HalcyonBrowserController, link: HalLinkDisplay) {
         this.rel = link.rel;
         this.parentController = parentController;
-        this.requestDataModel = bindings.getModel<HalRequestData>("requestData");
         this.client = link.getClient();
 
         if (link.method != "GET" && this.client.HasLinkDoc(this.rel)) {
@@ -49,12 +51,12 @@ export class LinkController {
                         disable_edit_json: true,
                         disable_properties: true,
                         disable_collapse: true,
-                        show_errors: "always"
-                        //custom_validators: [
-                        //    (schema, value, path) => this.showCurrentErrorValidator(schema, value, path)
-                        //],
-                        //strongConstructor: context.strongConstructor
+                        show_errors: "always",
+                        custom_validators: [
+                            (schema, value, path) => this.showCurrentErrorValidator(schema, value, path)
+                        ],
                     });
+                    this.jsonEditor = this.formModel.getEditor();
                     this.formModel.setData(this.client.GetData());
                 });
         }
@@ -62,25 +64,60 @@ export class LinkController {
 
     submit(evt) {
         evt.preventDefault();
-        var data;
-        if (this.formModel !== null) {
-            data = this.formModel.getData();
+        if (this.formModel != null) {
+            var data = this.formModel.getData();
+            this.client.LoadLinkWith(this.rel, data)
+                .then(result => {
+                    if (result.HasLink("self")) {
+                        var link = result.GetLink("self");
+                        if (link.method == "GET") {
+                            window.location.href = "/?entry=" + encodeURIComponent(link.href);
+                        }
+                    }
+                    else {
+                        window.location.href = window.location.href;
+                    }
+                })
+                .catch(err => {
+                    this.currentError = err;
+                    this.jsonEditor.onChange();
+                });
         }
         else {
-            data = this.requestDataModel.getData();
+            throw new Error("No form model set for link " + this.rel);
         }
-        this.client.LoadLinkWith(this.rel, data)
-            .then(result => {
-                if (result.HasLink("self")) {
-                    var link = result.GetLink("self");
-                    if (link.method == "GET") {
-                        window.location.href = "/?entry=" + encodeURIComponent(link.href);
-                    }
+    }
+
+    private showCurrentErrorValidator(schema, value, path): any {
+        if (this.currentError !== null) {
+            if (path === "root") {
+                return {
+                    path: path,
+                    message: this.currentError.message
                 }
-                else {
-                    window.location.href = window.location.href;
+            }
+
+            if (this.currentError instanceof HalClient.HalError) {
+                var halError = <HalClient.HalError>this.currentError;
+
+                //walk path to error
+                var shortPath = this.errorPath(path);
+                var errorMessage = halError.getValidationError(shortPath);
+                if (errorMessage !== undefined) {
+                    //Listen for changes on field
+                    //this.fieldWatcher.watch(path, shortPath, this.currentError);
+                    return {
+                        path: path,
+                        message: errorMessage
+                    };
                 }
-            });
+            }
+        }
+        return defaultError;
+    }
+
+    private errorPath(path) {
+        return path.replace('root.', '');
     }
 }
 
