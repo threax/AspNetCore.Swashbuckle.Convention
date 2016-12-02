@@ -41,7 +41,7 @@ namespace HateoasTest.Controllers
         [HalRel(Rels.List)]
         public SubThingyCollectionView List()
         {
-            return mapper.Map<SubThingyCollectionView>(testContext.SubThingies);
+            return mapper.Map<SubThingyCollectionView>(testContext.SubThingies.Values);
         }
 
         [HttpGet("{SubThingyId}")]
@@ -54,15 +54,22 @@ namespace HateoasTest.Controllers
         // POST api/values
         [HttpPost]
         [HalRel(Rels.Add)]
-        public void Add([FromBody]SubThingyView value)
+        public SubThingyView Add([FromBody]SubThingyView value)
         {
+            var entity = mapper.Map<SubThingy>(value);
+            testContext.SubThingies.Add(entity);
+            return mapper.Map<SubThingyView>(entity);
         }
 
         // PUT api/values/5
         [HttpPut("{SubThingyId}")]
         [HalRel(Rels.Update)]
-        public void Update(int subThingyId, [FromBody]SubThingyView value)
+        public SubThingyView Update(int subThingyId, [FromBody]SubThingyView value)
         {
+            value.ThingyId = subThingyId; //Make sure id is correct.
+            var entity = testContext.Thingies.Get(subThingyId);
+            mapper.Map(value, entity);
+            return mapper.Map<SubThingyView>(entity);
         }
 
         // DELETE api/values/5
@@ -70,6 +77,7 @@ namespace HateoasTest.Controllers
         [HalRel(Rels.Delete)]
         public void Delete(int subThingyId)
         {
+            testContext.SubThingies.Remove(subThingyId);
         }
     }
 }
