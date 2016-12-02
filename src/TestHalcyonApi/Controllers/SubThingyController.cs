@@ -11,6 +11,7 @@ using Halcyon.HAL.Attributes;
 using AutoMapper;
 using TestHalcyonApi.Database;
 using TestHalcyonApi.Models;
+using TestHalcyonApi.ViewModels;
 
 namespace HateoasTest.Controllers
 {
@@ -27,26 +28,26 @@ namespace HateoasTest.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<SubThingy> List()
+        public SubThingyCollectionView List()
         {
-            return testContext.TestSubData;
+            return mapper.Map<SubThingyCollectionView>(testContext.TestSubData);
         }
 
         [HttpGet("{SubThingyId}")]
-        public SubThingy Get(int subThingyId)
+        public SubThingyView Get(int subThingyId)
         {
-            return testContext.TestSubData.First(i => i.SubThingyId == subThingyId);
+            return mapper.Map<SubThingyView>(testContext.TestSubData.First(i => i.SubThingyId == subThingyId));
         }
 
         // POST api/values
         [HttpPost]
-        public void Add([FromBody]SubThingy value)
+        public void Add([FromBody]SubThingyView value)
         {
         }
 
         // PUT api/values/5
         [HttpPut("{SubThingyId}")]
-        public void Update(int subThingyId, [FromBody]SubThingy value)
+        public void Update(int subThingyId, [FromBody]SubThingyView value)
         {
         }
 

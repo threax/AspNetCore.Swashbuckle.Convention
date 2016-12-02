@@ -39,9 +39,10 @@
     <li>
         <form data-hr-on-submit="submit" data-hr-model="requestData">
             <h4>{{ref}}</h4>
-            <div>
+            <div data-hr-toggle="rawData" data-hr-style-off="display:none;">
                 <textarea name="jsonData"></textarea>
             </div>
+            <div data-hr-handle="editorHolder" data-hr-toggle="schemaData" data-hr-style-off="display:none;"></div>
             <div>
                 <button type="submit">{{ref}}</button>
             </div>

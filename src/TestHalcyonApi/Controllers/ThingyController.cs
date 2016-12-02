@@ -88,9 +88,9 @@ namespace HateoasTest.Controllers
         }
 
         [HttpGet("{ThingyId}/SubThingy")]
-        public IEnumerable<SubThingy> ListTestSubData(int thingyId)
+        public SubThingyCollectionView ListTestSubData(int thingyId)
         {
-            return testContext.TestSubData.Where(i => i.ThingyId == thingyId);
+            return mapper.Map<SubThingyCollectionView>(testContext.TestSubData.Where(i => i.ThingyId == thingyId));
         }
     }
 }

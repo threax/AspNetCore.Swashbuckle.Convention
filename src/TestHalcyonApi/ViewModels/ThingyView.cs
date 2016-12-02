@@ -20,7 +20,7 @@ namespace TestHalcyonApi.ViewModels
     [HalActionLink("update", typeof(ThingyController), "Update")]
     [HalActionLink("delete", typeof(ThingyController), "Delete")]
     [HalActionLink("listsubdata", typeof(ThingyController), "ListTestSubData")]
-    [HalActionLink("addsubdata", typeof(ThingyController), "AddTestSubData")]
+    [HalActionLink("addsubdata", typeof(SubThingyController), "Add")]
     [HalActionLink("authorizedproperties", typeof(ThingyController), "AuthorizedProperties")]
     [HalActionLink("roleproperties", typeof(ThingyController), "RoleProperties")]
     [HalSchemaLink("schema.self", typeof(SchemaController), "Get", typeof(ThingyView))]
