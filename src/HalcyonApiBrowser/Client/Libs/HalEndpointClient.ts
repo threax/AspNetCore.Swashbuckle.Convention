@@ -94,7 +94,11 @@ export class HalEndpointClient<T> {
     private static parseResult(response: Response, data: string, jsonParseReviver?: (key: string, value: any) => any): HalData {
         var result: HalData;
         var contentHeader = response.headers.get('content-type');
-        if (contentHeader && contentHeader.length >= HalEndpointClient.jsonMimeType.length && contentHeader.substring(0, HalEndpointClient.jsonMimeType.length) === HalEndpointClient.jsonMimeType) {
+        if (!contentHeader) {
+            result = <any>{};
+        }
+        else if (contentHeader.length >= HalEndpointClient.jsonMimeType.length
+                 && contentHeader.substring(0, HalEndpointClient.jsonMimeType.length) === HalEndpointClient.jsonMimeType) {
             result = data === "" ? null : JSON.parse(data, jsonParseReviver);
         }
         else {
@@ -144,7 +148,7 @@ export class HalEndpointClient<T> {
      * @returns True if found, false otherwise.
      */
     public HasEmbed(name: string): boolean {
-        return this.embeds[name] !== undefined;
+        return this.embeds !== undefined && this.embeds[name] !== undefined;
     }
 
     /**
@@ -231,7 +235,7 @@ export class HalEndpointClient<T> {
      * @returns - True if the link exists, false otherwise
      */
     public HasLink(ref: string): boolean {
-        return this.links[ref] !== undefined;
+        return this.links !== undefined && this.links[ref] !== undefined;
     }
 
     /**

@@ -77,6 +77,9 @@ export class LinkController {
                         window.location.href = "/?entry=" + encodeURIComponent(link.href);
                     }
                 }
+                else {
+                    alert('no self link, navigation ends here');
+                }
             });
     }
 }
