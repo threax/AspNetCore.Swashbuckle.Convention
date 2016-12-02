@@ -67,7 +67,11 @@ namespace TestHalcyonApi.Controllers
             }
 
             //Finally return the schema
-            return JsonSchema4.FromType(type);
+            return JsonSchema4.FromType(type, new NJsonSchema.Generation.JsonSchemaGeneratorSettings()
+            {
+                DefaultEnumHandling = EnumHandling.String,
+                DefaultPropertyNameHandling = PropertyNameHandling.CamelCase
+            });
         }
     }
 }
