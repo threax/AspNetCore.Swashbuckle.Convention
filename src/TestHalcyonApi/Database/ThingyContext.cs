@@ -29,8 +29,8 @@ namespace TestHalcyonApi.Database
 
         public void Add(TValue value)
         {
-            setKeyAction(currentKey++, value);
-            items.AddOrUpdate(currentKey, value, (key, existingValue) =>
+            setKeyAction(currentKey, value);
+            items.AddOrUpdate(currentKey++, value, (key, existingValue) =>
             {
                 return value;
             });

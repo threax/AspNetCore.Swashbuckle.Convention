@@ -78,7 +78,7 @@ export class LinkController {
                     }
                 }
                 else {
-                    alert('no self link, navigation ends here');
+                    window.location.href = window.location.href;
                 }
             });
     }
