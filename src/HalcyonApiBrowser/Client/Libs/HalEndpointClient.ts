@@ -198,6 +198,25 @@ export class HalEndpointClient<T> {
     }
 
     /**
+     * Load the documentation for a link.
+     */
+    public LoadLinkDoc<ResultType>(ref: string): Promise<HalEndpointClient<ResultType>> {
+        return this.LoadLink<ResultType>(ref + ".Docs");
+    }
+
+    /**
+     * Load a new link, this will return a new HalEndpointClient for the results
+     * of that request. You can keep using the client that you called this function
+     * on to keep making requests if needed. The ref must exist before you can call
+     * this function. Use HasLink to see if it is possible.
+     * @param {string} ref - The link reference to visit.
+     * @returns
+     */
+    public HasLinkDoc(ref: string): boolean {
+        return this.HasLink(ref + ".Docs");
+    }
+
+    /**
      * Get a single named link.
      * @param {string} ref - The name of the link to recover.
      * @returns The link or undefined if the link does not exist.

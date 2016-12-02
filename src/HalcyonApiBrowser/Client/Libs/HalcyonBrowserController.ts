@@ -2,6 +2,7 @@
 import * as PageStart from 'clientlibs.PageStart';
 import * as HalClient from 'clientlibs.HalEndpointClient';
 import * as iter from 'hr.iterable';
+import * as jsonEditor from 'clientlibs.json-editor-plugin';
 
 interface HalLinkDisplay {
     href: string,
@@ -18,6 +19,11 @@ interface HalRequestData {
     jsonData: string;
 }
 
+interface HalEndpointDoc {
+    requestSchema: any,
+    responseSchema: any,
+}
+
 export class LinkController {
     public static Builder(parentController: HalcyonBrowserController) {
         return new controller.ControllerBuilder<LinkController, HalcyonBrowserController, HalLinkDisplay>(LinkController, parentController);
@@ -27,12 +33,32 @@ export class LinkController {
     private parentController: HalcyonBrowserController;
     private requestDataModel: controller.Model<HalRequestData>;
     private client: HalClient.HalEndpointClient<any>;
+    private formModel;
 
     constructor(bindings: controller.BindingCollection, parentController: HalcyonBrowserController, link: HalLinkDisplay) {
         this.ref = link.ref;
         this.parentController = parentController;
         this.requestDataModel = bindings.getModel<HalRequestData>("requestData");
         this.client = link.getClient();
+
+        if (link.method != "GET" && this.client.HasLinkDoc(this.ref)) {
+            this.client.LoadLinkDoc<HalEndpointDoc>(this.ref)
+                .then(doc => {
+                    this.formModel = jsonEditor.create<any>(bindings.getHandle("editorHolder"), {
+                        schema: doc.GetData().requestSchema,
+                        disable_edit_json: true,
+                        disable_properties: true,
+                        disable_collapse: true,
+                        show_errors: "always",
+                        //custom_validators: [
+                        //    (schema, value, path) => this.showCurrentErrorValidator(schema, value, path)
+                        //],
+                        //strongConstructor: context.strongConstructor
+                    });
+                    this.formModel.setData(this.client.GetData());
+                    //alert(schema);
+                });
+        }
     }
 
     submit(evt) {
@@ -66,15 +92,7 @@ export class HalcyonBrowserController {
 
         var linkControllerBuilder = LinkController.Builder(this);
         var iterator: iter.IterableInterface<HalClient.HalLinkInfo> = new iter.Iterable(client.GetAllLinks());
-        var linkIter = iterator.select<HalLinkDisplay>(i => {
-            var link: HalLinkDisplay = {
-                ref: i.rel,
-                href: '/?entry=' + encodeURIComponent(i.href),
-                method: i.method,
-                getClient: () => this.client,
-            };
-            return link;
-        });
+        var linkIter = iterator.select<HalLinkDisplay>(i => this.getLinkDisplay(i));
         this.linkModel.setData(linkIter, linkControllerBuilder.createOnCallback(), this.getLinkVariant);
 
         var embedsBuilder = HalcyonEmbedsController.Builder();
@@ -83,6 +101,19 @@ export class HalcyonBrowserController {
 
     getCurrentClient() {
         return this.client;
+    }
+
+    private getLinkDisplay(i: HalClient.HalLinkInfo) {
+        var link: HalLinkDisplay = {
+            ref: i.rel,
+            href: i.href,
+            method: i.method,
+            getClient: () => this.client,
+        };
+        if (i.method === "GET") {
+            link.href = '/?entry=' + encodeURIComponent(i.href);
+        }
+        return link;
     }
 
     private getLinkVariant(item: HalLinkDisplay) {
