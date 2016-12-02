@@ -33,7 +33,7 @@ export class LinkController {
     private parentController: HalcyonBrowserController;
     private requestDataModel: controller.Model<HalRequestData>;
     private client: HalClient.HalEndpointClient<any>;
-    private formModel;
+    private formModel = null;
 
     constructor(bindings: controller.BindingCollection, parentController: HalcyonBrowserController, link: HalLinkDisplay) {
         this.ref = link.ref;
@@ -49,22 +49,30 @@ export class LinkController {
                         disable_edit_json: true,
                         disable_properties: true,
                         disable_collapse: true,
-                        show_errors: "always",
+                        show_errors: "always"
                         //custom_validators: [
                         //    (schema, value, path) => this.showCurrentErrorValidator(schema, value, path)
                         //],
                         //strongConstructor: context.strongConstructor
                     });
                     this.formModel.setData(this.client.GetData());
-                    //alert(schema);
                 });
         }
     }
 
     submit(evt) {
         evt.preventDefault();
-        var data = this.requestDataModel.getData();
-        this.client.LoadLink(this.ref);
+        var data;
+        if (this.formModel !== null) {
+            data = this.formModel.getData();
+        }
+        else {
+            data = this.requestDataModel.getData();
+        }
+        this.client.LoadLinkWith(this.ref, data)
+            .then(result => {
+                console.log(result);
+            });
     }
 }
 
