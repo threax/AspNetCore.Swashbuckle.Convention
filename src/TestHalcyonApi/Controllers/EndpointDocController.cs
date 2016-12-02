@@ -13,47 +13,18 @@ namespace TestHalcyonApi.Controllers
     [Route("api/[controller]")]
     public class EndpointDocController : Controller
     {
-        ISchemaFinder schemaFinder;
-        IApiDescriptionGroupCollectionProvider descriptionProvider;
+        IEndpointDocFinder endpointDocFinder;
 
-        public EndpointDocController(ISchemaFinder schemaFinder, IApiDescriptionGroupCollectionProvider descriptionProvider)
+        public EndpointDocController(IEndpointDocFinder endpointDocFinder)
         {
-            this.schemaFinder = schemaFinder;
-            this.descriptionProvider = descriptionProvider;
+            this.endpointDocFinder = endpointDocFinder;
         }
 
         [HttpGet("{groupName}/{method}/{*relativePath}")]
         [HalRel(HalDocEndpointInfo.DefaultRels.Get)]
         public EndpointDescription Get(String groupName, String method, String relativePath)
         {
-            if(relativePath.EndsWith("/") || relativePath.EndsWith("\\"))
-            {
-                relativePath = relativePath.Substring(0, relativePath.Length - 1);
-            }
-
-            var group = descriptionProvider.ApiDescriptionGroups.Items.First(i => i.GroupName == groupName);
-            var action = group.Items.First(i => i.HttpMethod == method && i.RelativePath == relativePath);
-
-            var description = new EndpointDescription();
-            foreach(var param in action.ParameterDescriptions)
-            {
-                if(param.Source.IsFromRequest && param.Source.Id == "Body")
-                {
-                    description.RequestSchema = schemaFinder.Find(param.Type);
-                }
-            }
-
-            var controllerActionDesc = action.ActionDescriptor as ControllerActionDescriptor;
-            if (controllerActionDesc != null)
-            {
-                var methodInfo = controllerActionDesc.MethodInfo;
-                if(methodInfo.ReturnType != typeof(void))
-                {
-                    description.ResponseSchema = schemaFinder.Find(methodInfo.ReturnType);
-                }
-            }
-
-            return description;
+            return endpointDocFinder.FindDoc(groupName, method, relativePath);
         }
     }
 }
