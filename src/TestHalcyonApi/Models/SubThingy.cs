@@ -9,7 +9,7 @@ namespace TestHalcyonApi.Models
     {
         public int SubThingyId { get; set; }
 
-        public decimal Cost { get; set; }
+        public decimal Amount { get; set; }
 
         public int ThingyId { get; set; }
     }

@@ -1,6 +1,7 @@
 ﻿import * as bootstrap from 'hr.bootstrap.all';
 import * as HalEndpointClient from 'clientlibs.HalEndpointClient';
 import * as WindowFetch from 'hr.windowfetch';
+import * as CacheBuster from 'hr.cachebuster';
 import * as uri from 'hr.uri';
 
 interface Query {
@@ -14,7 +15,7 @@ export class PageStart {
     constructor() {
         //Activate bootstrap here, this way we know its active and has registered all its models and toggles when starting up other controllers.
         bootstrap.activate();
-        this.fetcher = new WindowFetch.WindowFetch();
+        this.fetcher = new CacheBuster.CacheBuster(new WindowFetch.WindowFetch());
     }
 
     /**

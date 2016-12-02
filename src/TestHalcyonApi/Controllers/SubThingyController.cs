@@ -41,14 +41,14 @@ namespace HateoasTest.Controllers
         [HalRel(Rels.List)]
         public SubThingyCollectionView List()
         {
-            return mapper.Map<SubThingyCollectionView>(testContext.TestSubData);
+            return mapper.Map<SubThingyCollectionView>(testContext.SubThingies);
         }
 
         [HttpGet("{SubThingyId}")]
         [HalRel(Rels.Get)]
         public SubThingyView Get(int subThingyId)
         {
-            return mapper.Map<SubThingyView>(testContext.TestSubData.First(i => i.SubThingyId == subThingyId));
+            return mapper.Map<SubThingyView>(testContext.SubThingies.Values.First(i => i.SubThingyId == subThingyId));
         }
 
         // POST api/values

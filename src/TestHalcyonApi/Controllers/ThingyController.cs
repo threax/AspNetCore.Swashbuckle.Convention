@@ -18,9 +18,14 @@ using TestHalcyonApi.ViewModels;
 namespace HateoasTest.Controllers
 {
     /// <summary>
-    /// This is a ThingyController that returns pocos. This should be the way most controllers
-    /// can be built unless you need special logic when processing your links.
+    /// This is a ThingyController that returns view models. This is the general pattern
+    /// of what you want to return. The view models define the relationships between the 
+    /// controllers and the framework will automatically figure out if the user can actually
+    /// visit the returned link.
     /// </summary>
+    /// <remarks>
+    /// Ignore the way data is put into the context, you will probably want to use entity framework.
+    /// </remarks>
     [Route("api/[controller]")]
     public class ThingyController : Controller
     {
@@ -49,14 +54,14 @@ namespace HateoasTest.Controllers
         [HalRel(Rels.List)]
         public ThingyCollectionView List()
         {
-            return mapper.Map<ThingyCollectionView>(testContext.TestData);
+            return mapper.Map<ThingyCollectionView>(testContext.Thingies.Values);
         }
 
         [HttpGet("{ThingyId}")]
         [HalRel(Rels.Get)]
         public ThingyView Get(int thingyId)
         {
-            return mapper.Map<ThingyView>(testContext.TestData.First(i => i.ThingyId == thingyId));
+            return mapper.Map<ThingyView>(testContext.Thingies.Values.First(i => i.ThingyId == thingyId));
         }
 
         // POST api/values
@@ -64,7 +69,11 @@ namespace HateoasTest.Controllers
         [HalRel(Rels.Add)]
         public ThingyView Add([FromBody]ThingyView value)
         {
-            return value;
+            //This is the general idea for an add, but if you were using entity framework you would do the correct calls there
+            //but the general pattern of map to entity -> update -> get updated object-> return updated object will apply
+            var entity = mapper.Map<Thingy>(value);
+            testContext.Thingies.Add(entity);
+            return mapper.Map<ThingyView>(entity);
         }
 
         /// <summary>
@@ -110,7 +119,7 @@ namespace HateoasTest.Controllers
         [HalRel(Rels.ListTestSubData)]
         public SubThingyCollectionView ListTestSubData(int thingyId)
         {
-            return mapper.Map<SubThingyCollectionView>(testContext.TestSubData.Where(i => i.ThingyId == thingyId));
+            return mapper.Map<SubThingyCollectionView>(testContext.SubThingies.Values.Where(i => i.ThingyId == thingyId));
         }
     }
 }

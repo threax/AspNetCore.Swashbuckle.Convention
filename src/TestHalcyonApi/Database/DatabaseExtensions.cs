@@ -14,32 +14,28 @@ namespace TestHalcyonApi.Database
     {
         public static IServiceCollection UseAppDatabase(this IServiceCollection services)
         {
-            //Add the database
-            services.AddScoped<ThingyContext, ThingyContext>();
+            //Add the database, normally this would be scoped, but we are in memory
+            services.AddSingleton<ThingyContext, ThingyContext>();
 
             //Setup the mapper
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Thingy, ThingyView>();
                 cfg.CreateMap<SubThingy, SubThingyView>();
+                cfg.CreateMap<ThingyView, Thingy>();
+                cfg.CreateMap<SubThingyView, SubThingy>();
                 cfg.CreateMap<IEnumerable<Thingy>, ThingyCollectionView>()
                    .ForMember(dest => dest.Items,
                               opts => opts.MapFrom(src => src));
                 cfg.CreateMap<IEnumerable<SubThingy>, SubThingyCollectionView>()
                    .ForMember(dest => dest.Items,
                               opts => opts.MapFrom(src => src));
+
+                //Also map models to themselves to handle fake database
+                cfg.CreateMap<Thingy, Thingy>();
+                cfg.CreateMap<SubThingy, SubThingy>();
             });
             services.AddScoped<IMapper>(i => mapperConfig.CreateMapper());
-            services.AddScoped<IHalModelViewMapper>(s =>
-            {
-                HalModelViewMapper viewMapper = new HalModelViewMapper();
-                var mapper = s.GetRequiredService<IMapper>();
-                foreach (var map in mapper.ConfigurationProvider.GetAllTypeMaps())
-                {
-                    viewMapper.AddConverter(map.SourceType, i => mapper.Map(i, map.SourceType, map.DestinationType));
-                }
-                return viewMapper;
-            });
 
             return services;
         }
