@@ -11,19 +11,22 @@
     <h2>Data</h2>
     <pre data-hr-model="data" data-hr-model-component="dataProperty"></pre>
     <h2>Links</h2>
-    <ol data-hr-model="links" data-hr-model-component="linksComponent"></ol>
+    <ul class="list-group" data-hr-model="links" data-hr-model-component="linksComponent"></ul>
     <h2>Embedded Data</h2>
     <div data-hr-model="embeds" data-hr-model-component="embedsComponent"></div>
 </div>
 
 <template data-hr-component="subBrowser">
-    <h4>Data</h4>
-    <pre data-hr-model="data" data-hr-model-component="dataProperty"></pre>
-    <h4>Links</h4>
-    <ol data-hr-model="links" data-hr-model-component="linksComponent"></ol>
-    <h4>Embedded Data</h4>
-    <div data-hr-model="embeds" data-hr-model-component="embedsComponent"></div>
-    <hr />
+    <div class="panel panel-default">
+        <div class="panel-heading">Data</div>
+        <div class="panel-body">
+            <pre data-hr-model="data" data-hr-model-component="dataProperty"></pre>
+            <h4>Links</h4>
+            <ul class="list-group" data-hr-model="links" data-hr-model-component="linksComponent"></ul>
+            <h4>Embedded Data</h4>
+            <div data-hr-model="embeds" data-hr-model-component="embedsComponent"></div>
+        </div>
+    </div>
 </template>
 
 <template data-hr-component="dataProperty">
@@ -31,17 +34,19 @@
 </template>
 
 <template data-hr-component="linksComponent">
-    <li>
-        <a href="{{href}}">{{rel}}</a>
-    </li>
+    <a href="{{href}}">
+        <li class="list-group-item">
+            {{rel}}
+        </li>
+    </a>
 </template>
 <template data-hr-variant="form">
-    <li>
+    <li class="list-group-item">
+        
         <form data-hr-on-submit="submit" data-hr-model="requestData">
-            <h4>{{rel}}</h4>
             <div data-hr-handle="editorHolder" data-hr-toggle="schemaData" data-hr-style-off="display:none;"></div>
             <div>
-                <button type="submit">{{rel}}</button>
+                <button class="btn btn-default" type="submit">{{rel}}</button>
             </div>
         </form>
     </li>
