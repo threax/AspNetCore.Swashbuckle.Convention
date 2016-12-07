@@ -17,10 +17,10 @@ namespace TestHalcyonApi.ViewModels
     {
         public ThingyCollectionView(int offset, int limit, int total, IEnumerable<ThingyView> items)
         {
-            this.Items = items;
-            this.Limit = limit;
             this.Offset = offset;
+            this.Limit = limit;
             this.Total = total;
+            this.Items = items;
         }
     }
 }
