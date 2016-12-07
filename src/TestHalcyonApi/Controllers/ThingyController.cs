@@ -51,10 +51,11 @@ namespace HateoasTest.Controllers
         }
 
         [HttpGet]
-        [HalRel(Rels.List)]
-        public ThingyCollectionView List()
+        [HalRel(Rels.List, IsPaged = true)]
+        public ThingyCollectionView List([FromQuery] int offset = 0, [FromQuery] int limit = 10)
         {
-            return mapper.Map<ThingyCollectionView>(testContext.Thingies.Values);
+            var items = testContext.Thingies.Values.Skip(offset * limit).Take(limit).Select(i => mapper.Map<ThingyView>(i));
+            return new ThingyCollectionView(offset, limit, testContext.Thingies.Values.Count(), items);
         }
 
         [HttpGet("{ThingyId}")]

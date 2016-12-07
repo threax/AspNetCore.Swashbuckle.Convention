@@ -15,6 +15,12 @@ namespace TestHalcyonApi.ViewModels
     [HalActionLink(ThingyController.Rels.Add, typeof(ThingyController))]
     public class ThingyCollectionView : CollectionView<ThingyView>
     {
-        
+        public ThingyCollectionView(int offset, int limit, int total, IEnumerable<ThingyView> items)
+        {
+            this.Items = items;
+            this.Limit = limit;
+            this.Offset = offset;
+            this.Total = total;
+        }
     }
 }

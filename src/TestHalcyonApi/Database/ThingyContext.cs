@@ -58,7 +58,14 @@ namespace TestHalcyonApi.Database
 
         public ThingyContext()
         {
-            var defaultThingies = new Thingy[] { new Thingy { Name = "First Thingy" }, new Thingy { Name = "Second Thingy" } };
+            int numThingies = 25;
+            var defaultThingies = new List<Thingy>(numThingies);
+
+            for(int i = 0; i < numThingies; ++i)
+            {
+                defaultThingies.Add(new Thingy() { Name = $"Thingy {i + 1}" });
+            }
+
             var defaultSubThingies = new SubThingy[] { new SubThingy { Amount = 5.00m, ThingyId = 1 }, new SubThingy { Amount = 100.00m, ThingyId = 0 } };
 
             foreach(var item in defaultThingies)
