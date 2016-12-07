@@ -14,6 +14,9 @@ namespace TestHalcyonApi.ViewModels
     [HalActionLink(SubThingyController.Rels.List, typeof(SubThingyController))]
     public class SubThingyCollectionView : CollectionView<SubThingyView>
     {
-        
+        public SubThingyCollectionView(IEnumerable<SubThingyView> items)
+        {
+            this.Items = items;
+        }
     }
 }

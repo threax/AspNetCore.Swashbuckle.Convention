@@ -41,7 +41,8 @@ namespace HateoasTest.Controllers
         [HalRel(Rels.List)]
         public SubThingyCollectionView List()
         {
-            return mapper.Map<SubThingyCollectionView>(testContext.SubThingies.Values);
+            var items = testContext.SubThingies.Values.Select(i => mapper.Map<SubThingyView>(i));
+            return new SubThingyCollectionView(items);
         }
 
         [HttpGet("{SubThingyId}")]

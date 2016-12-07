@@ -24,9 +24,6 @@ namespace TestHalcyonApi.Database
                 cfg.CreateMap<SubThingy, SubThingyView>();
                 cfg.CreateMap<ThingyView, Thingy>();
                 cfg.CreateMap<SubThingyView, SubThingy>();
-                cfg.CreateMap<IEnumerable<SubThingy>, SubThingyCollectionView>()
-                   .ForMember(dest => dest.Items,
-                              opts => opts.MapFrom(src => src));
 
                 //Also map models to themselves to handle fake database, wont need this normally
                 cfg.CreateMap<Thingy, Thingy>();

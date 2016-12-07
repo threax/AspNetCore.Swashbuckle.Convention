@@ -102,7 +102,8 @@ namespace HateoasTest.Controllers
         [HalRel(Rels.ListTestSubData)]
         public SubThingyCollectionView ListTestSubData(int thingyId)
         {
-            return mapper.Map<SubThingyCollectionView>(testContext.SubThingies.Values.Where(i => i.ThingyId == thingyId));
+            var items = testContext.SubThingies.Values.Where(i => i.ThingyId == thingyId).Select(i => mapper.Map<SubThingyView>(i));
+            return new SubThingyCollectionView(items);
         }
 
         //Some test stuff below here, mostly to test roles, you should never see these since you can't log into the browser
