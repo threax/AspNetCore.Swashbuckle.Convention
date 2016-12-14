@@ -77,6 +77,7 @@ namespace Threax.AspNetCore.ClientGenerator
             Console.WriteLine("out=path - The path to output file. This is required.");
             Console.WriteLine("client - Include this argument to generate a client.");
             Console.WriteLine("schemas - Include this argument to generate schemas");
+            Console.WriteLine("generationMode=MultipleClientsFromOperationId | MultipleClientsFromPathSegments | SingleClientFromOperationId - Set the client generation mode to one of these options. Defaults to MultipleClientsFromOperationId");
         }
 
         static async Task AsyncMain(Dictionary<String, String> parsedArgs)
@@ -111,9 +112,15 @@ namespace Threax.AspNetCore.ClientGenerator
             String client = null;
             if (parsedArgs.ContainsKey("client"))
             {
+                var generationMode = OperationGenerationMode.MultipleClientsFromOperationId;
+                if (parsedArgs.ContainsKey("generationMode"))
+                {
+                    generationMode = (OperationGenerationMode)Enum.Parse(typeof(OperationGenerationMode), parsedArgs["generationMode"]);
+                }
+
                 SwaggerToTypeScriptClientCommand Command = new SwaggerToTypeScriptClientCommand();
                 Command.Settings.TypeScriptGeneratorSettings.TemplateFactory = new FetchTemplateFactory(Command.Settings.TypeScriptGeneratorSettings.TemplateFactory);
-                Command.OperationGenerationMode = OperationGenerationMode.MultipleClientsFromPathSegments;
+                Command.OperationGenerationMode = generationMode;
                 Command.Template = TypeScriptTemplate.Fetch;
                 Command.TypeStyle = TypeScriptTypeStyle.Interface;
                 Command.Input = SwaggerDocument.FromJson(swaggerData, swaggerDocPath);

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Threax.AspNetCore.Swashbuckle.Convention
+namespace Threax.AspNetCore.ExceptionToJson
 {
     /// <summary>
     /// This attribute marks that an item must contain items. Supports
