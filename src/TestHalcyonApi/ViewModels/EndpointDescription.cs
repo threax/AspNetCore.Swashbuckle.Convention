@@ -8,7 +8,7 @@ using Halcyon.HAL;
 using Newtonsoft.Json;
 using NJsonSchema;
 
-namespace TestHalcyonApi.ViewModels
+namespace Threax.AspNetCore.Halcyon.Ext
 {
     [HalModel]
     public class EndpointDescription

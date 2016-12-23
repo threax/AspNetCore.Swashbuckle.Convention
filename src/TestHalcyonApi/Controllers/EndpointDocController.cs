@@ -59,6 +59,12 @@ namespace TestHalcyonApi.Controllers
 
         private JsonSchema4 GetSchema(Type type)
         {
+            //See if we are returning a task, and get its type
+            if (typeof(IAsyncResult).IsAssignableFrom(type))
+            {
+                type = type.GenericTypeArguments.First();
+            }
+
             //Also make sure we have a HalModelAttribute on the class. 
             var typeInfo = type.GetTypeInfo();
             if (typeInfo.GetCustomAttribute<HalModelAttribute>() == null)
