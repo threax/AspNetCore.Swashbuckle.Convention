@@ -98,7 +98,8 @@ namespace HateoasTest.Controllers
             testContext.Thingies.Remove(thingyId);
         }
 
-        [HttpGet("{ThingyId}/SubThingy")]
+        [HttpGet()]
+        [Route("{ThingyId}/SubThingy")]
         [HalRel(Rels.ListTestSubData)]
         public SubThingyCollectionView ListTestSubData(int thingyId)
         {
