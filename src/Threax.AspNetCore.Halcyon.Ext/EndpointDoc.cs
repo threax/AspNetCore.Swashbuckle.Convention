@@ -1,17 +1,14 @@
 ﻿using Halcyon.HAL.Attributes;
+using NJsonSchema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Threax.AspNetCore.Halcyon.Ext;
-using Halcyon.HAL;
-using Newtonsoft.Json;
-using NJsonSchema;
 
 namespace Threax.AspNetCore.Halcyon.Ext
 {
     [HalModel]
-    public class EndpointDescription
+    public class EndpointDoc
     {
         public JsonSchema4 RequestSchema { get; set; }
 

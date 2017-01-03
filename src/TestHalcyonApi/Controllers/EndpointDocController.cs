@@ -16,69 +16,18 @@ namespace TestHalcyonApi.Controllers
     [Route("api/[controller]")]
     public class EndpointDocController : Controller
     {
-        IApiDescriptionGroupCollectionProvider descriptionProvider;
+        IEndpointDocBuilder descriptionProvider;
 
-        public EndpointDocController(IApiDescriptionGroupCollectionProvider descriptionProvider)
+        public EndpointDocController(IEndpointDocBuilder descriptionProvider)
         {
             this.descriptionProvider = descriptionProvider;
         }
 
         [HttpGet("{groupName}/{method}/{*relativePath}")]
         [HalRel(HalDocEndpointInfo.DefaultRels.Get)]
-        public EndpointDescription Get(String groupName, String method, String relativePath)
+        public EndpointDoc Get(String groupName, String method, String relativePath)
         {
-            if(relativePath.EndsWith("/") || relativePath.EndsWith("\\"))
-            {
-                relativePath = relativePath.Substring(0, relativePath.Length - 1);
-            }
-
-            var group = descriptionProvider.ApiDescriptionGroups.Items.First(i => i.GroupName == groupName);
-            var action = group.Items.First(i => i.HttpMethod == method && i.RelativePath == relativePath);
-
-            var description = new EndpointDescription();
-            foreach(var param in action.ParameterDescriptions)
-            {
-                if(param.Source.IsFromRequest && param.Source.Id == "Body")
-                {
-                    description.RequestSchema = GetSchema(param.Type);
-                }
-            }
-
-            var controllerActionDesc = action.ActionDescriptor as ControllerActionDescriptor;
-            if (controllerActionDesc != null)
-            {
-                var methodInfo = controllerActionDesc.MethodInfo;
-                if(methodInfo.ReturnType != typeof(void))
-                {
-                    description.ResponseSchema = GetSchema(methodInfo.ReturnType);
-                }
-            }
-
-            return description;
-        }
-
-        private JsonSchema4 GetSchema(Type type)
-        {
-            //See if we are returning a task, and get its type
-            if (typeof(IAsyncResult).IsAssignableFrom(type))
-            {
-                type = type.GenericTypeArguments.First();
-            }
-
-            //Also make sure we have a HalModelAttribute on the class. 
-            var typeInfo = type.GetTypeInfo();
-            if (typeInfo.GetCustomAttribute<HalModelAttribute>() == null)
-            {
-                throw new InvalidOperationException($"{type.Name} is not a valid schema object. Declare a HalModel attribute on it to mark it valid.");
-            }
-
-            //Finally return the schema
-            return JsonSchema4.FromType(type, new NJsonSchema.Generation.JsonSchemaGeneratorSettings()
-            {
-                DefaultEnumHandling = EnumHandling.String,
-                DefaultPropertyNameHandling = PropertyNameHandling.CamelCase,
-                FlattenInheritanceHierarchy = true
-            });
+            return descriptionProvider.GetDoc(groupName, method, relativePath);
         }
     }
 }
