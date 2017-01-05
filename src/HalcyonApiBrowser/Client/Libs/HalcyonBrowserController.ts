@@ -8,7 +8,7 @@ interface HalLinkDisplay {
     href: string,
     rel: string,
     method: string,
-    getClient(): HalClient.HalEndpointClient<any>;
+    getClient(): HalClient.HalEndpointClient;
 }
 
 interface HalDataDisplay {
@@ -22,6 +22,7 @@ interface HalRequestData {
 interface HalEndpointDoc {
     requestSchema: any,
     responseSchema: any,
+    querySchema: any,
 }
 
 var defaultError = { path: null };
@@ -34,7 +35,7 @@ export class LinkController {
     private rel: string;
     private method: string;
     private parentController: HalcyonBrowserController;
-    private client: HalClient.HalEndpointClient<any>;
+    private client: HalClient.HalEndpointClient;
     private formModel = null;
     private jsonEditor;
     private currentError: Error = null;
@@ -46,9 +47,9 @@ export class LinkController {
         this.method = link.method;
 
         if (link.method != "GET" && this.client.HasLinkDoc(this.rel)) {
-            this.client.LoadLinkDoc<HalEndpointDoc>(this.rel)
+            this.client.LoadLinkDoc(this.rel)
                 .then(docClient => {
-                    var doc = docClient.GetData();
+                    var doc = docClient.GetData<HalEndpointDoc>();
                     if (doc.requestSchema) {
                         this.formModel = jsonEditor.create<any>(bindings.getHandle("editorHolder"), {
                             schema: doc.requestSchema,
@@ -71,7 +72,7 @@ export class LinkController {
         evt.preventDefault();
         if (this.formModel != null) {
             var data = this.formModel.getData();
-            this.client.LoadLinkWith(this.rel, data)
+            this.client.LoadLinkWithBody(this.rel, data)
                 .then(result => {
                     if (result.HasLink("self")) {
                         var link = result.GetLink("self");
@@ -146,17 +147,17 @@ export class HalcyonBrowserController {
     }
 
     private linkModel: controller.Model<HalLinkDisplay>;
-    private embedsModel: controller.Model<HalClient.Embed<any>>;
+    private embedsModel: controller.Model<HalClient.Embed>;
     private dataModel: controller.Model<any>;
-    private client: HalClient.HalEndpointClient<any>;
+    private client: HalClient.HalEndpointClient;
 
     constructor(bindings: controller.BindingCollection) {
         this.linkModel = bindings.getModel<HalLinkDisplay>("links");
-        this.embedsModel = bindings.getModel<HalClient.Embed<any>>("embeds");
+        this.embedsModel = bindings.getModel<HalClient.Embed>("embeds");
         this.dataModel = bindings.getModel<any>("data");
     }
 
-    showResults(client: HalClient.HalEndpointClient<any>) {
+    showResults(client: HalClient.HalEndpointClient) {
         this.client = client;
 
         var dataString = JSON.stringify(client.GetData(), null, 4);
@@ -197,10 +198,10 @@ export class HalcyonBrowserController {
 
 class HalcyonSubBrowserController extends HalcyonBrowserController {
     public static SubBrowserBuilder() {
-        return new controller.ControllerBuilder<HalcyonSubBrowserController, void, HalClient.HalEndpointClient<any>>(HalcyonSubBrowserController);
+        return new controller.ControllerBuilder<HalcyonSubBrowserController, void, HalClient.HalEndpointClient>(HalcyonSubBrowserController);
     }
 
-    constructor(bindings: controller.BindingCollection, context: void, data: HalClient.HalEndpointClient<any>) {
+    constructor(bindings: controller.BindingCollection, context: void, data: HalClient.HalEndpointClient) {
         super(bindings);
         this.showResults(data);
     }
@@ -208,11 +209,11 @@ class HalcyonSubBrowserController extends HalcyonBrowserController {
 
 class HalcyonEmbedsController {
     public static Builder() {
-        return new controller.ControllerBuilder<HalcyonEmbedsController, void, HalClient.Embed<any>>(HalcyonEmbedsController);
+        return new controller.ControllerBuilder<HalcyonEmbedsController, void, HalClient.Embed>(HalcyonEmbedsController);
     }
 
-    constructor(bindings: controller.BindingCollection, context: void, data: HalClient.Embed<any>) {
-        var itemModel = bindings.getModel<HalClient.HalEndpointClient<any>>("items");
+    constructor(bindings: controller.BindingCollection, context: void, data: HalClient.Embed) {
+        var itemModel = bindings.getModel<HalClient.HalEndpointClient>("items");
         var subBrowserBuilder = HalcyonSubBrowserController.SubBrowserBuilder();
         itemModel.setData(data.GetAllClients(), subBrowserBuilder.createOnCallback());
     }
