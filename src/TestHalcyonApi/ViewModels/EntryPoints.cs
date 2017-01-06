@@ -10,7 +10,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 namespace TestHalcyonApi.ViewModels
 {
     [HalModel]
-    [HalSelfActionLink(ThingyController.Rels.List, typeof(ThingyController))]
+    [HalSelfLink]
     [HalActionLink(ThingyController.Rels.List, typeof(ThingyController))]
     public class EntryPoints
     {

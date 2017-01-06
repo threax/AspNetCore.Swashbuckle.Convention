@@ -10,7 +10,7 @@ interface Query {
 
 export class PageStart {
     private fetcher: WindowFetch.WindowFetch;
-    private entryPoint: HalEndpointClient.HalEndpointClient<any>;
+    private entryPoint: HalEndpointClient.HalEndpointClient;
 
     constructor() {
         //Activate bootstrap here, this way we know its active and has registered all its models and toggles when starting up other controllers.

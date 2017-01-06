@@ -39,6 +39,7 @@ export class LinkController {
     private formModel = null;
     private jsonEditor;
     private currentError: Error = null;
+    private isQueryForm: boolean;
 
     constructor(bindings: controller.BindingCollection, parentController: HalcyonBrowserController, link: HalLinkDisplay) {
         this.rel = link.rel;
@@ -46,7 +47,7 @@ export class LinkController {
         this.client = link.getClient();
         this.method = link.method;
 
-        if (link.method != "GET" && this.client.HasLinkDoc(this.rel)) {
+        if (this.client.HasLinkDoc(this.rel)) {
             this.client.LoadLinkDoc(this.rel)
                 .then(docClient => {
                     var doc = docClient.GetData<HalEndpointDoc>();
@@ -63,6 +64,21 @@ export class LinkController {
                         });
                         this.jsonEditor = this.formModel.getEditor();
                         this.formModel.setData(this.client.GetData());
+                        this.isQueryForm = false;
+                    }
+                    else if (doc.querySchema) {
+                        this.formModel = jsonEditor.create<any>(bindings.getHandle("editorHolder"), {
+                            schema: doc.querySchema,
+                            disable_edit_json: true,
+                            disable_properties: true,
+                            disable_collapse: true,
+                            show_errors: "always",
+                            custom_validators: [
+                                (schema, value, path) => this.showCurrentErrorValidator(schema, value, path)
+                            ],
+                        });
+                        this.jsonEditor = this.formModel.getEditor();
+                        this.isQueryForm = true;
                     }
                 });
         }
@@ -72,22 +88,28 @@ export class LinkController {
         evt.preventDefault();
         if (this.formModel != null) {
             var data = this.formModel.getData();
-            this.client.LoadLinkWithBody(this.rel, data)
-                .then(result => {
-                    if (result.HasLink("self")) {
-                        var link = result.GetLink("self");
-                        if (link.method == "GET") {
-                            window.location.href = "/?entry=" + encodeURIComponent(link.href);
-                        }
+            var promise;
+            if (this.isQueryForm) {
+                promise = this.client.LoadLinkWithQuery(this.rel, data);
+            }
+            else {
+                promise = this.client.LoadLinkWithBody(this.rel, data);
+            }
+            promise.then(result => {
+                if (result.HasLink("self")) {
+                    var link = result.GetLink("self");
+                    if (link.method == "GET") {
+                        window.location.href = "/?entry=" + encodeURIComponent(link.href);
                     }
-                    else {
-                        window.location.href = window.location.href;
-                    }
-                })
-                .catch(err => {
-                    this.currentError = err;
-                    this.jsonEditor.onChange();
-                });
+                }
+                else {
+                    window.location.href = window.location.href;
+                }
+            })
+            .catch(err => {
+                this.currentError = err;
+                this.jsonEditor.onChange();
+            });
         }
         else if (this.method === "DELETE") {
             this.client.LoadLink(this.rel)
@@ -104,7 +126,8 @@ export class LinkController {
                 });
         }
         else {
-            throw new Error("No form model set for link " + this.rel);
+            var link = this.client.GetLink(this.rel);
+            window.location.href = "/?entry=" + encodeURIComponent(link.href);
         }
     }
 
@@ -190,9 +213,9 @@ export class HalcyonBrowserController {
     }
 
     private getLinkVariant(item: HalLinkDisplay) {
-        if (item.method !== "GET") {
+        //if (item.method !== "GET") {
             return "form";
-        }
+        //}
     }
 }
 
