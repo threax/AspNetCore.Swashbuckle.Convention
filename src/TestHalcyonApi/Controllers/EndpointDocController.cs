@@ -14,6 +14,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 namespace TestHalcyonApi.Controllers
 {
     [Route("api/[controller]")]
+    [ResponseCache(NoStore = true)]
     public class EndpointDocController : Controller
     {
         IEndpointDocBuilder descriptionProvider;

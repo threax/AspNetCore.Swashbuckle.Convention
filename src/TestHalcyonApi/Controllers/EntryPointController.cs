@@ -8,6 +8,7 @@ using TestHalcyonApi.ViewModels;
 namespace TestHalcyonApi.Controllers
 {
     [Route("api")]
+    [ResponseCache(NoStore = true)]
     public class EntryPointController : Controller
     {
         [HttpGet]

@@ -27,6 +27,7 @@ namespace HateoasTest.Controllers
     /// Ignore the way data is put into the context, you will probably want to use entity framework.
     /// </remarks>
     [Route("api/[controller]")]
+    [ResponseCache(NoStore = true)]
     public class ThingyController : Controller
     {
         public static class Rels

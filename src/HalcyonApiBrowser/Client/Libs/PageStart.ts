@@ -15,7 +15,7 @@ export class PageStart {
     constructor() {
         //Activate bootstrap here, this way we know its active and has registered all its models and toggles when starting up other controllers.
         bootstrap.activate();
-        this.fetcher = new CacheBuster.CacheBuster(new WindowFetch.WindowFetch());
+        this.fetcher = new WindowFetch.WindowFetch();
     }
 
     /**

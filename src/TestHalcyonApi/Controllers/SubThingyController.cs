@@ -17,6 +17,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 namespace HateoasTest.Controllers
 {
     [Route("api/[controller]")]
+    [ResponseCache(NoStore = true)]
     public class SubThingyController : Controller
     {
         public static class Rels
