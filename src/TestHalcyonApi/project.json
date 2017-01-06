@@ -14,7 +14,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-    "Threax.AspNetCore.Halcyon.Ext": "1.0.7-*",
+    "Threax.AspNetCore.Halcyon.Ext": "1.1.0-*",
     "Threax.AspNetCore.Swashbuckle.Convention": "1.9.2-*",
     "AutoMapper": "5.2.0"
   },
