@@ -2,10 +2,6 @@
 using Newtonsoft.Json.Linq;
 using NJsonSchema.CodeGeneration;
 using NJsonSchema.CodeGeneration.TypeScript;
-using NSwag;
-using NSwag.CodeGeneration.CodeGenerators;
-using NSwag.CodeGeneration.CodeGenerators.TypeScript;
-using NSwag.Commands;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -112,19 +108,20 @@ namespace Threax.AspNetCore.ClientGenerator
             String client = null;
             if (parsedArgs.ContainsKey("client"))
             {
-                var generationMode = OperationGenerationMode.MultipleClientsFromOperationId;
-                if (parsedArgs.ContainsKey("generationMode"))
-                {
-                    generationMode = (OperationGenerationMode)Enum.Parse(typeof(OperationGenerationMode), parsedArgs["generationMode"]);
-                }
+                //var generationMode = OperationGenerationMode.MultipleClientsFromOperationId;
+                //if (parsedArgs.ContainsKey("generationMode"))
+                //{
+                //    generationMode = (OperationGenerationMode)Enum.Parse(typeof(OperationGenerationMode), parsedArgs["generationMode"]);
+                //}
 
-                SwaggerToTypeScriptClientCommand Command = new SwaggerToTypeScriptClientCommand();
-                Command.Settings.TypeScriptGeneratorSettings.TemplateFactory = new FetchTemplateFactory(Command.Settings.TypeScriptGeneratorSettings.TemplateFactory);
-                Command.OperationGenerationMode = generationMode;
-                Command.Template = TypeScriptTemplate.Fetch;
-                Command.TypeStyle = TypeScriptTypeStyle.Interface;
-                Command.Input = SwaggerDocument.FromJson(swaggerData, swaggerDocPath);
-                client = await Command.RunAsync();
+                //SwaggerToTypeScriptClientCommand Command = new SwaggerToTypeScriptClientCommand();
+                //Command.Settings.TypeScriptGeneratorSettings.TemplateFactory = new FetchTemplateFactory(Command.Settings.TypeScriptGeneratorSettings.TemplateFactory);
+                //Command.OperationGenerationMode = generationMode;
+                //Command.Template = TypeScriptTemplate.Fetch;
+                //Command.TypeStyle = TypeScriptTypeStyle.Interface;
+                //Command.Input = await SwaggerDocument.FromJsonAsync(swaggerData, swaggerDocPath);
+                //client = await Command.RunAsync();
+                client = "//client generation disabled";
             }
 
             String schemas = null;
