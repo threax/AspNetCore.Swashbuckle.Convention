@@ -1,10 +1,10 @@
 {
-  "version": "1.9.2-*",
+  "version": "1.10.2-*",
   "dependencies": {
     "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
     "NETStandard.Library": "1.6.1",
     "Swashbuckle": "6.0.0-beta902",
-    "Threax.AspNetCore.ExceptionToJson": "1.7.0-*"
+    "Threax.AspNetCore.ExceptionToJson": "1.8.0-*"
   },
   "frameworks": {
     "netstandard1.6": {
@@ -12,7 +12,7 @@
     },
     "net452": {
       "dependencies": {
-        "System.Reflection.Extensions": "4.3.0"
+        "System.Reflection.Extensions": "4.0.0"
       }
     }
   },
