@@ -11,7 +11,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 namespace TestHalcyonApi.ViewModels
 {
     [HalModel]
-    [HalSelfLink]
+    [HalSelfActionLink(SubThingyController.Rels.Get, typeof(SubThingyController))]
     [HalActionLink(SubThingyController.Rels.List, typeof(SubThingyController))]
     [HalActionLink(SubThingyController.Rels.Update, typeof(SubThingyController))]
     [HalActionLink(SubThingyController.Rels.Delete, typeof(SubThingyController))]

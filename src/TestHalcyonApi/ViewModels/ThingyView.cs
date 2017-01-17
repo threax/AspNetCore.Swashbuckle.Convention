@@ -15,7 +15,7 @@ namespace TestHalcyonApi.ViewModels
     /// A simple test model.
     /// </summary>
     [HalModel]
-    [HalSelfLink]
+    [HalSelfActionLink(ThingyController.Rels.Get, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.Get, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.Update, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.Delete, typeof(ThingyController))]
