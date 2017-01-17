@@ -1,4 +1,6 @@
-﻿namespace TestHalcyonApi
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace TestHalcyonApi
 {
     internal class AppConfig
     {
@@ -6,6 +8,6 @@
         {
         }
 
-        public string BaseUrl { get; set; } = "{{authority}}";
+        public string BaseUrl { get; set; } = HalcyonConventionOptions.HostVariable;
     }
 }
