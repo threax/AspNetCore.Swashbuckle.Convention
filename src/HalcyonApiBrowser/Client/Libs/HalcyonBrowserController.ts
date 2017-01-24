@@ -86,49 +86,28 @@ export class LinkController {
 
     submit(evt) {
         evt.preventDefault();
+        
+        var data = this.formModel.getData();
+        var promise;
         if (this.formModel != null) {
-            var data = this.formModel.getData();
-            var promise;
             if (this.isQueryForm) {
                 promise = this.client.LoadLinkWithQuery(this.rel, data);
             }
             else {
                 promise = this.client.LoadLinkWithBody(this.rel, data);
             }
-            promise.then(result => {
-                if (result.HasLink("self")) {
-                    var link = result.GetLink("self");
-                    if (link.method == "GET") {
-                        window.location.href = "/?entry=" + encodeURIComponent(link.href);
-                    }
-                }
-                else {
-                    window.location.href = window.location.href;
-                }
-            })
-            .catch(err => {
-                this.currentError = err;
-                this.jsonEditor.onChange();
-            });
         }
-        else if (this.method === "DELETE") {
-            this.client.LoadLink(this.rel)
-                .then(result => {
-                    if (result.HasLink("self")) {
-                        var link = result.GetLink("self");
-                        if (link.method == "GET") {
-                            window.location.href = "/?entry=" + encodeURIComponent(link.href);
-                        }
-                    }
-                    else {
-                        window.location.href = window.location.href;
-                    }
-                });
+        else{
+            promise = this.client.LoadLink(this.rel);
         }
-        else {
-            var link = this.client.GetLink(this.rel);
-            window.location.href = "/?entry=" + encodeURIComponent(link.href);
-        }
+
+        promise.then(result => {
+            this.parentController.showResults(result);
+        })
+        .catch(err => {
+            this.currentError = err;
+            this.jsonEditor.onChange();
+        });
     }
 
     private showCurrentErrorValidator(schema, value, path): any {
