@@ -1,5 +1,5 @@
 ﻿import * as bootstrap from 'hr.bootstrap.all';
-import * as HalEndpointClient from 'clientlibs.HalEndpointClient';
+import * as HalEndpointClient from 'hr.halcyon.EndpointClient';
 import * as WindowFetch from 'hr.windowfetch';
 import * as CacheBuster from 'hr.cachebuster';
 import * as uri from 'hr.uri';

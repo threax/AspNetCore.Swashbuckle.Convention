@@ -18,6 +18,9 @@
         "node_modules/HtmlRapier.Bootstrap/lib/*",
         "node_modules/HtmlRapier.Bootstrap/*"
       ],
+      "hr.halcyon.*": [
+        "node_modules/HtmlRapier.Halcyon/src/*"
+      ],
       "clientlibs.*": [
         "Client/Libs/*"
       ],

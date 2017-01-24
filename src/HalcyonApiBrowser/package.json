@@ -10,6 +10,7 @@
     "jsns": "^2.0.1",
     "htmlrapier.bootstrap": "^3.0.1",
     "bootstrap": "^3.3.7",
-    "htmlrapier.json-editor": "^3.0.0"
+    "htmlrapier.json-editor": "^3.0.0",
+    "htmlrapier.halcyon": "^1.0.0"
   }
 }

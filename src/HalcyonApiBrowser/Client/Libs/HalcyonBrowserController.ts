@@ -1,6 +1,6 @@
 ﻿import * as controller from 'hr.controller';
 import * as PageStart from 'clientlibs.PageStart';
-import * as HalClient from 'clientlibs.HalEndpointClient';
+import * as HalClient from 'hr.halcyon.EndpointClient';
 import * as iter from 'hr.iterable';
 import * as jsonEditor from 'clientlibs.json-editor-plugin';
 
