@@ -86,10 +86,10 @@ export class LinkController {
 
     submit(evt) {
         evt.preventDefault();
-        
-        var data = this.formModel.getData();
         var promise;
         if (this.formModel != null) {
+            var data = this.formModel.getData();
+
             if (this.isQueryForm) {
                 promise = this.client.LoadLinkWithQuery(this.rel, data);
             }

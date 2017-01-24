@@ -12,6 +12,7 @@ var compileTypescript = require('threax-gulp-tk/typescript.js');
 var htmlRapier = require('./node_modules/HtmlRapier/build');
 var hrBootstrapBuild = require('./node_modules/HtmlRapier.Bootstrap/build');
 var jsonEditorBuild = require('./node_modules/HtmlRapier.json-editor/build');
+var hrHalcyon = require('./node_modules/HtmlRapier.Halcyon/build');
 
 var webroot = __dirname + "/wwwroot/";
 
@@ -61,6 +62,7 @@ function build(sharedSettings) {
     htmlRapier(__dirname, libDir, sharedSettings);
     hrBootstrapBuild(__dirname, libDir, sharedSettings);
     jsonEditorBuild(__dirname + '/node_modules/json-editor/', libDir);
+    hrHalcyon(__dirname, libDir, sharedSettings);
 
     //Client Side ts
     compileTypescript({
