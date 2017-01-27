@@ -6,11 +6,11 @@
     "threax-gulp-tk": "^4.1.1"
   },
   "dependencies": {
-    "htmlrapier": "^3.0.5",
+    "htmlrapier": "^3.3.0",
     "jsns": "^2.0.1",
-    "htmlrapier.bootstrap": "^3.0.1",
+    "htmlrapier.bootstrap": "^3.2.0",
     "bootstrap": "^3.3.7",
-    "htmlrapier.json-editor": "^3.0.0",
-    "htmlrapier.halcyon": "^1.0.0"
+    "htmlrapier.json-editor": "^3.2.0",
+    "htmlrapier.halcyon": "^3.2.0"
   }
 }
