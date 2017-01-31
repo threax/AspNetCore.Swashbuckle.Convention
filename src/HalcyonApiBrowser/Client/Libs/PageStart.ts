@@ -28,13 +28,13 @@ export class PageStart {
 
     __loadResources(): Promise<PageStart> {
         var query: Query = <Query>uri.getQueryObject();
-        if (query.entry === undefined) {
-            query.entry = 'http://localhost:58151/api';
+        if (query.entry !== undefined) {
+            return HalEndpointClient.HalEndpointClient.Load({ href: query.entry, method: 'GET' }, this.fetcher)
+                .then(client => this.entryPoint = client)
+                .then(data => this);
         }
 
-        return HalEndpointClient.HalEndpointClient.Load({ href: query.entry, method: 'GET' }, this.fetcher)
-            .then(client => this.entryPoint = client)
-            .then(data => this);
+        return Promise.reject("No entry point");
     }
 }
 
