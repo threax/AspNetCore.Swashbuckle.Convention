@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.Swagger.Model;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using TestHalcyonApi.Database;
@@ -20,13 +19,6 @@ namespace TestHalcyonApi
     {
         private AppConfig appConfig = new AppConfig();
         private bool isDev;
-        private Info apiInfo = new Info()
-        {
-            Version = "v1",
-            Title = "Halcyon Test Api",
-            Description = "A swagger view of our HATEOAS implemented using HAL via Halcyon.",
-            TermsOfService = "None"
-        };
 
         public Startup(IHostingEnvironment env)
         {
@@ -64,8 +56,6 @@ namespace TestHalcyonApi
                 o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 o.SerializerSettings.Converters.Add(new StringEnumConverter());
             });
-
-            services.AddConventionalSwagger(apiInfo);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -83,8 +73,6 @@ namespace TestHalcyonApi
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            app.UseConventionalSwagger(apiInfo);
 
             app.UseMvc();
         }
