@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Threax.AspNetCore.ExceptionToJson")]
+[assembly: AssemblyProduct("Threax.AspNetCore.ExceptionFilter")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5b8700b7-8c1e-44ae-807c-64dc1c7ba7d7")]
+[assembly: Guid("0f437156-e559-4749-8ea9-e788daf07f74")]

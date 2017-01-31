@@ -7,8 +7,8 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>5b8700b7-8c1e-44ae-807c-64dc1c7ba7d7</ProjectGuid>
-    <RootNamespace>Threax.AspNetCore.ExceptionToJson</RootNamespace>
+    <ProjectGuid>0f437156-e559-4749-8ea9-e788daf07f74</ProjectGuid>
+    <RootNamespace>Threax.AspNetCore.ExceptionFilter</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
