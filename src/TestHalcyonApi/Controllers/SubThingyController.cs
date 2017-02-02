@@ -71,7 +71,7 @@ namespace HateoasTest.Controllers
         public SubThingyView Update(int subThingyId, [FromBody]SubThingyView value)
         {
             value.ThingyId = subThingyId; //Make sure id is correct.
-            var entity = testContext.Thingies.Get(subThingyId);
+            var entity = testContext.SubThingies.Get(subThingyId);
             mapper.Map(value, entity);
             return mapper.Map<SubThingyView>(entity);
         }

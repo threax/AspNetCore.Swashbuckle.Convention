@@ -11,7 +11,8 @@
       "version": "1.1.0"
     },
     "Newtonsoft.Json": "9.0.1",
-    "NJsonSchema.CodeGeneration": "7.5.6218.39592"
+    "NJsonSchema.CodeGeneration": "8.0.6242.20256",
+    "NJsonSchema.CodeGeneration.TypeScript": "8.0.6242.20256"
   },
 
   "frameworks": {
