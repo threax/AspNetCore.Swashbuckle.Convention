@@ -113,7 +113,6 @@ namespace HateoasTest.Controllers
         /// <summary>
         /// This should not list in any links since it has an authorize attribute unless you are logged in.
         /// </summary>
-        /// <param name="value"></param>
         [HttpPost("[action]")]
         [Authorize]
         [HalRel(Rels.AuthorizedProperties)]
@@ -125,7 +124,6 @@ namespace HateoasTest.Controllers
         /// <summary>
         /// This should not list in any links since it has a role the user will not have.
         /// </summary>
-        /// <param name="value"></param>
         [HttpPost("[action]")]
         [Authorize(Roles = "NeverHaveThisRole")]
         [HalRel(Rels.RoleProperties)]
