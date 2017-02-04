@@ -8,7 +8,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 
 namespace TestHalcyonApi.Controllers
 {
-    [Route("api")]
+    [Route("")]
     [ResponseCache(NoStore = true)]
     public class EntryPointController : Controller
     {
