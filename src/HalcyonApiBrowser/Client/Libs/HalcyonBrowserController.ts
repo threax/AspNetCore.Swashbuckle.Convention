@@ -106,7 +106,12 @@ export class LinkController {
         })
         .catch(err => {
             this.currentError = err;
-            this.jsonEditor.onChange();
+            if (this.jsonEditor) {
+                this.jsonEditor.onChange();
+            }
+            else {
+                alert('Error completing request. Message: ' + err.message);
+            }
         });
     }
 
