@@ -7,9 +7,9 @@ var copy = require('threax-gulp-tk/copy.js');
 var compileLess = require('threax-gulp-tk/less.js');
 var compileJs = require('threax-gulp-tk/javascript.js');
 var compileTypescript = require('threax-gulp-tk/typescript.js');
-var clientBuild = require('clientbuild.js');
+var clientBuild = require('./clientbuild.js');
 
-module.exports = function (rootDir, webroot, sharedSettings) {
+module.exports = function (rootDir, libDir, sharedSettings) {
 
     //Load library build modules
     var hrBootstrapBuild = require(rootDir + '/node_modules/HtmlRapier.Bootstrap/build');
@@ -29,8 +29,6 @@ module.exports = function (rootDir, webroot, sharedSettings) {
     if (sharedSettings.concat === undefined) {
         sharedSettings.concat = true;
     }
-
-    var libDir = webroot + "lib/";
 
     //File Copy
     copy({

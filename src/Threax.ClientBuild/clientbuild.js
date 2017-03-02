@@ -8,7 +8,7 @@ var compileLess = require('threax-gulp-tk/less.js');
 var compileJs = require('threax-gulp-tk/javascript.js');
 var compileTypescript = require('threax-gulp-tk/typescript.js');
 
-module.exports = function (rootDir, webroot, sharedSettings) {
+module.exports = function (rootDir, libDir, sharedSettings) {
     if (sharedSettings === undefined) {
         sharedSettings = {};
     }
