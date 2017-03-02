@@ -22,6 +22,12 @@
       ],
       "hr.halcyon.*": [
         "node_modules/HtmlRapier.Halcyon/src/*"
+      ],
+      "clientlibs.*": [
+        "Client/Libs/*"
+      ],
+      "jdorn.*": [
+        "node_modules/htmlrapier.json-editor/*"
       ]
     }
   },
