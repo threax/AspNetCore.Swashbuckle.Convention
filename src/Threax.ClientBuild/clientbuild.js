@@ -17,8 +17,6 @@ module.exports = function (rootDir, webroot, sharedSettings) {
     var htmlRapierWidgets = require(rootDir + '/node_modules/HtmlRapier.Widgets/build');
     var hrHalcyon = require(rootDir + '/node_modules/HtmlRapier.Halcyon/build');
 
-    //var webroot = __dirname + "/wwwroot/";
-
     if (sharedSettings === undefined) {
         sharedSettings = {};
     }
@@ -41,20 +39,20 @@ module.exports = function (rootDir, webroot, sharedSettings) {
     });
 
     //Compile modules
-    htmlRapier(__dirname, libDir, sharedSettings);
-    htmlRapierWidgets(__dirname, libDir, sharedSettings);
-    jsonEditorBuild(__dirname + '/node_modules/json-editor/', libDir);
-    hrBootstrapBuild(__dirname, libDir, sharedSettings);
-    hrHalcyon(__dirname, libDir, sharedSettings);
+    htmlRapier(rootDir, libDir, sharedSettings);
+    htmlRapierWidgets(rootDir, libDir, sharedSettings);
+    jsonEditorBuild(rootDir + '/node_modules/json-editor/', libDir);
+    hrBootstrapBuild(rootDir, libDir, sharedSettings);
+    hrHalcyon(rootDir, libDir, sharedSettings);
 
     //Client Side ts
     compileTypescript({
         libs: [
-            __dirname + "/Client/Libs/**/*.ts",
+            rootDir + "/Client/Libs/**/*.ts",
         ],
         runners: false,
         dest: libDir,
-        sourceRoot: __dirname + "/Client/Libs/",
+        sourceRoot: rootDir + "/Client/Libs/",
         namespace: "clientlibs",
         output: "ClientLibs",
         concat: sharedSettings.concat,
@@ -64,20 +62,20 @@ module.exports = function (rootDir, webroot, sharedSettings) {
     //Additional Styles
     compileLess({
         files: [
-        __dirname + '/Client/Styles/*.less'
+        rootDir + '/Client/Styles/*.less'
         ],
         dest: libDir + '/css',
-        importPaths: [path.join(__dirname + '/Client/Styles/'), path.join(__dirname, "node_modules/bootstrap/less")],
+        importPaths: [path.join(rootDir + '/Client/Styles/'), path.join(rootDir, "node_modules/bootstrap/less")],
     });
 
     //Views
     compileTypescript({
         libs: [
-            __dirname + "/Views/**/*.ts",
+            rootDir + "/Views/**/*.ts",
             "!**/*.intellisense.js"
         ],
         runners: true,
         dest: libDir + '/views',
-        sourceRoot: __dirname + "/Views"
+        sourceRoot: rootDir + "/Views"
     });
 };
