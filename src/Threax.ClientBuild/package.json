@@ -1,6 +1,6 @@
 {
   "name": "threax-gulp-clientbuild",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "private": false,
   "devDependencies": {
     "threax-gulp-tk": "^4.2.0"
@@ -10,6 +10,7 @@
     "htmlrapier": "^3.3.2",
     "htmlrapier.bootstrap": "^3.2.0",
     "htmlrapier.widgets": "^3.3.0",
-    "htmlrapier.halcyon": "^3.3.3"
+    "htmlrapier.halcyon": "^3.3.3",
+    "htmlrapier.halcyon-explorer": "^1.0.0"
   }
 }

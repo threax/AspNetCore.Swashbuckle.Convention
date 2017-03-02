@@ -17,6 +17,7 @@ module.exports = function (rootDir, libDir, sharedSettings) {
     var htmlRapier = require(rootDir + '/node_modules/HtmlRapier/build');
     var htmlRapierWidgets = require(rootDir + '/node_modules/HtmlRapier.Widgets/build');
     var hrHalcyon = require(rootDir + '/node_modules/HtmlRapier.Halcyon/build');
+    var halcyonExplorerBuild = require(rootDir + '/node_modules/htmlrapier.halcyon-explorer/build.js');
 
     if (sharedSettings === undefined) {
         sharedSettings = {};
@@ -44,4 +45,5 @@ module.exports = function (rootDir, libDir, sharedSettings) {
     hrBootstrapBuild(rootDir, libDir, sharedSettings);
     hrHalcyon(rootDir, libDir, sharedSettings);
     clientBuild(rootDir, libDir, sharedSettings);
+    halcyonExplorerBuild(__dirname, libDir, sharedSettings);
 };
