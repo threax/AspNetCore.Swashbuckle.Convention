@@ -22,5 +22,10 @@ namespace TestHalcyonApi.ViewModels
             this.Total = total;
             this.Items = items;
         }
+
+        private ThingyCollectionView()
+        {
+            //For codegen
+        }
     }
 }
