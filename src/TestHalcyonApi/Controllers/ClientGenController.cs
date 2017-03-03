@@ -18,18 +18,27 @@ namespace TestHalcyonApi.Controllers
             public const String Get = "GetClient";
         }
 
-        TypescriptClientWriter clientWriter;
-
-        public ClientGenController(TypescriptClientWriter clientWriter)
+        public ClientGenController()
         {
-            this.clientWriter = clientWriter;
+            
         }
 
         [HttpGet]
         [HalRel(Rels.Get)]
-        public String Index()
+        public JsonResult Index([FromServices] IClientGenerator clientGenerator)
         {
-            return this.clientWriter.CreateClient();
+            return new JsonResult(clientGenerator.GetEndpointDefinitions());
+        }
+
+        [HttpGet("[action]")]
+        [HalRel(Rels.Get)]
+        public String Typescript([FromServices] TypescriptClientWriter clientWriter)
+        {
+            using(var writer = new StringWriter())
+            {
+                clientWriter.CreateClient(writer);
+                return writer.ToString();
+            }
         }
     }
 }

@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:65405/ClientGen",
+      "launchUrl": "http://localhost:65405/ClientGen/Typescript",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
