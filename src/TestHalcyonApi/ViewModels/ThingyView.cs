@@ -23,6 +23,7 @@ namespace TestHalcyonApi.ViewModels
     [HalActionLink(SubThingyController.Rels.Add, typeof(SubThingyController))]
     [HalActionLink(ThingyController.Rels.AuthorizedProperties, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.RoleProperties, typeof(ThingyController))]
+    [DeclareHalLink(ThingyController.Rels.TestDeclareLinkToRel, typeof(ThingyController))]
     public class ThingyView : Thingy
     {
         

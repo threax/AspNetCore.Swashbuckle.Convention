@@ -434,6 +434,18 @@ export class ThingyViewResult {
         return this.client.HasLink("rolepropertiesThingies");
     }
 
+
+    public testDeclareLinkToRel(query: CollectionQuery) {
+        return this.client.LoadLinkWithQuery("testDeclareLinkToRel", query)
+            .then(r => {
+                return r;
+            });
+    }
+
+    public canTestDeclareLinkToRel(): boolean {
+        return this.client.HasLink("testDeclareLinkToRel");
+    }
+
 }
 export interface EntryPoints {
 }

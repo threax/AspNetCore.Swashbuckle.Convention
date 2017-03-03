@@ -40,6 +40,7 @@ namespace HateoasTest.Controllers
             public const String AuthorizedProperties = "authorizedpropertiesThingies";
             public const String RoleProperties = "rolepropertiesThingies";
             public const String ListTestSubData = "listThingySubThingies";
+            public const String TestDeclareLinkToRel = "testDeclareLinkToRel";
         }
 
         private ThingyContext testContext;
@@ -128,6 +129,16 @@ namespace HateoasTest.Controllers
         [Authorize(Roles = "NeverHaveThisRole")]
         [HalRel(Rels.RoleProperties)]
         public void RoleProperties()
+        {
+
+        }
+
+        /// <summary>
+        /// This should not list in any links since it has a role the user will not have.
+        /// </summary>
+        [HttpGet("[action]")]
+        [HalRel(Rels.TestDeclareLinkToRel)]
+        public void TestDeclaredLinkToRel([FromQuery] CollectionQuery query)
         {
 
         }
