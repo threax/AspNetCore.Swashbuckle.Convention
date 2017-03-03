@@ -143,17 +143,6 @@ export class SubThingyCollectionViewResult {
         return this.client.HasLink("next");
     }
 
-    public getNextDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("next")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasNextDocs(): boolean {
-        return this.client.HasLinkDoc("next");
-    }
-
     public previous() {
         return this.client.LoadLink("previous")
             .then(r => {
@@ -163,17 +152,6 @@ export class SubThingyCollectionViewResult {
 
     public canPrevious(): boolean {
         return this.client.HasLink("previous");
-    }
-
-    public getPreviousDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("previous")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasPreviousDocs(): boolean {
-        return this.client.HasLinkDoc("previous");
     }
 
     public first() {
@@ -187,17 +165,6 @@ export class SubThingyCollectionViewResult {
         return this.client.HasLink("first");
     }
 
-    public getFirstDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("first")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasFirstDocs(): boolean {
-        return this.client.HasLinkDoc("first");
-    }
-
     public last() {
         return this.client.LoadLink("last")
             .then(r => {
@@ -207,17 +174,6 @@ export class SubThingyCollectionViewResult {
 
     public canLast(): boolean {
         return this.client.HasLink("last");
-    }
-
-    public getLastDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("last")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasLastDocs(): boolean {
-        return this.client.HasLinkDoc("last");
     }
 }
 
@@ -307,17 +263,6 @@ export class SubThingyViewResult {
 
     public canDeleteSubThingy(): boolean {
         return this.client.HasLink("deleteSubThingy");
-    }
-
-    public getDeleteSubThingyDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("deleteSubThingy")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasDeleteSubThingyDocs(): boolean {
-        return this.client.HasLinkDoc("deleteSubThingy");
     }
 
     public getSubThingy(): Promise<SubThingyViewResult> {
@@ -463,17 +408,6 @@ export class ThingyCollectionViewResult {
         return this.client.HasLink("next");
     }
 
-    public getNextDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("next")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasNextDocs(): boolean {
-        return this.client.HasLinkDoc("next");
-    }
-
     public previous() {
         return this.client.LoadLink("previous")
             .then(r => {
@@ -483,17 +417,6 @@ export class ThingyCollectionViewResult {
 
     public canPrevious(): boolean {
         return this.client.HasLink("previous");
-    }
-
-    public getPreviousDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("previous")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasPreviousDocs(): boolean {
-        return this.client.HasLinkDoc("previous");
     }
 
     public first() {
@@ -507,17 +430,6 @@ export class ThingyCollectionViewResult {
         return this.client.HasLink("first");
     }
 
-    public getFirstDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("first")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasFirstDocs(): boolean {
-        return this.client.HasLinkDoc("first");
-    }
-
     public last() {
         return this.client.LoadLink("last")
             .then(r => {
@@ -527,17 +439,6 @@ export class ThingyCollectionViewResult {
 
     public canLast(): boolean {
         return this.client.HasLink("last");
-    }
-
-    public getLastDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("last")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasLastDocs(): boolean {
-        return this.client.HasLinkDoc("last");
     }
 }
 
@@ -629,17 +530,6 @@ export class ThingyViewResult {
         return this.client.HasLink("deleteThingy");
     }
 
-    public getDeleteThingyDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("deleteThingy")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasDeleteThingyDocs(): boolean {
-        return this.client.HasLinkDoc("deleteThingy");
-    }
-
     public listThingySubThingies(): Promise<SubThingyCollectionViewResult> {
         return this.client.LoadLink("listThingySubThingies")
             .then(r => {
@@ -695,17 +585,6 @@ export class ThingyViewResult {
         return this.client.HasLink("authorizedpropertiesThingies");
     }
 
-    public getAuthorizedpropertiesThingiesDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("authorizedpropertiesThingies")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasAuthorizedpropertiesThingiesDocs(): boolean {
-        return this.client.HasLinkDoc("authorizedpropertiesThingies");
-    }
-
     public rolepropertiesThingies() {
         return this.client.LoadLink("rolepropertiesThingies")
             .then(r => {
@@ -715,17 +594,6 @@ export class ThingyViewResult {
 
     public canRolepropertiesThingies(): boolean {
         return this.client.HasLink("rolepropertiesThingies");
-    }
-
-    public getRolepropertiesThingiesDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("rolepropertiesThingies")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasRolepropertiesThingiesDocs(): boolean {
-        return this.client.HasLinkDoc("rolepropertiesThingies");
     }
 
     public testDeclareLinkToRel(query: CollectionQuery) {
