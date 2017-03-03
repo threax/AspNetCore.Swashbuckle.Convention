@@ -42,9 +42,10 @@ namespace TestHalcyonApi
         public void ConfigureServices(IServiceCollection services)
         {
             //Client generator test
-            services.AddScoped<IResultViewProvider>(s => new DefaultResultViewProvider(new Assembly[]{ this.GetType().GetTypeInfo().Assembly }));
-            services.AddScoped<IClientGenerator, ClientGenerator>();
-            services.AddScoped<TypescriptClientWriter>();
+            services.AddHalClientGen(new HalClientGenOptions()
+            {
+                SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly }
+            });
 
             services.AddConventionalHalcyon(new HalcyonConventionOptions()
             {
