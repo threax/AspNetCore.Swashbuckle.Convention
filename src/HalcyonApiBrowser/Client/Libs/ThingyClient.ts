@@ -1,7 +1,7 @@
 ﻿import * as hal from 'hr.halcyon.EndpointClient';
 import { Fetcher } from 'hr.fetcher';
 
-export class EntryPointsResultView {
+export class EntryPointsResult {
     private client: hal.HalEndpointClient;
 
     constructor(client: hal.HalEndpointClient) {
@@ -13,10 +13,10 @@ export class EntryPointsResultView {
     }
 
 
-    public refresh(): Promise<EntryPointsResultView> {
+    public refresh(): Promise<EntryPointsResult> {
         return this.client.LoadLink("self")
             .then(r => {
-                return new EntryPointsResultView(r);
+                return new EntryPointsResult(r);
             });
     }
 
@@ -25,10 +25,10 @@ export class EntryPointsResultView {
     }
 
 
-    public listThingies(query: CollectionQuery): Promise<ThingyCollectionViewResultView> {
+    public listThingies(query: CollectionQuery): Promise<ThingyCollectionViewResult> {
         return this.client.LoadLinkWithQuery("listThingies", query)
             .then(r => {
-                return new ThingyCollectionViewResultView(r);
+                return new ThingyCollectionViewResult(r);
             });
     }
 
@@ -39,7 +39,7 @@ export class EntryPointsResultView {
 
 }
 
-export class SubThingyCollectionViewResultView {
+export class SubThingyCollectionViewResult {
     private client: hal.HalEndpointClient;
 
     constructor(client: hal.HalEndpointClient) {
@@ -51,10 +51,21 @@ export class SubThingyCollectionViewResultView {
     }
 
 
-    public refresh(): Promise<SubThingyCollectionViewResultView> {
+    public get items(): SubThingyViewResult[] {
+        var embeds = this.client.GetEmbed("values");
+        var clients = embeds.GetAllClients();
+        var result: SubThingyViewResult[] = [];
+        for (var i = 0; i < clients.length; ++i) {
+            result.push(new SubThingyViewResult(clients[i]));
+        }
+        return result;
+    }
+
+
+    public refresh(): Promise<SubThingyCollectionViewResult> {
         return this.client.LoadLink("self")
             .then(r => {
-                return new SubThingyCollectionViewResultView(r);
+                return new SubThingyCollectionViewResult(r);
             });
     }
 
@@ -63,10 +74,10 @@ export class SubThingyCollectionViewResultView {
     }
 
 
-    public listSubThingies(): Promise<SubThingyCollectionViewResultView> {
+    public listSubThingies(): Promise<SubThingyCollectionViewResult> {
         return this.client.LoadLink("listSubThingies")
             .then(r => {
-                return new SubThingyCollectionViewResultView(r);
+                return new SubThingyCollectionViewResult(r);
             });
     }
 
@@ -77,7 +88,7 @@ export class SubThingyCollectionViewResultView {
 
 }
 
-export class SubThingyViewResultView {
+export class SubThingyViewResult {
     private client: hal.HalEndpointClient;
 
     constructor(client: hal.HalEndpointClient) {
@@ -89,10 +100,10 @@ export class SubThingyViewResultView {
     }
 
 
-    public refresh(): Promise<SubThingyViewResultView> {
+    public refresh(): Promise<SubThingyViewResult> {
         return this.client.LoadLink("self")
             .then(r => {
-                return new SubThingyViewResultView(r);
+                return new SubThingyViewResult(r);
             });
     }
 
@@ -101,10 +112,10 @@ export class SubThingyViewResultView {
     }
 
 
-    public listSubThingies(): Promise<SubThingyCollectionViewResultView> {
+    public listSubThingies(): Promise<SubThingyCollectionViewResult> {
         return this.client.LoadLink("listSubThingies")
             .then(r => {
-                return new SubThingyCollectionViewResultView(r);
+                return new SubThingyCollectionViewResult(r);
             });
     }
 
@@ -113,10 +124,10 @@ export class SubThingyViewResultView {
     }
 
 
-    public updateSubThingy(data: SubThingyView): Promise<SubThingyViewResultView> {
+    public updateSubThingy(data: SubThingyView): Promise<SubThingyViewResult> {
         return this.client.LoadLinkWithBody("updateSubThingy", data)
             .then(r => {
-                return new SubThingyViewResultView(r);
+                return new SubThingyViewResult(r);
             });
     }
 
@@ -137,10 +148,10 @@ export class SubThingyViewResultView {
     }
 
 
-    public getSubThingy(): Promise<SubThingyViewResultView> {
+    public getSubThingy(): Promise<SubThingyViewResult> {
         return this.client.LoadLink("getSubThingy")
             .then(r => {
-                return new SubThingyViewResultView(r);
+                return new SubThingyViewResult(r);
             });
     }
 
@@ -149,10 +160,10 @@ export class SubThingyViewResultView {
     }
 
 
-    public getThingy(): Promise<ThingyViewResultView> {
+    public getThingy(): Promise<ThingyViewResult> {
         return this.client.LoadLink("getThingy")
             .then(r => {
-                return new ThingyViewResultView(r);
+                return new ThingyViewResult(r);
             });
     }
 
@@ -163,7 +174,7 @@ export class SubThingyViewResultView {
 
 }
 
-export class ThingyCollectionViewResultView {
+export class ThingyCollectionViewResult {
     private client: hal.HalEndpointClient;
 
     constructor(client: hal.HalEndpointClient) {
@@ -175,10 +186,21 @@ export class ThingyCollectionViewResultView {
     }
 
 
-    public refresh(): Promise<ThingyCollectionViewResultView> {
+    public get items(): ThingyViewResult[] {
+        var embeds = this.client.GetEmbed("values");
+        var clients = embeds.GetAllClients();
+        var result: ThingyViewResult[] = [];
+        for (var i = 0; i < clients.length; ++i) {
+            result.push(new ThingyViewResult(clients[i]));
+        }
+        return result;
+    }
+
+
+    public refresh(): Promise<ThingyCollectionViewResult> {
         return this.client.LoadLink("self")
             .then(r => {
-                return new ThingyCollectionViewResultView(r);
+                return new ThingyCollectionViewResult(r);
             });
     }
 
@@ -187,10 +209,10 @@ export class ThingyCollectionViewResultView {
     }
 
 
-    public listThingies(query: CollectionQuery): Promise<ThingyCollectionViewResultView> {
+    public listThingies(query: CollectionQuery): Promise<ThingyCollectionViewResult> {
         return this.client.LoadLinkWithQuery("listThingies", query)
             .then(r => {
-                return new ThingyCollectionViewResultView(r);
+                return new ThingyCollectionViewResult(r);
             });
     }
 
@@ -199,10 +221,10 @@ export class ThingyCollectionViewResultView {
     }
 
 
-    public addThingy(data: ThingyView): Promise<ThingyViewResultView> {
+    public addThingy(data: ThingyView): Promise<ThingyViewResult> {
         return this.client.LoadLinkWithBody("addThingy", data)
             .then(r => {
-                return new ThingyViewResultView(r);
+                return new ThingyViewResult(r);
             });
     }
 
@@ -213,7 +235,7 @@ export class ThingyCollectionViewResultView {
 
 }
 
-export class ThingyViewResultView {
+export class ThingyViewResult {
     private client: hal.HalEndpointClient;
 
     constructor(client: hal.HalEndpointClient) {
@@ -225,10 +247,10 @@ export class ThingyViewResultView {
     }
 
 
-    public refresh(): Promise<ThingyViewResultView> {
+    public refresh(): Promise<ThingyViewResult> {
         return this.client.LoadLink("self")
             .then(r => {
-                return new ThingyViewResultView(r);
+                return new ThingyViewResult(r);
             });
     }
 
@@ -237,10 +259,10 @@ export class ThingyViewResultView {
     }
 
 
-    public getThingy(): Promise<ThingyViewResultView> {
+    public getThingy(): Promise<ThingyViewResult> {
         return this.client.LoadLink("getThingy")
             .then(r => {
-                return new ThingyViewResultView(r);
+                return new ThingyViewResult(r);
             });
     }
 
@@ -249,10 +271,10 @@ export class ThingyViewResultView {
     }
 
 
-    public updateThingy(data: ThingyView): Promise<ThingyViewResultView> {
+    public updateThingy(data: ThingyView): Promise<ThingyViewResult> {
         return this.client.LoadLinkWithBody("updateThingy", data)
             .then(r => {
-                return new ThingyViewResultView(r);
+                return new ThingyViewResult(r);
             });
     }
 
@@ -273,10 +295,10 @@ export class ThingyViewResultView {
     }
 
 
-    public listThingySubThingies(): Promise<SubThingyCollectionViewResultView> {
+    public listThingySubThingies(): Promise<SubThingyCollectionViewResult> {
         return this.client.LoadLink("listThingySubThingies")
             .then(r => {
-                return new SubThingyCollectionViewResultView(r);
+                return new SubThingyCollectionViewResult(r);
             });
     }
 
@@ -285,10 +307,10 @@ export class ThingyViewResultView {
     }
 
 
-    public addSubThingy(data: SubThingyView): Promise<SubThingyViewResultView> {
+    public addSubThingy(data: SubThingyView): Promise<SubThingyViewResult> {
         return this.client.LoadLinkWithBody("addSubThingy", data)
             .then(r => {
-                return new SubThingyViewResultView(r);
+                return new SubThingyViewResult(r);
             });
     }
 
