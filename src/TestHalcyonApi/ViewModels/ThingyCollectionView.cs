@@ -13,6 +13,10 @@ namespace TestHalcyonApi.ViewModels
     [HalSelfActionLink(ThingyController.Rels.List, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.List, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.Add, typeof(ThingyController))]
+    [DeclareHalLink(CollectionView<Object>.Rels.Next, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
+    [DeclareHalLink(CollectionView<Object>.Rels.Previous, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
+    [DeclareHalLink(CollectionView<Object>.Rels.First, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
+    [DeclareHalLink(CollectionView<Object>.Rels.Last, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
     public class ThingyCollectionView : CollectionView<ThingyView>
     {
         public ThingyCollectionView(int offset, int limit, int total, IEnumerable<ThingyView> items)
