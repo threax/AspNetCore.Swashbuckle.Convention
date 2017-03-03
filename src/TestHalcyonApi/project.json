@@ -4,7 +4,7 @@
       "version": "1.1.0",
       "type": "platform"
     },
-    "Threax.AspNetCore.Halcyon.Ext": "1.8.0-*",
+    "Threax.AspNetCore.Halcyon.Ext": "1.9.0-*",
     "AutoMapper": "5.2.0",
     "Microsoft.AspNetCore.Mvc": "1.1.1",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
