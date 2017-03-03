@@ -649,3 +649,4 @@ export interface ThingyView {
     /** Name, provides some test data. */
     name: string;
 }
+

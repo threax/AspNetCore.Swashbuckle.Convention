@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,31 +14,24 @@ namespace TestHalcyonApi.Controllers
     [ResponseCache(NoStore = true)]
     public class ClientGenController : Controller
     {
-        public class Rels
-        {
-            public const String Get = "GetClient";
-        }
-
         public ClientGenController()
         {
             
         }
 
         [HttpGet]
-        [HalRel(Rels.Get)]
-        public JsonResult Index([FromServices] IClientGenerator clientGenerator)
+        public IActionResult Index([FromServices] IClientGenerator clientGenerator)
         {
             return new JsonResult(clientGenerator.GetEndpointDefinitions());
         }
 
         [HttpGet("[action]")]
-        [HalRel(Rels.Get)]
-        public String Typescript([FromServices] TypescriptClientWriter clientWriter)
+        public IActionResult Typescript([FromServices] TypescriptClientWriter clientWriter)
         {
             using(var writer = new StringWriter())
             {
                 clientWriter.CreateClient(writer);
-                return writer.ToString();
+                return Content(writer.ToString());
             }
         }
     }
