@@ -20,7 +20,7 @@ export class EntryPointsResultView {
             });
     }
 
-    public canrefresh(): boolean {
+    public canRefresh(): boolean {
         return this.client.HasLink("self");
     }
 
@@ -32,7 +32,7 @@ export class EntryPointsResultView {
             });
     }
 
-    public canlistThingies(): boolean {
+    public canListThingies(): boolean {
         return this.client.HasLink("listThingies");
     }
 
@@ -58,7 +58,7 @@ export class SubThingyCollectionViewResultView {
             });
     }
 
-    public canrefresh(): boolean {
+    public canRefresh(): boolean {
         return this.client.HasLink("self");
     }
 
@@ -70,7 +70,7 @@ export class SubThingyCollectionViewResultView {
             });
     }
 
-    public canlistSubThingies(): boolean {
+    public canListSubThingies(): boolean {
         return this.client.HasLink("listSubThingies");
     }
 
@@ -96,7 +96,7 @@ export class SubThingyViewResultView {
             });
     }
 
-    public canrefresh(): boolean {
+    public canRefresh(): boolean {
         return this.client.HasLink("self");
     }
 
@@ -108,7 +108,7 @@ export class SubThingyViewResultView {
             });
     }
 
-    public canlistSubThingies(): boolean {
+    public canListSubThingies(): boolean {
         return this.client.HasLink("listSubThingies");
     }
 
@@ -120,7 +120,7 @@ export class SubThingyViewResultView {
             });
     }
 
-    public canupdateSubThingy(): boolean {
+    public canUpdateSubThingy(): boolean {
         return this.client.HasLink("updateSubThingy");
     }
 
@@ -132,7 +132,7 @@ export class SubThingyViewResultView {
             });
     }
 
-    public candeleteSubThingy(): boolean {
+    public canDeleteSubThingy(): boolean {
         return this.client.HasLink("deleteSubThingy");
     }
 
@@ -144,7 +144,7 @@ export class SubThingyViewResultView {
             });
     }
 
-    public cangetSubThingy(): boolean {
+    public canGetSubThingy(): boolean {
         return this.client.HasLink("getSubThingy");
     }
 
@@ -156,7 +156,7 @@ export class SubThingyViewResultView {
             });
     }
 
-    public cangetThingy(): boolean {
+    public canGetThingy(): boolean {
         return this.client.HasLink("getThingy");
     }
 
@@ -182,7 +182,7 @@ export class ThingyCollectionViewResultView {
             });
     }
 
-    public canrefresh(): boolean {
+    public canRefresh(): boolean {
         return this.client.HasLink("self");
     }
 
@@ -194,7 +194,7 @@ export class ThingyCollectionViewResultView {
             });
     }
 
-    public canlistThingies(): boolean {
+    public canListThingies(): boolean {
         return this.client.HasLink("listThingies");
     }
 
@@ -206,7 +206,7 @@ export class ThingyCollectionViewResultView {
             });
     }
 
-    public canaddThingy(): boolean {
+    public canAddThingy(): boolean {
         return this.client.HasLink("addThingy");
     }
 
@@ -232,7 +232,7 @@ export class ThingyViewResultView {
             });
     }
 
-    public canrefresh(): boolean {
+    public canRefresh(): boolean {
         return this.client.HasLink("self");
     }
 
@@ -244,7 +244,7 @@ export class ThingyViewResultView {
             });
     }
 
-    public cangetThingy(): boolean {
+    public canGetThingy(): boolean {
         return this.client.HasLink("getThingy");
     }
 
@@ -256,7 +256,7 @@ export class ThingyViewResultView {
             });
     }
 
-    public canupdateThingy(): boolean {
+    public canUpdateThingy(): boolean {
         return this.client.HasLink("updateThingy");
     }
 
@@ -268,7 +268,7 @@ export class ThingyViewResultView {
             });
     }
 
-    public candeleteThingy(): boolean {
+    public canDeleteThingy(): boolean {
         return this.client.HasLink("deleteThingy");
     }
 
@@ -280,7 +280,7 @@ export class ThingyViewResultView {
             });
     }
 
-    public canlistThingySubThingies(): boolean {
+    public canListThingySubThingies(): boolean {
         return this.client.HasLink("listThingySubThingies");
     }
 
@@ -292,7 +292,7 @@ export class ThingyViewResultView {
             });
     }
 
-    public canaddSubThingy(): boolean {
+    public canAddSubThingy(): boolean {
         return this.client.HasLink("addSubThingy");
     }
 
@@ -304,7 +304,7 @@ export class ThingyViewResultView {
             });
     }
 
-    public canauthorizedpropertiesThingies(): boolean {
+    public canAuthorizedpropertiesThingies(): boolean {
         return this.client.HasLink("authorizedpropertiesThingies");
     }
 
@@ -316,7 +316,7 @@ export class ThingyViewResultView {
             });
     }
 
-    public canrolepropertiesThingies(): boolean {
+    public canRolepropertiesThingies(): boolean {
         return this.client.HasLink("rolepropertiesThingies");
     }
 
