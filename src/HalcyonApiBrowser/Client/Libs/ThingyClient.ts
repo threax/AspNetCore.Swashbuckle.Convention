@@ -36,7 +36,6 @@ export class EntryPointsResult {
         return this.client.HasLink("listThingies");
     }
 
-
 }
 
 export class SubThingyCollectionViewResult {
@@ -85,6 +84,53 @@ export class SubThingyCollectionViewResult {
         return this.client.HasLink("listSubThingies");
     }
 
+
+    public next() {
+        return this.client.LoadLink("next")
+            .then(r => {
+                return r;
+            });
+    }
+
+    public canNext(): boolean {
+        return this.client.HasLink("next");
+    }
+
+
+    public previous() {
+        return this.client.LoadLink("previous")
+            .then(r => {
+                return r;
+            });
+    }
+
+    public canPrevious(): boolean {
+        return this.client.HasLink("previous");
+    }
+
+
+    public first() {
+        return this.client.LoadLink("first")
+            .then(r => {
+                return r;
+            });
+    }
+
+    public canFirst(): boolean {
+        return this.client.HasLink("first");
+    }
+
+
+    public last() {
+        return this.client.LoadLink("last")
+            .then(r => {
+                return r;
+            });
+    }
+
+    public canLast(): boolean {
+        return this.client.HasLink("last");
+    }
 
 }
 
@@ -171,7 +217,6 @@ export class SubThingyViewResult {
         return this.client.HasLink("getThingy");
     }
 
-
 }
 
 export class ThingyCollectionViewResult {
@@ -232,6 +277,53 @@ export class ThingyCollectionViewResult {
         return this.client.HasLink("addThingy");
     }
 
+
+    public next() {
+        return this.client.LoadLink("next")
+            .then(r => {
+                return r;
+            });
+    }
+
+    public canNext(): boolean {
+        return this.client.HasLink("next");
+    }
+
+
+    public previous() {
+        return this.client.LoadLink("previous")
+            .then(r => {
+                return r;
+            });
+    }
+
+    public canPrevious(): boolean {
+        return this.client.HasLink("previous");
+    }
+
+
+    public first() {
+        return this.client.LoadLink("first")
+            .then(r => {
+                return r;
+            });
+    }
+
+    public canFirst(): boolean {
+        return this.client.HasLink("first");
+    }
+
+
+    public last() {
+        return this.client.LoadLink("last")
+            .then(r => {
+                return r;
+            });
+    }
+
+    public canLast(): boolean {
+        return this.client.HasLink("last");
+    }
 
 }
 
@@ -341,7 +433,6 @@ export class ThingyViewResult {
     public canRolepropertiesThingies(): boolean {
         return this.client.HasLink("rolepropertiesThingies");
     }
-
 
 }
 export interface EntryPoints {
