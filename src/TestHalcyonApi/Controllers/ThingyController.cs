@@ -53,7 +53,7 @@ namespace HateoasTest.Controllers
         }
 
         [HttpGet]
-        [HalRel(Rels.List, IsPaged = true)]
+        [HalRel(Rels.List)]
         public ThingyCollectionView List([FromQuery] CollectionQuery query)
         {
             var items = testContext.Thingies.Values.Skip(query.Offset * query.Limit).Take(query.Limit).Select(i => mapper.Map<ThingyView>(i));
