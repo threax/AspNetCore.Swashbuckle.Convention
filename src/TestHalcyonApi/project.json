@@ -4,7 +4,7 @@
       "version": "1.1.0",
       "type": "platform"
     },
-    "Threax.AspNetCore.Halcyon.Ext": "1.9.1-*",
+    "Threax.AspNetCore.Halcyon.Ext": "1.10.0-*",
     "AutoMapper": "5.2.0",
     "Microsoft.AspNetCore.Mvc": "1.1.1",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
@@ -17,7 +17,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Threax.AspNetCore.ExceptionFilter": "1.0.2-*",
-    "Threax.AspNetCore.Halcyon.ClientGen": "1.0.1-*"
+    "Threax.AspNetCore.Halcyon.ClientGen": "1.1.0-*"
   },
 
   "tools": {
