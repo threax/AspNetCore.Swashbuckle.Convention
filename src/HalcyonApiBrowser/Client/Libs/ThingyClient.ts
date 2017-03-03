@@ -327,35 +327,29 @@ export interface EntryPoints {
 /** Default implementation of ICollectionQuery. */
 export interface CollectionQuery {
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
-    offset: number;
+    offset?: number;
     /** The limit of the number of items to return. */
-    limit: number;
+    limit?: number;
 }
 export interface ThingyCollectionView {
-    collectionType: string;
-    offset: number;
-    limit: number;
-    total: number;
-    items: Items[];
-    asObjects: any[];
+    offset?: number;
+    limit?: number;
+    total?: number;
 }
 export interface SubThingyCollectionView {
-    collectionType: string;
-    offset: number;
-    limit: number;
-    total: number;
-    items: Items[];
-    asObjects: any[];
+    offset?: number;
+    limit?: number;
+    total?: number;
 }
 export interface SubThingyView {
-    subThingyId: number;
-    amount: number;
-    thingyId: number;
+    subThingyId?: number;
+    amount?: number;
+    thingyId?: number;
 }
 /** A simple test model. */
 export interface ThingyView {
     /** Id, it is important to fully name it here and in routes to avoid naming collisions. */
-    thingyId: number;
+    thingyId?: number;
     /** Name, provides some test data. */
     name: string;
 }
