@@ -11,7 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:65404/?entry=http%3A%2F%2Flocalhost%3A65405%2F",
+      "launchUrl": "http://localhost:65405/ClientGen",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

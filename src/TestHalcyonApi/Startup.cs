@@ -12,6 +12,8 @@ using Newtonsoft.Json.Converters;
 using TestHalcyonApi.Database;
 using Threax.AspNetCore.Halcyon.Ext;
 using TestHalcyonApi.Controllers;
+using Threax.AspNetCore.Halcyon.ClientGen;
+using System.Reflection;
 
 namespace TestHalcyonApi
 {
@@ -39,6 +41,11 @@ namespace TestHalcyonApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Client generator test
+            services.AddScoped<IResultViewProvider>(s => new DefaultResultViewProvider(new Assembly[]{ this.GetType().GetTypeInfo().Assembly }));
+            services.AddScoped<IClientGenerator, ClientGenerator>();
+            services.AddScoped<TypescriptClientWriter>();
+
             services.AddConventionalHalcyon(new HalcyonConventionOptions()
             {
                 BaseUrl = appConfig.BaseUrl,
