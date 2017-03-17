@@ -57,7 +57,7 @@ namespace HateoasTest.Controllers
         public ThingyCollectionView List([FromQuery] CollectionQuery query)
         {
             var items = testContext.Thingies.Values.Skip(query.Offset * query.Limit).Take(query.Limit).Select(i => mapper.Map<ThingyView>(i));
-            return new ThingyCollectionView(query.Offset, query.Limit, testContext.Thingies.Values.Count(), items);
+            return new ThingyCollectionView(query, testContext.Thingies.Values.Count(), items);
         }
 
         [HttpGet("{ThingyId}")]

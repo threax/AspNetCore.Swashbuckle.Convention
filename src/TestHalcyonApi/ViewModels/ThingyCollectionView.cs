@@ -13,21 +13,20 @@ namespace TestHalcyonApi.ViewModels
     [HalSelfActionLink(ThingyController.Rels.List, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.List, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.Add, typeof(ThingyController))]
-    [DeclareHalLink(CollectionView<Object>.Rels.Next, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
-    [DeclareHalLink(CollectionView<Object>.Rels.Previous, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
-    [DeclareHalLink(CollectionView<Object>.Rels.First, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
-    [DeclareHalLink(CollectionView<Object>.Rels.Last, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
-    public class ThingyCollectionView : CollectionView<ThingyView>
+    [DeclareHalLink(PagedCollectionView<Object>.Rels.Next, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
+    [DeclareHalLink(PagedCollectionView<Object>.Rels.Previous, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
+    [DeclareHalLink(PagedCollectionView<Object>.Rels.First, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
+    [DeclareHalLink(PagedCollectionView<Object>.Rels.Last, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
+    public class ThingyCollectionView : PagedCollectionView<ThingyView>
     {
-        public ThingyCollectionView(int offset, int limit, int total, IEnumerable<ThingyView> items)
+        public ThingyCollectionView(CollectionQuery query, int total, IEnumerable<ThingyView> items)
+            :base(query, total, items)
         {
-            this.Offset = offset;
-            this.Limit = limit;
-            this.Total = total;
-            this.Items = items;
+            
         }
 
         private ThingyCollectionView()
+            :base(new SearchCollectionQuery(), 0, null)
         {
             //For codegen
         }
