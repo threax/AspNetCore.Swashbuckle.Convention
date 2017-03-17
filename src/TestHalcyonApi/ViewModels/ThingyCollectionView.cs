@@ -19,7 +19,7 @@ namespace TestHalcyonApi.ViewModels
     [DeclareHalLink(PagedCollectionView<Object>.Rels.Last, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
     public class ThingyCollectionView : PagedCollectionView<ThingyView>
     {
-        public ThingyCollectionView(CollectionQuery query, int total, IEnumerable<ThingyView> items)
+        public ThingyCollectionView(PagedCollectionQuery query, int total, IEnumerable<ThingyView> items)
             :base(query, total, items)
         {
             

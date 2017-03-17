@@ -54,7 +54,7 @@ namespace HateoasTest.Controllers
 
         [HttpGet]
         [HalRel(Rels.List)]
-        public ThingyCollectionView List([FromQuery] CollectionQuery query)
+        public ThingyCollectionView List([FromQuery] PagedCollectionQuery query)
         {
             var items = testContext.Thingies.Values.Skip(query.Offset * query.Limit).Take(query.Limit).Select(i => mapper.Map<ThingyView>(i));
             return new ThingyCollectionView(query, testContext.Thingies.Values.Count(), items);
@@ -138,7 +138,7 @@ namespace HateoasTest.Controllers
         /// </summary>
         [HttpGet("[action]")]
         [HalRel(Rels.TestDeclareLinkToRel)]
-        public void TestDeclaredLinkToRel([FromQuery] CollectionQuery query)
+        public void TestDeclaredLinkToRel([FromQuery] PagedCollectionQuery query)
         {
 
         }
