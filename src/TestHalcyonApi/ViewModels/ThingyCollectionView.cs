@@ -26,7 +26,7 @@ namespace TestHalcyonApi.ViewModels
         }
 
         private ThingyCollectionView()
-            :base(new SearchCollectionQuery(), 0, null)
+            :base(new PagedCollectionQuery(), 0, null)
         {
             //For codegen
         }
