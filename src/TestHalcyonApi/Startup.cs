@@ -14,6 +14,9 @@ using Threax.AspNetCore.Halcyon.Ext;
 using TestHalcyonApi.Controllers;
 using Threax.AspNetCore.Halcyon.ClientGen;
 using System.Reflection;
+using NJsonSchema.Generation.TypeMappers;
+using TestHalcyonApi.ViewModels;
+using TestHalcyonApi.ValueProviders;
 
 namespace TestHalcyonApi
 {
@@ -41,28 +44,31 @@ namespace TestHalcyonApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<OtherWeirdThingProvider, OtherWeirdThingProvider>();
+
             //Client generator test
             services.AddHalClientGen(new HalClientGenOptions()
             {
                 SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly }
             });
 
-            services.AddConventionalHalcyon(new HalcyonConventionOptions()
+            var halOptions = new HalcyonConventionOptions()
             {
                 BaseUrl = appConfig.BaseUrl,
-                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController))
-            });
+                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController)),
+            };
+
+            services.AddConventionalHalcyon(halOptions);
             services.UseAppDatabase();
 
             services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters(isDev);
-                o.UseConventionalHalcyon();
+                o.UseConventionalHalcyon(halOptions);
             })
             .AddJsonOptions(o =>
             {
-                o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                o.SerializerSettings.Converters.Add(new StringEnumConverter());
+                o.SerializerSettings.SetToHalcyonDefault();
             });
         }
 
