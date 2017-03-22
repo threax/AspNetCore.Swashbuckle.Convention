@@ -14,6 +14,7 @@ using NJsonSchema.Generation;
 using NJsonSchema.Annotations;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 using TestHalcyonApi.ValueProviders;
+using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 
 namespace TestHalcyonApi.ViewModels
 {
@@ -27,7 +28,7 @@ namespace TestHalcyonApi.ViewModels
     public class SubThingyView : SubThingy
     {
         [ValueProviderAttribute(typeof(OtherWeirdThingProvider))]
-        [JsonSchemaExtensionData("x-ui-type", "select")]
+        [SelectUiType]
         public Guid OtherWeirdThing { get; set; }
     }
 }
