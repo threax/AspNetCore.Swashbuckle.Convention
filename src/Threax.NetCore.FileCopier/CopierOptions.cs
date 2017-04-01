@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Threax.NetCore.FileCopier
 {
-    class CopierOptions
+    public class CopierOptions
     {
         public bool UseLastIndex { get; set; }
 

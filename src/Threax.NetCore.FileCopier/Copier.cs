@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Threax.NetCore.FileCopier
 {
-    class Copier
+    public class Copier
     {
         private string[] resourceNames;
         private Assembly assembly;
@@ -38,13 +38,20 @@ namespace Threax.NetCore.FileCopier
                 int baseIndex;
                 if (options.UseLastIndex)
                 {
-                    baseIndex = name.LastIndexOf(baseNamespace) + baseNamespace.Length;
+                    baseIndex = name.LastIndexOf(baseNamespace);
                 }
                 else
                 {
-                    baseIndex = name.IndexOf(baseNamespace) + baseNamespace.Length;
+                    baseIndex = name.IndexOf(baseNamespace);
                 }
                 
+                if(baseIndex == -1)
+                {
+                    continue;
+                }
+
+                baseIndex += baseNamespace.Length;
+
                 var fileName = name.Substring(baseIndex);
                 Console.WriteLine(fileName);
                 using (var stream = File.Open(Path.Combine(outDir, fileName), FileMode.Create, FileAccess.Write, FileShare.None))
