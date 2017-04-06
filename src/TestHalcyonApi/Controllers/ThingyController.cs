@@ -41,6 +41,7 @@ namespace HateoasTest.Controllers
             public const String RoleProperties = "rolepropertiesThingies";
             public const String ListTestSubData = "listThingySubThingies";
             public const String TestDeclareLinkToRel = "testDeclareLinkToRel";
+            public const String TestTakeListInput = "TestTakeListInput";
         }
 
         private ThingyContext testContext;
@@ -107,6 +108,16 @@ namespace HateoasTest.Controllers
         {
             var items = testContext.SubThingies.Values.Where(i => i.ThingyId == thingyId).Select(i => mapper.Map<SubThingyView>(i));
             return new SubThingyCollectionView(items);
+        }
+
+        /// <summary>
+        /// Take in a list of multiple inputs
+        /// </summary>
+        [HttpPost("[action]")]
+        [HalRel(Rels.TestTakeListInput)]
+        public void TestTakeListInput([FromBody] List<ThingyView> thingies)
+        {
+
         }
 
         //Some test stuff below here, mostly to test roles, you should never see these since you can't log into the browser
