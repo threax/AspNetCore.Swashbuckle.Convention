@@ -14,7 +14,7 @@ namespace TestHalcyonApi.Controllers
     /// </summary>
     [Route("[controller]/[action]")] //Be sure to take actions here since you will have multiple gets and sets
     [ResponseCache(NoStore = true)]
-    public class MultipartInputController
+    public class MultipartInputController : Controller
     {
         public static class Rels
         {
