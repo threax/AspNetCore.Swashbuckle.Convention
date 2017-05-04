@@ -22,7 +22,7 @@ namespace Threax.AspNetCore.Crud
     /// <typeparam name="ViewModel"></typeparam>
     /// <typeparam name="ViewModelCollection"></typeparam>
     /// <typeparam name="CrudDbContext"></typeparam>
-    public abstract class CrudRepoBase<Key, Query, InputModel, TEntity, ViewModel, ViewModelCollection, CrudDbContext> : ICrudRepo<Key, Query, InputModel, ViewModel, ViewModelCollection>
+    public abstract class CrudRepo<Key, Query, InputModel, TEntity, ViewModel, ViewModelCollection, CrudDbContext> : ICrudRepo<Key, Query, InputModel, ViewModel, ViewModelCollection>
         where TEntity : class
         where CrudDbContext : DbContext
         where Query : PagedCollectionQuery
@@ -30,7 +30,7 @@ namespace Threax.AspNetCore.Crud
         private CrudDbContext dbContext;
         private IMapper mapper;
 
-        public CrudRepoBase(CrudDbContext dbContext, IMapper mapper)
+        public CrudRepo(CrudDbContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
