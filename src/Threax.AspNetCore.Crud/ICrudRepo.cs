@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
 
 namespace Threax.AspNetCore.Crud
@@ -19,6 +20,13 @@ namespace Threax.AspNetCore.Crud
         /// <param name="value">The item to add.</param>
         /// <returns>The view of the newly added item.</returns>
         Task<ViewModel> Add(InputModel value);
+
+        /// <summary>
+        /// Add several items to the repository.
+        /// </summary>
+        /// <param name="values">The enumerable over the values to add.</param>
+        /// <returns>Void task</returns>
+        Task AddRange(IEnumerable<InputModel> values);
 
         /// <summary>
         /// Delete the item specified by key.

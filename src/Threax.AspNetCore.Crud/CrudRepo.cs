@@ -54,7 +54,7 @@ namespace Threax.AspNetCore.Crud
         /// </summary>
         /// <param name="values">The values to add.</param>
         /// <returns>The newly added value.</returns>
-        public virtual async Task Add(IEnumerable<InputModel> values)
+        public virtual async Task AddRange(IEnumerable<InputModel> values)
         {
             var entities = values.Select(i => mapper.Map<TEntity>(i));
             this.dbContext.AddRange(entities);
