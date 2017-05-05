@@ -17,6 +17,11 @@ namespace Threax.AspNetCore.Crud
         public const String Add = "Add";
 
         /// <summary>
+        /// The name of the list function. Used to lookup search query data.
+        /// </summary>
+        public const String List = "List";
+
+        /// <summary>
         /// The name of the update function.
         /// </summary>
         public const String Update = "Update";
