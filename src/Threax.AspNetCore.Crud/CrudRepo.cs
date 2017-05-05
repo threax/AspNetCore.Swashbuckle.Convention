@@ -50,6 +50,18 @@ namespace Threax.AspNetCore.Crud
         }
 
         /// <summary>
+        /// Add multiple new items to the repository.
+        /// </summary>
+        /// <param name="values">The values to add.</param>
+        /// <returns>The newly added value.</returns>
+        public virtual async Task Add(IEnumerable<InputModel> values)
+        {
+            var entities = values.Select(i => mapper.Map<TEntity>(i));
+            this.dbContext.AddRange(entities);
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
         /// Delete an entity by id.
         /// </summary>
         /// <param name="id">The id of the entity to delete.</param>
