@@ -37,6 +37,15 @@ namespace Threax.AspNetCore.Crud
         }
 
         /// <summary>
+        /// Check to see if this repository has any values at all.
+        /// </summary>
+        /// <returns>True if there are some values, false if not.</returns>
+        public virtual async Task<bool> HasValues()
+        {
+            return await Entities.CountAsync() > 0;
+        }
+
+        /// <summary>
         /// Add a new item to the repository.
         /// </summary>
         /// <param name="value">The value to add.</param>

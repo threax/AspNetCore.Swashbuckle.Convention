@@ -15,6 +15,12 @@ namespace Threax.AspNetCore.Crud
     public interface ICrudRepo<Key, Query, InputModel, ViewModel, ViewModelCollection> where Query : PagedCollectionQuery
     {
         /// <summary>
+        /// Check to see if this repository has any values at all.
+        /// </summary>
+        /// <returns>True if there are some values, false if not.</returns>
+        Task<bool> HasValues();
+
+        /// <summary>
         /// Add a new item to the repository.
         /// </summary>
         /// <param name="value">The item to add.</param>
