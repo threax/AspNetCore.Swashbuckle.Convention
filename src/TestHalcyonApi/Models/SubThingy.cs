@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace TestHalcyonApi.Models
 {
+    [NullEnumLabel("None")]
     public enum TestEnum
     {
         [Display(Name = "Test Value 1")]
@@ -25,5 +27,10 @@ namespace TestHalcyonApi.Models
         public int ThingyId { get; set; }
 
         public TestEnum EnumTest { get; set; }
+
+        public TestEnum? EnumTestNullable { get; set; }
+
+        [NullEnumLabel("Relabeled")]
+        public TestEnum? EnumTestNullableRelabel { get; set; }
     }
 }
