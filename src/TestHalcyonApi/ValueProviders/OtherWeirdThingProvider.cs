@@ -6,13 +6,13 @@ using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace TestHalcyonApi.ValueProviders
 {
-    public class OtherWeirdThingProvider : LabelValuePairProvider
+    public class OtherWeirdThingProvider : LabelValuePairProviderSync
     {
         public OtherWeirdThingProvider()
         {
         }
 
-        protected override IEnumerable<LabelValuePair> GetSources()
+        protected override IEnumerable<LabelValuePair> GetSourcesSync()
         {
             yield return new LabelValuePair("Value 1", "5f959548-7edc-4c6d-970c-ff2ea44e62c3");
             yield return new LabelValuePair("Value 2", "7dfbbd59-645b-4f59-9bf2-287a4fcfd023");
