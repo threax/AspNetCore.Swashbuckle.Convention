@@ -26,6 +26,6 @@ namespace TestHalcyonApi.ViewModels
     [DeclareHalLink(ThingyController.Rels.TestDeclareLinkToRel, typeof(ThingyController))]
     public class ThingyView : Thingy
     {
-        
+        public IEnumerable<ComplexObject> ComplexObjects { get; set; }
     }
 }
