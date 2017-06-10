@@ -4,8 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HalcyonApiBrowser</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-custom.css" />
 </head>
 <body>
     <div class="navbar navbar-inverse">
@@ -34,13 +33,7 @@
         </footer>
     </div>
 
-    <script src="~/lib/jsns.js"></script>
-    <script src="~/lib/polyfill.js"></script>
-    <script src="~/lib/HtmlRapier.js" async></script>
-    <script src="~/lib/HtmlRapierBootstrap.js" async></script>
-    <script src="~/lib/ClientLibs.js" async></script>
-    <script src="~/lib/json-editor.js" async></script>
-    <script src="~/lib/HtmlRapierHalcyonClient.js" async></script>
+    <script src="~/lib/tsbin.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>

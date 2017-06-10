@@ -37,9 +37,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var less = require("threax-npm-tk/less");
 var typescript_1 = require("threax-npm-tk/typescript");
-var jsnsTools = require("threax-npm-tk/jsnstools");
 var filesDir = __dirname + "/..";
-build(filesDir + "/ClientBin/Site", filesDir + "/wwwroot", filesDir + "/node_modules");
+build(filesDir + "/wwwroot", filesDir + "/wwwroot", filesDir + "/node_modules");
 function build(outDir, iconOutPath, moduleDir) {
     var promises = [];
     //Build bootstrap theme
@@ -65,7 +64,6 @@ function compileTypescript() {
                     })];
                 case 1:
                     _a.sent();
-                    jsnsTools.saveLoadedModules(filesDir + '/wwwroot/lib/tsbin.js', ['edity.theme.layouts.default'], filesDir + '/ClientBin/Site/lib/tsbin.prod.js');
                     return [2 /*return*/];
             }
         });

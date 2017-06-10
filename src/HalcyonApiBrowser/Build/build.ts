@@ -5,7 +5,7 @@ import * as jsnsTools from 'threax-npm-tk/jsnstools';
 
 var filesDir = __dirname + "/..";
 
-build(filesDir + "/ClientBin/Site", filesDir + "/wwwroot", filesDir + "/node_modules");
+build(filesDir + "/wwwroot", filesDir + "/wwwroot", filesDir + "/node_modules");
 
 export function build(outDir, iconOutPath, moduleDir): Promise<any> {
     var promises = [];
@@ -30,6 +30,4 @@ async function compileTypescript() {
     await tsc({
         projectFolder: filesDir
     });
-
-    jsnsTools.saveLoadedModules(filesDir + '/wwwroot/lib/tsbin.js', ['edity.theme.layouts.default'], filesDir + '/ClientBin/Site/lib/tsbin.prod.js')
 }
