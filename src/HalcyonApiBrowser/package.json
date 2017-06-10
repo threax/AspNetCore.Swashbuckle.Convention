@@ -3,14 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "devDependencies": {
-    "threax-gulp-tk": "^4.1.1"
+    "@types/node": "^6.0.69"
   },
   "dependencies": {
-    "htmlrapier": "^3.3.1",
-    "jsns": "^2.0.1",
-    "htmlrapier.bootstrap": "^3.2.0",
+    "htmlrapier": "^6.1.1",
+    "jsns": "^4.2.2",
+    "htmlrapier.bootstrap": "^4.2.1",
     "bootstrap": "^3.3.7",
-    "htmlrapier.json-editor": "^3.2.0",
-    "htmlrapier.halcyon": "^3.3.4"
+    "htmlrapier.json-editor": "^4.2.0",
+    "htmlrapier.halcyon": "^4.1.2",
+    "htmlrapier.halcyon-explorer": "^4.3.0"
+  },
+  "scripts": {
+    "build": "node Build/build.js",
+    "link-tk": "npm link threax-npm-tk"
   }
 }

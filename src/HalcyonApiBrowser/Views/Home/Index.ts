@@ -1,8 +1,8 @@
-﻿import * as PageStart from 'clientlibs.PageStart';
-import { HalcyonBrowserController } from 'clientlibs.HalcyonBrowserController';
+﻿import * as explorer from 'hr.halcyon-explorer.HalcyonBrowserController';
+import * as controller from 'hr.controller';
+import * as startup from 'clientlibs.startup';
 
-PageStart.init()
-    .then(config => {
-        var browsers = HalcyonBrowserController.Builder().create("halcyonbrowser");
-        browsers[0].showResults(config.EntryPoint);
-    });
+var builder = new controller.InjectedControllerBuilder();
+startup.addServices(builder.Services);
+explorer.addServices(builder.Services);
+builder.create("halcyonbrowser", explorer.HalcyonBrowserController);

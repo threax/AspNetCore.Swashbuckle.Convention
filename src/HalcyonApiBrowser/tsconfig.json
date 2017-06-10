@@ -4,11 +4,15 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
+    "allowJs": true,
     "target": "es5",
     "outDir": "obj/tscout/lib",
+    "outFile": "wwwroot/lib/tsbin.js",
     "module": "amd",
     "baseUrl": ".",
-    "types": [ "es6-promise" ],
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
     "paths": {
       "hr.*": [
         "node_modules/HtmlRapier/src/*",
@@ -26,12 +30,31 @@
       ],
       "jdorn.*": [
         "node_modules/htmlrapier.json-editor/*"
+      ],
+      "hr.halcyon-explorer.*": [
+        "node_modules/htmlrapier.halcyon-explorer/src/*"
+      ],
+      "hr.widgets.*": [
+        "node_modules/HtmlRapier.Widgets/src/*"
       ]
     }
   },
+  "include": [
+    "./**/*.ts"
+  ],
   "exclude": [
-    "node_modules",
-    "wwwroot"
+    "./**/*.js",
+    "./**/Build/*.ts",
+    "node_modules/jsns",
+    "node_modules/*/node_modules/**/*.ts",
+    "wwwroot",
+    "node_modules/**/threax-npm-tk/*.ts"
+  ],
+  "files": [
+    "node_modules/jsns/jsns.ts",
+    "node_modules/htmlrapier/src/polyfill.js",
+    "node_modules/jsns/tslib.jsns.js",
+    "node_modules/htmlrapier.json-editor/bin/json-editor.js"
   ],
   "compileOnSave": true
 }
