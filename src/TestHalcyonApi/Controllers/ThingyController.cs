@@ -129,8 +129,12 @@ namespace HateoasTest.Controllers
         public class SingleFileInput
         {
             public IFormFile DaFile { get; set; }
+        }
 
-            public String Woot { get; set; }
+        [HalModel]
+        public class MultiFileInput
+        {
+            public IEnumerable<IFormFile> DaFile { get; set; }
         }
 
         /// <summary>
@@ -148,7 +152,7 @@ namespace HateoasTest.Controllers
         /// </summary>
         [HttpPost("[action]")]
         [HalRel(Rels.FileInputQuery)]
-        public void FileInputQuery([FromQuery] PagedCollectionQuery testQuery, [FromForm] IFormFile files)
+        public void FileInputQuery([FromQuery] PagedCollectionQuery testQuery, [FromForm] SingleFileInput input)
         {
 
         }
@@ -158,7 +162,7 @@ namespace HateoasTest.Controllers
         /// </summary>
         [HttpPost("[action]")]
         [HalRel(Rels.FileInputMultiple)]
-        public void FileInputMultiple([FromForm] IEnumerable<IFormFile> files)
+        public void FileInputMultiple([FromForm] MultiFileInput files)
         {
 
         }
@@ -168,7 +172,7 @@ namespace HateoasTest.Controllers
         /// </summary>
         [HttpPost("[action]")]
         [HalRel(Rels.FileInputMultipleQuery)]
-        public void FileInputMultipleQuery([FromForm] IEnumerable<IFormFile> files, [FromQuery] PagedCollectionQuery testQuery)
+        public void FileInputMultipleQuery([FromForm] MultiFileInput files, [FromQuery] PagedCollectionQuery testQuery)
         {
 
         }
