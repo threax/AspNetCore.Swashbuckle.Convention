@@ -14,6 +14,7 @@ using TestHalcyonApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Threax.AspNetCore.Halcyon.Ext;
 using TestHalcyonApi.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace HateoasTest.Controllers
 {
@@ -42,6 +43,10 @@ namespace HateoasTest.Controllers
             public const String ListTestSubData = "listThingySubThingies";
             public const String TestDeclareLinkToRel = "testDeclareLinkToRel";
             public const String TestTakeListInput = "TestTakeListInput";
+            public const String FileInput = "FileInput";
+            public const String FileInputMultiple = "FileInputMultiple";
+            public const String FileInputQuery = "FileInputQuery";
+            public const String FileInputMultipleQuery = "FileInputMultipleQuery";
         }
 
         private ThingyContext testContext;
@@ -116,6 +121,46 @@ namespace HateoasTest.Controllers
         [HttpPost("[action]")]
         [HalRel(Rels.TestTakeListInput)]
         public void TestTakeListInput([FromBody] List<ThingyView> thingies)
+        {
+
+        }
+
+        /// <summary>
+        /// Take in a list of multiple inputs
+        /// </summary>
+        [HttpPost("[action]")]
+        [HalRel(Rels.FileInput)]
+        public void FileInput([FromBody] IFormFile files)
+        {
+
+        }
+
+        /// <summary>
+        /// Take in a list of multiple inputs
+        /// </summary>
+        [HttpPost("[action]")]
+        [HalRel(Rels.FileInputQuery)]
+        public void FileInputQuery([FromQuery] PagedCollectionQuery testQuery, [FromBody] IFormFile files)
+        {
+
+        }
+
+        /// <summary>
+        /// Take in a list of multiple inputs
+        /// </summary>
+        [HttpPost("[action]")]
+        [HalRel(Rels.FileInputMultiple)]
+        public void FileInputMultiple([FromBody] IEnumerable<IFormFile> files)
+        {
+
+        }
+
+        /// <summary>
+        /// Take in a list of multiple inputs
+        /// </summary>
+        [HttpPost("[action]")]
+        [HalRel(Rels.FileInputMultipleQuery)]
+        public void FileInputMultipleQuery([FromBody] IEnumerable<IFormFile> files, [FromQuery] PagedCollectionQuery testQuery)
         {
 
         }
