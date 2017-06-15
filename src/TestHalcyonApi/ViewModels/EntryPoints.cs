@@ -20,6 +20,7 @@ namespace TestHalcyonApi.ViewModels
     [HalActionLink(ThingyController.Rels.FileInputMultiple, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.FileInputQuery, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.FileInputMultipleQuery, typeof(ThingyController))]
+    [HalActionLink(ThingyController.Rels.ReturnActionResult, typeof(ThingyController))]
     public class EntryPoints
     {
     }

@@ -47,6 +47,7 @@ namespace HateoasTest.Controllers
             public const String FileInputMultiple = "FileInputMultiple";
             public const String FileInputQuery = "FileInputQuery";
             public const String FileInputMultipleQuery = "FileInputMultipleQuery";
+            public const String ReturnActionResult = "ReturnActionResult";
         }
 
         private ThingyContext testContext;
@@ -209,6 +210,19 @@ namespace HateoasTest.Controllers
         public void TestDeclaredLinkToRel([FromQuery] PagedCollectionQuery query)
         {
 
+        }
+
+        /// <summary>
+        /// Test returning an action result
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        [HttpGet("[action]/{*Path}")]
+        [Produces("text/html")]
+        [HalRel(Rels.ReturnActionResult)]
+        public FileStreamResult ReturnActionResult(String path)
+        {
+            throw new NotImplementedException();
         }
     }
 }
