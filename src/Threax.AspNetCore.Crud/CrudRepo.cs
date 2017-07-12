@@ -108,7 +108,7 @@ namespace Threax.AspNetCore.Crud
             IQueryable<TEntity> dbQuery = CustomizeListBeforeCountAndSkip(query, this.Entities);
             var total = await dbQuery.CountAsync();
             dbQuery = CustomizeListAfterSkip(query, dbQuery.Skip(query.SkipTo(total)).Take(query.Limit));
-            var resultQuery = dbQuery.Select(i => mapper.Map<ViewModel>(i));
+            var resultQuery = CreateResultQuery(dbQuery);
             var results = await resultQuery.ToListAsync();
 
             return CreateCollection(query, total, results);
@@ -157,6 +157,16 @@ namespace Threax.AspNetCore.Crud
         }
 
         /// <summary>
+        /// Customize the mapping to the result by overriding this method.
+        /// </summary>
+        /// <param name="dbQuery">The query for the entities.</param>
+        /// <returns>The query that selects the view model.</returns>
+        protected virtual IQueryable<ViewModel> CreateResultQuery(IQueryable<TEntity> dbQuery)
+        {
+            return dbQuery.Select(i => mapper.Map<ViewModel>(i));
+        }
+
+        /// <summary>
         /// Get the db context passed to the constructor.
         /// </summary>
         protected virtual CrudDbContext DbContext
@@ -164,6 +174,17 @@ namespace Threax.AspNetCore.Crud
             get
             {
                 return dbContext;
+            }
+        }
+
+        /// <summary>
+        /// The mapper for this repo.
+        /// </summary>
+        public IMapper Mapper
+        {
+            get
+            {
+                return mapper;
             }
         }
 
