@@ -52,10 +52,10 @@ namespace Threax.AspNetCore.Crud
         /// <returns>The newly added value.</returns>
         public virtual async Task<ViewModel> Add(InputModel value)
         {
-            var entity = mapper.Map<TEntity>(value);
+            var entity = CreateEntity(value);
             this.dbContext.Add(entity);
             await this.dbContext.SaveChangesAsync();
-            return mapper.Map<ViewModel>(entity);
+            return CreateResult(entity);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Threax.AspNetCore.Crud
         /// <returns>The newly added value.</returns>
         public virtual async Task AddRange(IEnumerable<InputModel> values)
         {
-            var entities = values.Select(i => mapper.Map<TEntity>(i));
+            var entities = values.Select(i => CreateEntity(i));
             this.dbContext.AddRange(entities);
             await this.dbContext.SaveChangesAsync();
         }
@@ -93,7 +93,7 @@ namespace Threax.AspNetCore.Crud
         public virtual async Task<ViewModel> Get(Key id)
         {
             var entity = await this.Entity(id);
-            return mapper.Map<ViewModel>(entity);
+            return CreateResult(entity);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Threax.AspNetCore.Crud
             IQueryable<TEntity> dbQuery = CustomizeListBeforeCountAndSkip(query, this.Entities);
             var total = await dbQuery.CountAsync();
             dbQuery = CustomizeListAfterSkip(query, dbQuery.Skip(query.SkipTo(total)).Take(query.Limit));
-            var resultQuery = CreateResultQuery(dbQuery);
+            var resultQuery = dbQuery.Select(i => CreateResult(i));
             var results = await resultQuery.ToListAsync();
 
             return CreateCollection(query, total, results);
@@ -129,7 +129,7 @@ namespace Threax.AspNetCore.Crud
             {
                 mapper.Map<InputModel, TEntity>(value, entity);
                 await this.dbContext.SaveChangesAsync();
-                return mapper.Map<ViewModel>(entity);
+                return CreateResult(entity);
             }
             throw new KeyNotFoundException($"Cannot find item {id.ToString()}");
         }
@@ -156,14 +156,19 @@ namespace Threax.AspNetCore.Crud
             return dbQuery;
         }
 
+        protected virtual TEntity CreateEntity(InputModel input)
+        {
+            return mapper.Map<TEntity>(input);
+        }
+
         /// <summary>
         /// Customize the mapping to the result by overriding this method.
         /// </summary>
         /// <param name="dbQuery">The query for the entities.</param>
         /// <returns>The query that selects the view model.</returns>
-        protected virtual IQueryable<ViewModel> CreateResultQuery(IQueryable<TEntity> dbQuery)
+        protected virtual ViewModel CreateResult(TEntity entity)
         {
-            return dbQuery.Select(i => mapper.Map<ViewModel>(i));
+            return mapper.Map<ViewModel>(entity);
         }
 
         /// <summary>
