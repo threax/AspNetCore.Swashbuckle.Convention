@@ -35,23 +35,23 @@ htmlrapier.halcyon@>=4.0.2, htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@^6.0.
   dependencies:
     htmlrapier ">=7.0.0"
 
-htmlrapier.json-editor@>=4.1.0, htmlrapier.json-editor@^4.2.0:
+htmlrapier.json-editor@>=4.1.0, htmlrapier.json-editor@>=4.2.0, htmlrapier.json-editor@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/htmlrapier.json-editor/-/htmlrapier.json-editor-4.2.0.tgz#7abd46d372cdd60b9aeb703c44a28163416ee530"
   dependencies:
     htmlrapier ">=5.2.0"
     json-editor "~0.7.28"
 
-htmlrapier.widgets@>=6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-6.0.0.tgz#9038d6c9f562eb7c8ca83a0f8606bdb0d05e0aca"
+htmlrapier.widgets@>=6.0.0, htmlrapier.widgets@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-6.1.0.tgz#29529d989d0e53e6b3bbd225c8b8ef840c24e73d"
   dependencies:
-    htmlrapier ">=7.0.0"
-    htmlrapier.bootstrap ">=4.1.0"
-    htmlrapier.halcyon ">=4.0.2"
-    htmlrapier.json-editor ">=4.1.0"
+    htmlrapier ">=8.0.2"
+    htmlrapier.bootstrap ">=4.2.1"
+    htmlrapier.halcyon ">=6.0.0"
+    htmlrapier.json-editor ">=4.2.0"
 
-htmlrapier@>=4.1.0, htmlrapier@>=5.2.0, htmlrapier@>=7.0.0, htmlrapier@>=8.0.0, htmlrapier@^8.0.2:
+htmlrapier@>=4.1.0, htmlrapier@>=5.2.0, htmlrapier@>=7.0.0, htmlrapier@>=8.0.0, htmlrapier@>=8.0.2, htmlrapier@^8.0.2:
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-8.0.2.tgz#e0d7a8565f4384d2fa07541464f7a473907486f0"
   dependencies:

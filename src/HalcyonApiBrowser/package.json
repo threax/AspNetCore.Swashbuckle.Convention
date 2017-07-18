@@ -6,18 +6,22 @@
     "@types/node": "^6.0.69"
   },
   "dependencies": {
-    "htmlrapier": "^8.0.2",
-    "jsns": "^4.2.2",
-    "htmlrapier.bootstrap": "^4.2.1",
     "bootstrap": "^3.3.7",
-    "htmlrapier.json-editor": "^4.2.0",
+    "htmlrapier": "^8.0.2",
+    "htmlrapier.bootstrap": "^4.2.1",
     "htmlrapier.halcyon": "^6.0.0",
-    "htmlrapier.halcyon-explorer": "^5.0.0"
+    "htmlrapier.halcyon-explorer": "^5.0.0",
+    "htmlrapier.json-editor": "^4.2.0",
+    "htmlrapier.widgets": "^6.1.0",
+    "jsns": "^4.2.2"
   },
   "scripts": {
     "build": "node Build/build.js",
     "yarn-install": "yarn install --flat && yarn link threax-npm-tk",
     "clean": "powershell -Command Remove-Item 'wwwroot\\*' -Recurse -Force",
     "trash-modules": "powershell -Command Remove-Item 'node_modules\\*' -Recurse -Force"
+  },
+  "resolutions": {
+    "htmlrapier.widgets": "6.1.0"
   }
 }
