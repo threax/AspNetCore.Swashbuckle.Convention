@@ -7,60 +7,60 @@
   resolved "https://registry.yarnpkg.com/@types/es6-promise/-/es6-promise-0.0.32.tgz#3bcf44fb1e429f3df76188c8c6d874463ba371fd"
 
 "@types/node@^6.0.69":
-  version "6.0.78"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.78.tgz#5d4a3f579c1524e01ee21bf474e6fba09198f470"
+  version "6.0.85"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.85.tgz#ec02bfe54a61044f2be44f13b389c6a0e8ee05ae"
 
 bootstrap@^3.3.7:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
 
-htmlrapier.bootstrap@>=4.1.0, htmlrapier.bootstrap@>=4.2.1, htmlrapier.bootstrap@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap/-/htmlrapier.bootstrap-4.2.1.tgz#98141adcdcb024cd45ab2e2431eb7c647c5d8069"
+htmlrapier.bootstrap@>=4.2.1, htmlrapier.bootstrap@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap/-/htmlrapier.bootstrap-5.3.0.tgz#97ceb15b895245be2e560855fecf2a3f36e1d653"
   dependencies:
-    htmlrapier ">=4.1.0"
+    htmlrapier ">=8.1.0"
 
-htmlrapier.halcyon-explorer@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.halcyon-explorer/-/htmlrapier.halcyon-explorer-5.0.0.tgz#971fa6f7ee2d9c17138a54669c7b36d196f14a48"
+htmlrapier.halcyon-explorer@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/htmlrapier.halcyon-explorer/-/htmlrapier.halcyon-explorer-5.0.1.tgz#b8a837e411db28d70feee54deabeb676483a6092"
   dependencies:
     htmlrapier ">=8.0.0"
     htmlrapier.bootstrap ">=4.2.1"
     htmlrapier.halcyon ">=6.0.0"
     htmlrapier.widgets ">=6.0.0"
 
-htmlrapier.halcyon@>=4.0.2, htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.halcyon/-/htmlrapier.halcyon-6.0.0.tgz#319a340352eaad8d3a5f2d34770c0d9030cc0030"
+htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@>=6.0.1, htmlrapier.halcyon@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/htmlrapier.halcyon/-/htmlrapier.halcyon-6.0.1.tgz#03b46fcf484dd10ad25d35627225b58da4ee936d"
   dependencies:
     htmlrapier ">=7.0.0"
 
-htmlrapier.json-editor@>=4.1.0, htmlrapier.json-editor@>=4.2.0, htmlrapier.json-editor@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.json-editor/-/htmlrapier.json-editor-4.2.0.tgz#7abd46d372cdd60b9aeb703c44a28163416ee530"
+htmlrapier.json-editor@>=4.2.1, htmlrapier.json-editor@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/htmlrapier.json-editor/-/htmlrapier.json-editor-4.2.1.tgz#4c04062dbe172d3739bc0c96453efef69d4d8392"
   dependencies:
     htmlrapier ">=5.2.0"
     json-editor "~0.7.28"
 
-htmlrapier.widgets@>=6.0.0, htmlrapier.widgets@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-6.1.0.tgz#29529d989d0e53e6b3bbd225c8b8ef840c24e73d"
+htmlrapier.widgets@>=6.0.0, htmlrapier.widgets@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier.widgets/-/htmlrapier.widgets-7.1.0.tgz#98f59b8eee9435a1d03535a3722c14d27e92dcec"
   dependencies:
     htmlrapier ">=8.0.2"
     htmlrapier.bootstrap ">=4.2.1"
-    htmlrapier.halcyon ">=6.0.0"
-    htmlrapier.json-editor ">=4.2.0"
+    htmlrapier.halcyon ">=6.0.1"
+    htmlrapier.json-editor ">=4.2.1"
 
-htmlrapier@>=4.1.0, htmlrapier@>=5.2.0, htmlrapier@>=7.0.0, htmlrapier@>=8.0.0, htmlrapier@>=8.0.2, htmlrapier@^8.0.2:
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-8.0.2.tgz#e0d7a8565f4384d2fa07541464f7a473907486f0"
+htmlrapier@>=5.2.0, htmlrapier@>=7.0.0, htmlrapier@>=8.0.0, htmlrapier@>=8.0.2, htmlrapier@>=8.1.0, htmlrapier@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-9.0.0.tgz#4a499907cc17c71874a97be509eb17435e0f8bb3"
   dependencies:
     "@types/es6-promise" "^0.0.32"
     tslib "^1.6.1"
 
-jsns@^4.2.2:
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/jsns/-/jsns-4.2.2.tgz#1e3bd502322adb49e1d80e109be1f1fa972184fb"
+jsns@^4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/jsns/-/jsns-4.2.3.tgz#5a1857d3a2f4935b5475716b91676a82e87de0a7"
 
 json-editor@~0.7.28:
   version "0.7.28"
