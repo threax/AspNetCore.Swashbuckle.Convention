@@ -11,9 +11,7 @@
     "htmlrapier.bootstrap": "^5.3.0",
     "htmlrapier.halcyon": "^6.0.1",
     "htmlrapier.halcyon-explorer": "^5.0.1",
-    "htmlrapier.json-editor": "^4.2.1",
-    "htmlrapier.widgets": "^7.1.0",
-    "jsns": "^4.2.3"
+    "jsns": "^5.0.0"
   },
   "scripts": {
     "build": "node Build/build.js",
@@ -21,8 +19,5 @@
     "clean": "powershell -Command Remove-Item 'wwwroot\\*' -Recurse -Force",
     "trash-modules": "powershell -Command Remove-Item 'node_modules\\*' -Recurse -Force",
     "import-tsconfig": "node node_modules\\threax-npm-tk\\tsimport.js"
-  },
-  "resolutions": {
-    "htmlrapier.widgets": "6.1.0"
   }
 }

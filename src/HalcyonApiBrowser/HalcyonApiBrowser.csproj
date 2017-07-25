@@ -13,6 +13,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\site\**" />
+    <Content Remove="wwwroot\site\**" />
+    <EmbeddedResource Remove="wwwroot\site\**" />
+    <None Remove="wwwroot\site\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Views\**\*;Areas\**\Views">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>

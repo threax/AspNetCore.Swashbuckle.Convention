@@ -4,14 +4,12 @@
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "allowJs": true,
     "target": "es5",
     "outDir": "obj/tscout/lib",
     "outFile": "wwwroot/lib/tsbin.js",
     "module": "amd",
     "baseUrl": ".",
     "noEmitHelpers": true,
-    "importHelpers": true,
     "moduleResolution": "node",
     "paths": {
       "clientlibs.*": [
@@ -25,9 +23,6 @@
       ],
       "hr.halcyon.*": [
         "node_modules\\htmlrapier.halcyon\\src\\*"
-      ],
-      "jdorn.*": [
-        "node_modules\\htmlrapier.json-editor\\*"
       ],
       "hr.widgets.*": [
         "node_modules\\htmlrapier.widgets\\src\\*"
@@ -47,14 +42,10 @@
     "node_modules\\htmlrapier.widgets\\src\\**\\*.ts",
     "node_modules\\htmlrapier\\src\\**\\*.ts"
   ],
-  "files": [
-    "node_modules\\jsns\\jsns.ts",
-    "node_modules\\htmlrapier.bootstrap\\hr.bootstrap.js",
-    "node_modules\\htmlrapier.json-editor\\bin\\json-editor.js",
-    "node_modules\\htmlrapier\\src\\polyfill.js",
-    "node_modules\\jsns\\tslib.jsns.js"
-  ],
   "exclude": [
     "node_modules\\threax-npm-tk\\**\\*.js"
+  ],
+  "files": [
+    "node_modules\\jsns\\jsns.ts"
   ]
 }

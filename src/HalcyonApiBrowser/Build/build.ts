@@ -2,6 +2,7 @@
 import * as less from 'threax-npm-tk/less';
 import { tsc } from 'threax-npm-tk/typescript';
 import * as jsnsTools from 'threax-npm-tk/jsnstools';
+import * as artifact from 'threax-npm-tk/artifacts';
 
 var filesDir = __dirname + "/..";
 
@@ -21,6 +22,7 @@ export function build(outDir, iconOutPath, moduleDir): Promise<any> {
     }));
 
     promises.push(compileTypescript());
+    artifact.importConfigs(filesDir, filesDir + "/wwwroot", [filesDir + '/artifacts.json', artifact.getDefaultGlob(filesDir)]);
 
     //Return composite promise
     return Promise.all(promises);

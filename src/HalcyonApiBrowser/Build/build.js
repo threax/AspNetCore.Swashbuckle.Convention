@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var less = require("threax-npm-tk/less");
 var typescript_1 = require("threax-npm-tk/typescript");
+var artifact = require("threax-npm-tk/artifacts");
 var filesDir = __dirname + "/..";
 build(filesDir + "/wwwroot", filesDir + "/wwwroot", filesDir + "/node_modules");
 function build(outDir, iconOutPath, moduleDir) {
@@ -51,6 +52,7 @@ function build(outDir, iconOutPath, moduleDir) {
         compress: true,
     }));
     promises.push(compileTypescript());
+    artifact.importConfigs(filesDir, filesDir + "/wwwroot", [filesDir + '/artifacts.json', artifact.getDefaultGlob(filesDir)]);
     //Return composite promise
     return Promise.all(promises);
 }

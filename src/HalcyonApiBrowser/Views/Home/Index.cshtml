@@ -39,11 +39,8 @@
 <template data-hr-variant="form">
     <li class="list-group-item">
         <h2>{{rel}}</h2>
-        <form data-hr-on-submit="submit" data-hr-model="requestData">
-            <div data-hr-handle="editorHolder"></div>
-            <div>
-                <button class="btn btn-default" type="submit">{{rel}}</button>
-            </div>
+        <form data-hr-on-submit="submit" data-hr-form="form">
+            <button class="btn btn-default" type="submit" data-hr-form-end>{{rel}}</button>
         </form>
     </li>
 </template>
