@@ -22,7 +22,7 @@ export function build(outDir, iconOutPath, moduleDir): Promise<any> {
     }));
 
     promises.push(compileTypescript());
-    artifact.importConfigs(filesDir, filesDir + "/wwwroot", [filesDir + '/artifacts.json', artifact.getDefaultGlob(filesDir)]);
+    promises.push(artifact.importConfigs(filesDir, filesDir + "/wwwroot", [filesDir + '/artifacts.json', artifact.getDefaultGlob(filesDir)]));
 
     //Return composite promise
     return Promise.all(promises);

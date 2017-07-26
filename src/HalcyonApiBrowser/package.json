@@ -7,10 +7,10 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "htmlrapier": "^9.0.0",
-    "htmlrapier.bootstrap": "^5.3.0",
+    "htmlrapier": "^10.0.0",
+    "htmlrapier.bootstrap": "^6.0.0",
     "htmlrapier.halcyon": "^6.0.1",
-    "htmlrapier.halcyon-explorer": "^5.0.1",
+    "htmlrapier.halcyon-explorer": "^6.0.0",
     "jsns": "^5.0.0"
   },
   "scripts": {

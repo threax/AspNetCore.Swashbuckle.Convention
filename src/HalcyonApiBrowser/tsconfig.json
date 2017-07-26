@@ -24,9 +24,6 @@
       "hr.halcyon.*": [
         "node_modules\\htmlrapier.halcyon\\src\\*"
       ],
-      "hr.widgets.*": [
-        "node_modules\\htmlrapier.widgets\\src\\*"
-      ],
       "hr.*": [
         "node_modules\\htmlrapier\\src\\*"
       ]
@@ -39,7 +36,6 @@
     "node_modules\\htmlrapier.bootstrap\\src\\**\\*.ts",
     "node_modules\\htmlrapier.halcyon-explorer\\src\\**\\*.ts",
     "node_modules\\htmlrapier.halcyon\\src\\**\\*.ts",
-    "node_modules\\htmlrapier.widgets\\src\\**\\*.ts",
     "node_modules\\htmlrapier\\src\\**\\*.ts"
   ],
   "exclude": [
