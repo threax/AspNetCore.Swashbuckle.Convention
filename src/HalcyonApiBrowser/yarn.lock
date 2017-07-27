@@ -15,29 +15,29 @@ bootstrap@>=3.3.7, bootstrap@^3.3.7:
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
 
 htmlrapier.bootstrap@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap/-/htmlrapier.bootstrap-6.0.0.tgz#e079e82f949a116a2d6ada5359e10dbd77c6f1f2"
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap/-/htmlrapier.bootstrap-6.0.1.tgz#584b599d4801d43c81bb9ba1dc8a5f72c07f5fba"
   dependencies:
     bootstrap ">=3.3.7"
     htmlrapier ">=8.1.0"
     jquery "^3.2.1"
 
-htmlrapier.halcyon-explorer@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier.halcyon-explorer/-/htmlrapier.halcyon-explorer-6.0.0.tgz#48d46709c768725ca6fd36da2bb9ce597f38cccd"
+htmlrapier.halcyon-explorer@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/htmlrapier.halcyon-explorer/-/htmlrapier.halcyon-explorer-6.0.1.tgz#53352f9e9e461a2d15d325549b92397e920373ac"
   dependencies:
     htmlrapier ">=9.0.0"
     htmlrapier.halcyon ">=6.0.0"
 
-htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/htmlrapier.halcyon/-/htmlrapier.halcyon-6.0.1.tgz#03b46fcf484dd10ad25d35627225b58da4ee936d"
+htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/htmlrapier.halcyon/-/htmlrapier.halcyon-6.0.2.tgz#d14ffab0360d033c2597a00fb0fac87b2fbb19cc"
   dependencies:
-    htmlrapier ">=7.0.0"
+    htmlrapier ">=10.0.2"
 
-htmlrapier@>=7.0.0, htmlrapier@>=8.1.0, htmlrapier@>=9.0.0, htmlrapier@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-10.0.0.tgz#8c6fa47b8678a37e457f0708a552f9b3a14e1e84"
+htmlrapier@>=10.0.2, htmlrapier@>=8.1.0, htmlrapier@>=9.0.0, htmlrapier@^10.0.2:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-10.0.2.tgz#b0a4bfb61f072dfb1826aa98556cef6baeb83d21"
   dependencies:
     "@types/es6-promise" "^0.0.32"
     tslib "^1.6.1"
