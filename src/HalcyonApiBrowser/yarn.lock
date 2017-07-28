@@ -15,8 +15,8 @@ bootstrap@>=3.3.7, bootstrap@^3.3.7:
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
 
 htmlrapier.bootstrap@^6.0.0:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap/-/htmlrapier.bootstrap-6.0.1.tgz#584b599d4801d43c81bb9ba1dc8a5f72c07f5fba"
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap/-/htmlrapier.bootstrap-6.0.2.tgz#475f7cb06c0a20bc9b4c02fd5841debb90a1c7f7"
   dependencies:
     bootstrap ">=3.3.7"
     htmlrapier ">=8.1.0"
@@ -35,9 +35,9 @@ htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@^6.0.2:
   dependencies:
     htmlrapier ">=10.0.2"
 
-htmlrapier@>=10.0.2, htmlrapier@>=8.1.0, htmlrapier@>=9.0.0, htmlrapier@^10.0.2:
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-10.0.2.tgz#b0a4bfb61f072dfb1826aa98556cef6baeb83d21"
+htmlrapier@>=10.0.2, htmlrapier@>=8.1.0, htmlrapier@>=9.0.0, htmlrapier@^10.3.0:
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-10.3.0.tgz#661a3676bc98bd03633808a1838f6f14b3e98b0f"
   dependencies:
     "@types/es6-promise" "^0.0.32"
     tslib "^1.6.1"

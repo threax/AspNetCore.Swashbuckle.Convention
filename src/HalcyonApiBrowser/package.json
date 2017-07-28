@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "htmlrapier": "^10.0.2",
+    "htmlrapier": "^10.3.0",
     "htmlrapier.bootstrap": "^6.0.0",
     "htmlrapier.halcyon": "^6.0.2",
     "htmlrapier.halcyon-explorer": "^6.0.1",
@@ -20,8 +20,5 @@
     "trash-modules": "powershell -Command Remove-Item 'node_modules\\*' -Recurse -Force",
     "import-tsconfig": "node node_modules\\threax-npm-tk\\tsimport.js",
     "yarn-upgrade": "yarn upgrade --flat"
-  },
-  "resolutions": {
-    "htmlrapier": "10.0.1"
   }
 }

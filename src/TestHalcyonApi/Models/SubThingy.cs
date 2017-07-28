@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace TestHalcyonApi.Models
@@ -20,16 +21,22 @@ namespace TestHalcyonApi.Models
 
     public class SubThingy
     {
+        [UiOrder]
         public int SubThingyId { get; set; }
 
+        [UiOrder]
         public decimal Amount { get; set; }
 
+        [UiOrder]
         public int ThingyId { get; set; }
 
+        [UiOrder]
         public TestEnum EnumTest { get; set; }
 
+        [UiOrder]
         public TestEnum? EnumTestNullable { get; set; }
 
+        [UiOrder]
         [NullEnumLabel("Relabeled")]
         public TestEnum? EnumTestNullableRelabel { get; set; }
     }
