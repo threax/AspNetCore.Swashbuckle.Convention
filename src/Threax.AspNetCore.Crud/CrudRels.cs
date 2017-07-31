@@ -22,6 +22,11 @@ namespace Threax.AspNetCore.Crud
         public const String List = "List";
 
         /// <summary>
+        /// The name of the get function.
+        /// </summary>
+        public const String Get = "Get";
+
+        /// <summary>
         /// The name of the update function.
         /// </summary>
         public const String Update = "Update";
