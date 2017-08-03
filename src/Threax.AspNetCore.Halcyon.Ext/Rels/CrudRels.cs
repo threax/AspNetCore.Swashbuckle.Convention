@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Threax.AspNetCore.Crud
+namespace Threax.AspNetCore.Halcyon.Ext
 {
     /// <summary>
     /// These rels are the common rels that the crud table clients expect to find. These
