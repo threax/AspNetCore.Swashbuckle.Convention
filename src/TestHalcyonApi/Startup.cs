@@ -17,6 +17,7 @@ using System.Reflection;
 using NJsonSchema.Generation.TypeMappers;
 using TestHalcyonApi.ViewModels;
 using TestHalcyonApi.ValueProviders;
+using TestHalcyonApi.Customizers;
 
 namespace TestHalcyonApi
 {
@@ -45,6 +46,7 @@ namespace TestHalcyonApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<OtherWeirdThingProvider, OtherWeirdThingProvider>();
+            services.AddScoped<PointlessSchemaCustomizer>();
 
             //Client generator test
             services.AddHalClientGen(new HalClientGenOptions()
