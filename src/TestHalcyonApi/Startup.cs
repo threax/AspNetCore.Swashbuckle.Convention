@@ -62,10 +62,14 @@ namespace TestHalcyonApi
 
             services.AddConventionalHalcyon(halOptions);
             services.UseAppDatabase();
+            services.AddExceptionErrorFilters(new ExceptionFilterOptions()
+            {
+                DetailedErrors = isDev
+            });
 
             services.AddMvc(o =>
             {
-                o.UseExceptionErrorFilters(isDev);
+                o.UseExceptionErrorFilters();
                 o.UseConventionalHalcyon(halOptions);
             })
             .AddJsonOptions(o =>
