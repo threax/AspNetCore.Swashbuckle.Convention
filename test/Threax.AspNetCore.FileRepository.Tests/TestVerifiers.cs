@@ -9,55 +9,55 @@ namespace Threax.AspNetCore.FileRepository.Tests
         [Fact]
         public void Pdf()
         {
-            TestVerifier("TestFiles/Pdf.pdf", FileVerifierFactory.CreatePdfVerifier(), FileVerifierFactory.PdfMimeType);
+            TestVerifier("TestFiles/Pdf.pdf", new FileVerifier().AddPdf(), FileVerifierFactory.PdfMimeType);
         }
 
         [Fact]
         public void Docx()
         {
-            TestVerifier("TestFiles/Docx.docx", FileVerifierFactory.CreateDocxVerifier(), FileVerifierFactory.DocxMimeType);
+            TestVerifier("TestFiles/Docx.docx", new FileVerifier().AddDocx(), FileVerifierFactory.DocxMimeType);
         }
 
         [Fact]
         public void Xlsx()
         {
-            TestVerifier("TestFiles/Xlsx.xlsx", FileVerifierFactory.CreateXlsxVerifier(), FileVerifierFactory.XlsxMimeType);
+            TestVerifier("TestFiles/Xlsx.xlsx", new FileVerifier().AddXlsx(), FileVerifierFactory.XlsxMimeType);
         }
 
         [Fact]
         public void Pptx()
         {
-            TestVerifier("TestFiles/Pptx.pptx", FileVerifierFactory.CreatePptxVerifier(), FileVerifierFactory.PptxMimeType);
+            TestVerifier("TestFiles/Pptx.pptx", new FileVerifier().AddPptx(), FileVerifierFactory.PptxMimeType);
         }
 
         [Fact]
         public void Doc()
         {
-            TestVerifier("TestFiles/Doc.doc", FileVerifierFactory.CreateDocVerifier(), FileVerifierFactory.DocMimeType);
+            TestVerifier("TestFiles/Doc.doc", new FileVerifier().AddDoc(), FileVerifierFactory.DocMimeType);
         }
 
         [Fact]
         public void Xls()
         {
-            TestVerifier("TestFiles/Xls.xls", FileVerifierFactory.CreateXlsVerifier(), FileVerifierFactory.XlsMimeType);
+            TestVerifier("TestFiles/Xls.xls", new FileVerifier().AddXls(), FileVerifierFactory.XlsMimeType);
         }
 
         [Fact]
         public void Ppt()
         {
-            TestVerifier("TestFiles/Ppt.ppt", FileVerifierFactory.CreatePptVerifier(), FileVerifierFactory.PptMimeType);
+            TestVerifier("TestFiles/Ppt.ppt", new FileVerifier().AddPpt(), FileVerifierFactory.PptMimeType);
         }
 
         [Fact]
         public void Mismatch()
         {
             var file = "TestFiles/Ppt.ppt";
-            var verifier = FileVerifierFactory.CreateXlsVerifier();
+            var verifier = new FileVerifier().AddXls();
             var mimeType = FileVerifierFactory.PptMimeType;
 
             using (var stream = File.Open(file, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                Assert.False(verifier.IsValid(stream, file, mimeType), $"{file} validated as a .xls when it shouldn't have.");
+                Assert.ThrowsAny<Exception>(new Action(() => verifier.Validate(stream, file, mimeType)));
             }
         }
 
@@ -65,7 +65,7 @@ namespace Threax.AspNetCore.FileRepository.Tests
         {
             using (var stream = File.Open(file, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                Assert.True(verifier.IsValid(stream, file, mimeType), $"{file} did not validate as a {Path.GetExtension(file)}");
+                verifier.Validate(stream, file, mimeType);
             }
         }
     }
