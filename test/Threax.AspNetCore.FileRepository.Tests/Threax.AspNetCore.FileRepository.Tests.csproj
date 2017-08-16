@@ -31,6 +31,9 @@
     <None Update="TestFiles\Pdf.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="TestFiles\PhpTest.php.doc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="TestFiles\Ppt.ppt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
