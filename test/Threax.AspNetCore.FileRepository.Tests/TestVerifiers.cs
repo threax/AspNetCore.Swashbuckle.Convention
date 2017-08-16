@@ -52,9 +52,9 @@ namespace Threax.AspNetCore.FileRepository.Tests
         [Fact]
         public void Mismatch()
         {
-            var file = "TestFiles/Ppt.ppt";
-            var verifier = new FileVerifier().AddXls();
-            var mimeType = FileVerifierFactory.PptMimeType;
+            var file = "TestFiles/EvilPdf.pdf";
+            var verifier = new FileVerifier().AddPdf();
+            var mimeType = FileVerifierFactory.PdfMimeType;
 
             using (var stream = File.Open(file, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
