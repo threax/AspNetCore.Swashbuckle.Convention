@@ -34,5 +34,15 @@ namespace TestHalcyonApi.Controllers
                 return Content(writer.ToString());
             }
         }
+
+        [HttpGet("[action]")]
+        public IActionResult CSharp([FromServices] CSharpClientWriter clientWriter)
+        {
+            using (var writer = new StringWriter())
+            {
+                clientWriter.CreateClient(writer);
+                return Content(writer.ToString());
+            }
+        }
     }
 }
