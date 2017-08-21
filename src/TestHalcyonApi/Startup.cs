@@ -51,7 +51,11 @@ namespace TestHalcyonApi
             //Client generator test
             services.AddHalClientGen(new HalClientGenOptions()
             {
-                SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly }
+                SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly },
+                CSharp = new CSharpOptions()
+                {
+                    Namespace = "TestHalcyonApi.ServiceClient"
+                }
             });
 
             var halOptions = new HalcyonConventionOptions()
