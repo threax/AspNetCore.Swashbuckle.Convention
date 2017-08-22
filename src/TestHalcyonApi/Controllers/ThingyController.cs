@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 using Threax.AspNetCore.Halcyon.Ext;
 using TestHalcyonApi.ViewModels;
 using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace HateoasTest.Controllers
 {
@@ -222,7 +223,10 @@ namespace HateoasTest.Controllers
         [HalRel(Rels.ReturnActionResult)]
         public FileStreamResult ReturnActionResult(String path)
         {
-            throw new NotImplementedException();
+            var writer = new StreamWriter(new MemoryStream());
+            writer.Write("This is a raw string");
+            writer.BaseStream.Seek(0, SeekOrigin.Begin);
+            return new FileStreamResult(writer.BaseStream, "text/plain");
         }
     }
 }
