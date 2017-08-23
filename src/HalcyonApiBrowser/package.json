@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "htmlrapier": "^10.3.0",
-    "htmlrapier.bootstrap": "^6.0.0",
+    "htmlrapier": "^12.1.0",
+    "htmlrapier.bootstrap": "^6.0.4",
     "htmlrapier.halcyon": "^6.0.2",
     "htmlrapier.halcyon-explorer": "^6.0.1",
     "jsns": "^5.0.0"

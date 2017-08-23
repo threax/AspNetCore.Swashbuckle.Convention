@@ -7,20 +7,20 @@
   resolved "https://registry.yarnpkg.com/@types/es6-promise/-/es6-promise-0.0.32.tgz#3bcf44fb1e429f3df76188c8c6d874463ba371fd"
 
 "@types/node@^6.0.69":
-  version "6.0.85"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.85.tgz#ec02bfe54a61044f2be44f13b389c6a0e8ee05ae"
+  version "6.0.87"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.87.tgz#5ab5774f8351a33a935099fa6be850aa0b0ad564"
 
 bootstrap@>=3.3.7, bootstrap@^3.3.7:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
 
-htmlrapier.bootstrap@^6.0.0:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap/-/htmlrapier.bootstrap-6.0.2.tgz#475f7cb06c0a20bc9b4c02fd5841debb90a1c7f7"
+htmlrapier.bootstrap@^6.0.4:
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/htmlrapier.bootstrap/-/htmlrapier.bootstrap-6.0.4.tgz#8687526023a12441508336a03a8c7b657e1eebc7"
   dependencies:
     bootstrap ">=3.3.7"
     htmlrapier ">=8.1.0"
-    jquery "^3.2.1"
+    jquery ">=3.2.1"
 
 htmlrapier.halcyon-explorer@^6.0.1:
   version "6.0.1"
@@ -35,14 +35,14 @@ htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@^6.0.2:
   dependencies:
     htmlrapier ">=10.0.2"
 
-htmlrapier@>=10.0.2, htmlrapier@>=8.1.0, htmlrapier@>=9.0.0, htmlrapier@^10.3.0:
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-10.3.0.tgz#661a3676bc98bd03633808a1838f6f14b3e98b0f"
+htmlrapier@>=10.0.2, htmlrapier@>=8.1.0, htmlrapier@>=9.0.0, htmlrapier@^12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-12.1.0.tgz#64ba92cb41224031d1086a60b1ff647fda54c96c"
   dependencies:
     "@types/es6-promise" "^0.0.32"
     tslib "^1.6.1"
 
-jquery@^3.2.1:
+jquery@>=3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
