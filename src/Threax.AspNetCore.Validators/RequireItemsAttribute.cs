@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Threax.AspNetCore.ExceptionFilter
+namespace Threax.AspNetCore.Validators
 {
     /// <summary>
     /// This attribute marks that an item must contain items. Supports
@@ -29,10 +29,10 @@ namespace Threax.AspNetCore.ExceptionFilter
         /// <returns></returns>
         public override bool IsValid(object value)
         {
-            var dictionary = value as ICollection;
-            if(dictionary != null)
+            var collection = value as ICollection;
+            if(collection != null)
             {
-                return dictionary.Count > 0;
+                return collection.Count > 0;
             }
             return false;
         }
