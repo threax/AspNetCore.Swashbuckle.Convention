@@ -8,7 +8,7 @@ using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace TestHalcyonApi.Models
 {
-    [NullEnumLabel("None")]
+    [NullValueLabel("None")]
     public enum TestEnum
     {
         [Display(Name = "Test Value 1")]
@@ -37,7 +37,7 @@ namespace TestHalcyonApi.Models
         public TestEnum? EnumTestNullable { get; set; }
 
         [UiOrder]
-        [NullEnumLabel("Relabeled")]
+        [NullValueLabel("Relabeled")]
         public TestEnum? EnumTestNullableRelabel { get; set; }
     }
 }
