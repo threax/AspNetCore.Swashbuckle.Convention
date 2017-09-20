@@ -16,6 +16,7 @@ using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 using TestHalcyonApi.ValueProviders;
 using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 using TestHalcyonApi.Customizers;
+using System.ComponentModel.DataAnnotations;
 
 namespace TestHalcyonApi.ViewModels
 {
@@ -31,6 +32,12 @@ namespace TestHalcyonApi.ViewModels
         [ValueProviderAttribute(typeof(OtherWeirdThingProvider))]
         [SelectUiType]
         [CustomizeSchema(typeof(PointlessSchemaCustomizer))]
+        [Required]
         public Guid OtherWeirdThing { get; set; }
+
+        [ValueProviderAttribute(typeof(OtherWeirdThingProvider))]
+        [SelectUiType]
+        [CustomizeSchema(typeof(PointlessSchemaCustomizer))]
+        public Guid OtherWeirdThingNullable { get; set; }
     }
 }
