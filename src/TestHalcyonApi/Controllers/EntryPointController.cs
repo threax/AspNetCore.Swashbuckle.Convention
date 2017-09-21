@@ -19,7 +19,7 @@ namespace TestHalcyonApi.Controllers
 
         [HttpGet]
         [HalRel(Rels.Get)]
-        public EntryPoints List()
+        public EntryPoints Get()
         {
             return new EntryPoints();
         }

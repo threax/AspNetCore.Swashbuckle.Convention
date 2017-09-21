@@ -11,17 +11,17 @@ namespace TestHalcyonApi.ViewModels
 {
     [HalModel]
     [HalEntryPoint]
-    [HalSelfActionLink(EntryPointController.Rels.Get, typeof(EntryPointController))]
-    [HalActionLink(ThingyController.Rels.List, typeof(ThingyController))]
-    [HalActionLink(ThingyController.Rels.Add, typeof(ThingyController))]
-    [HalActionLink(MultipartInputController.Rels.BeginAddMultipart, MultipartInputController.Rels.GetPart1, typeof(MultipartInputController))] //Here we bind a rel always named BeginAddMultipart to the real first step, this way we can alter the first step without changing the ui code.
-    [HalActionLink(ThingyController.Rels.Update, typeof(ThingyController), DocsOnly = true)] //Test out sending only docs for the thingy update, this kind of thing is useful if you have a crud table that does not allow adds
-    [HalActionLink(ThingyController.Rels.TestTakeListInput, typeof(ThingyController))]
-    [HalActionLink(ThingyController.Rels.FileInput, typeof(ThingyController))]
-    [HalActionLink(ThingyController.Rels.FileInputMultiple, typeof(ThingyController))]
-    [HalActionLink(ThingyController.Rels.FileInputQuery, typeof(ThingyController))]
-    [HalActionLink(ThingyController.Rels.FileInputMultipleQuery, typeof(ThingyController))]
-    [HalActionLink(ThingyController.Rels.ReturnActionResult, typeof(ThingyController))]
+    [HalSelfActionLink(typeof(EntryPointController), nameof(EntryPointController.Get))]
+    [HalActionLink(typeof(ThingyController), nameof(ThingyController.List))]
+    [HalActionLink(typeof(ThingyController), nameof(ThingyController.Add))]
+    [HalActionLink(MultipartInputController.Rels.BeginAddMultipart, typeof(MultipartInputController), nameof(MultipartInputController.GetPart1))] //Here we bind a rel always named BeginAddMultipart to the real first step, this way we can alter the first step without changing the ui code.
+    [HalActionLink(typeof(ThingyController), nameof(ThingyController.Update), DocsOnly = true)] //Test out sending only docs for the thingy update, this kind of thing is useful if you have a crud table that does not allow adds
+    [HalActionLink(typeof(ThingyController), nameof(ThingyController.TestTakeListInput))]
+    [HalActionLink(typeof(ThingyController), nameof(ThingyController.FileInput))]
+    [HalActionLink(typeof(ThingyController), nameof(ThingyController.FileInputMultiple))]
+    [HalActionLink(typeof(ThingyController), nameof(ThingyController.FileInputQuery))]
+    [HalActionLink(typeof(ThingyController), nameof(ThingyController.FileInputMultipleQuery))]
+    [HalActionLink(typeof(ThingyController), nameof(ThingyController.ReturnActionResult))]
     public class EntryPoints
     {
     }
