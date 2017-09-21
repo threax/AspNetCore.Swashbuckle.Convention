@@ -14,7 +14,7 @@ namespace TestHalcyonApi.ViewModels
     [HalSelfActionLink(typeof(EntryPointController), nameof(EntryPointController.Get))]
     [HalActionLink(typeof(ThingyController), nameof(ThingyController.List))]
     [HalActionLink(typeof(ThingyController), nameof(ThingyController.Add))]
-    [HalActionLink(MultipartInputController.Rels.BeginAddMultipart, typeof(MultipartInputController), nameof(MultipartInputController.GetPart1))] //Here we bind a rel always named BeginAddMultipart to the real first step, this way we can alter the first step without changing the ui code.
+    [HalActionLink(typeof(MultipartInputController), nameof(MultipartInputController.GetPart1), MultipartInputController.Rels.BeginAddMultipart)] //Here we bind a rel always named BeginAddMultipart to the real first step, this way we can alter the first step without changing the ui code.
     [HalActionLink(typeof(ThingyController), nameof(ThingyController.Update), DocsOnly = true)] //Test out sending only docs for the thingy update, this kind of thing is useful if you have a crud table that does not allow adds
     [HalActionLink(typeof(ThingyController), nameof(ThingyController.TestTakeListInput))]
     [HalActionLink(typeof(ThingyController), nameof(ThingyController.FileInput))]

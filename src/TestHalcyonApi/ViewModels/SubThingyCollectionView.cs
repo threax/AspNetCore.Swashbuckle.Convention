@@ -10,8 +10,8 @@ using Threax.AspNetCore.Halcyon.Ext;
 namespace TestHalcyonApi.ViewModels
 {
     [HalModel]
-    [HalSelfActionLink(SubThingyController.Rels.List, typeof(SubThingyController))]
-    [HalActionLink(SubThingyController.Rels.List, typeof(SubThingyController))]
+    [HalSelfActionLink(typeof(SubThingyController), nameof(SubThingyController.List))]
+    [HalActionLink(typeof(SubThingyController), nameof(SubThingyController.List))]
     //[DeclareHalLink(PagedCollectionView<Object>.Rels.Next, SubThingyController.Rels.List, typeof(SubThingyController), ResponseOnly = true)]
     //[DeclareHalLink(PagedCollectionView<Object>.Rels.Previous, SubThingyController.Rels.List, typeof(SubThingyController), ResponseOnly = true)]
     //[DeclareHalLink(PagedCollectionView<Object>.Rels.First, SubThingyController.Rels.List, typeof(SubThingyController), ResponseOnly = true)]

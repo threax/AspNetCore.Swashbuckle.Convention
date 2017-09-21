@@ -21,12 +21,12 @@ using System.ComponentModel.DataAnnotations;
 namespace TestHalcyonApi.ViewModels
 {
     [HalModel]
-    [HalSelfActionLink(SubThingyController.Rels.Get, typeof(SubThingyController))]
-    [HalActionLink(SubThingyController.Rels.List, typeof(SubThingyController))]
-    [HalActionLink(SubThingyController.Rels.Update, typeof(SubThingyController))]
-    [HalActionLink(SubThingyController.Rels.Delete, typeof(SubThingyController))]
-    [HalActionLink(SubThingyController.Rels.Get, typeof(SubThingyController))]
-    [HalActionLink(ThingyController.Rels.Get, typeof(ThingyController))]
+    [HalSelfActionLink(typeof(SubThingyController), nameof(SubThingyController.Get))]
+    [HalActionLink(typeof(SubThingyController), nameof(SubThingyController.List))]
+    [HalActionLink(typeof(SubThingyController), nameof(SubThingyController.Update))]
+    [HalActionLink(typeof(SubThingyController), nameof(SubThingyController.Delete))]
+    [HalActionLink(typeof(SubThingyController), nameof(SubThingyController.Get))]
+    [HalActionLink(typeof(ThingyController), nameof(ThingyController.Get))]
     public class SubThingyView : SubThingy
     {
         [ValueProviderAttribute(typeof(OtherWeirdThingProvider))]

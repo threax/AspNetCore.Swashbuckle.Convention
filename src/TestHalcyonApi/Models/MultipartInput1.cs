@@ -25,8 +25,8 @@ namespace TestHalcyonApi.Models
     /// </summary>
     [HalModel]
     [DeclareHalLink("previous", MultipartInputController.Rels.GetPart1, typeof(MultipartInputController))] //Declare a previous link bound to this class, but this will never generate at runtime
-    [HalActionLink("next", MultipartInputController.Rels.GetPart2, typeof(MultipartInputController))]
-    [HalActionLink("save", MultipartInputController.Rels.SetPart1, typeof(MultipartInputController))]
+    [HalActionLink(typeof(MultipartInputController), nameof(MultipartInputController.GetPart2), "next")]
+    [HalActionLink(typeof(MultipartInputController), nameof(MultipartInputController.SetPart1), "save")]
     public class MultipartInput1
     {
         /// <summary>

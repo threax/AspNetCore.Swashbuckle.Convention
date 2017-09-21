@@ -13,10 +13,10 @@ namespace TestHalcyonApi.ViewModels
     [HalSelfActionLink(ThingyController.Rels.List, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.List, typeof(ThingyController))]
     [HalActionLink(ThingyController.Rels.Add, typeof(ThingyController))]
-    [DeclareHalLink(PagedCollectionView<Object>.Rels.Next, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
-    [DeclareHalLink(PagedCollectionView<Object>.Rels.Previous, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
-    [DeclareHalLink(PagedCollectionView<Object>.Rels.First, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
-    [DeclareHalLink(PagedCollectionView<Object>.Rels.Last, ThingyController.Rels.List, typeof(ThingyController), ResponseOnly = true)]
+    [DeclareHalLink(typeof(ThingyController), nameof(ThingyController.List), PagedCollectionView<Object>.Rels.Next, ResponseOnly = true)]
+    [DeclareHalLink(typeof(ThingyController), nameof(ThingyController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]
+    [DeclareHalLink(typeof(ThingyController), nameof(ThingyController.List), PagedCollectionView<Object>.Rels.First, ResponseOnly = true)]
+    [DeclareHalLink(typeof(ThingyController), nameof(ThingyController.List), PagedCollectionView<Object>.Rels.Last, ResponseOnly = true)]
     public class ThingyCollectionView : PagedCollectionView<ThingyView>
     {
         public ThingyCollectionView(PagedCollectionQuery query, int total, IEnumerable<ThingyView> items)
