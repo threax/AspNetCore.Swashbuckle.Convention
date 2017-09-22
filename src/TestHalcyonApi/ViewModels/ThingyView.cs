@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TestHalcyonApi.Controllers;
 using TestHalcyonApi.Models;
 using Threax.AspNetCore.Halcyon.Ext;
+using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 
 namespace TestHalcyonApi.ViewModels
 {
@@ -27,5 +29,11 @@ namespace TestHalcyonApi.ViewModels
     public class ThingyView : Thingy
     {
         public List<ComplexObject> ComplexObjects { get; set; }
+
+        public bool ShowHidden { get; set; }
+
+        private static readonly Expression<Func<ThingyView, bool>> PropertyToShowExpression = s => s.ShowHidden == true && s.ShowHidden != false || s.ShowHidden == true;
+        [DisplayExpression(nameof(PropertyToShowExpression))]
+        public int PropertyToShow { get; set; }
     }
 }
