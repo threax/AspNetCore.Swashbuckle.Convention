@@ -28,13 +28,27 @@ namespace TestHalcyonApi.ViewModels
     [DeclareHalLink(ThingyController.Rels.TestDeclareLinkToRel, typeof(ThingyController))]
     public class ThingyView : Thingy
     {
-        public List<ComplexObject> ComplexObjects { get; set; }
+        //Various random test cases, need real tests for these.
 
-        public bool ShowHidden { get; set; }
+        //public List<ComplexObject> ComplexObjects { get; set; }
 
-        private static readonly Expression<Func<ThingyView, bool>> PropertyToShowExpression = s => s.ShowHidden;
-        [DisplayExpression(nameof(PropertyToShowExpression))]
-        public int PropertyToShow { get; set; }
+        //public bool ShowHidden { get; set; }
+
+        //private static readonly Expression<Func<ThingyView, bool>> PropertyToShowExpression = s => s.ShowHidden;
+        //[DisplayExpression(nameof(PropertyToShowExpression))]
+        //public int PropertyToShow { get; set; }
+
+        //public enum TestEnum
+        //{
+        //    On,
+        //    Off
+        //}
+
+        //public TestEnum TestDisplayEnum { get; set; }
+
+        //private static readonly Expression<Func<ThingyView, bool>> DisplayIfEnumOn = s => s.TestDisplayEnum == TestEnum.On;
+        //[DisplayExpression(nameof(DisplayIfEnumOn))]
+        //public int ShowIfTestEnumOn { get; set; }
 
         //public int Counter { get; set; }
 
