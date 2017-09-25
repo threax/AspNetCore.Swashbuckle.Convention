@@ -36,8 +36,8 @@ htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@^6.0.2:
     htmlrapier ">=10.0.2"
 
 htmlrapier@>=10.0.2, htmlrapier@>=8.1.0, htmlrapier@>=9.0.0, htmlrapier@^12.1.0:
-  version "12.4.2"
-  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-12.4.2.tgz#e0282f693893de6c8ccdee3c1e91ffab005248a5"
+  version "12.5.0"
+  resolved "https://registry.yarnpkg.com/htmlrapier/-/htmlrapier-12.5.0.tgz#6c381170c1c8fd97865f1bb1448594ad9a0c055e"
   dependencies:
     "@types/es6-promise" "^0.0.32"
     tslib "^1.6.1"
