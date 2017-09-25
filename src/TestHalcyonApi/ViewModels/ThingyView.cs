@@ -32,9 +32,20 @@ namespace TestHalcyonApi.ViewModels
 
         public bool ShowHidden { get; set; }
 
-        //private static readonly Expression<Func<ThingyView, bool>> PropertyToShowExpression = s => s.ShowHidden == true && s.ShowHidden != false || s.ShowHidden == true;
-        private static readonly Expression<Func<ThingyView, bool>> PropertyToShowExpression = s => !(s.ShowHidden == true);
+        private static readonly Expression<Func<ThingyView, bool>> PropertyToShowExpression = s => s.ShowHidden;
         [DisplayExpression(nameof(PropertyToShowExpression))]
         public int PropertyToShow { get; set; }
+
+        //public int Counter { get; set; }
+
+        //private static readonly Expression<Func<ThingyView, bool>> CounterTest = s => s.Counter > 5;
+        //[DisplayExpression(nameof(CounterTest))]
+        //public int ShowIfCounterBiggerThan5 { get; set; }
+
+        //public String TextValue { get; set; }
+
+        //private static readonly Expression<Func<ThingyView, bool>> ShowIfTextValueIsBeefTest = s => s.TextValue == "Beef";
+        //[DisplayExpression(nameof(ShowIfTextValueIsBeefTest))]
+        //public int ShowIfTextValueIsBeef { get; set; }
     }
 }
