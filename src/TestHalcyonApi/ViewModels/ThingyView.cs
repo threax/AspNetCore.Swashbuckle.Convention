@@ -32,7 +32,8 @@ namespace TestHalcyonApi.ViewModels
 
         public bool ShowHidden { get; set; }
 
-        private static readonly Expression<Func<ThingyView, bool>> PropertyToShowExpression = s => s.ShowHidden == true && s.ShowHidden != false || s.ShowHidden == true;
+        //private static readonly Expression<Func<ThingyView, bool>> PropertyToShowExpression = s => s.ShowHidden == true && s.ShowHidden != false || s.ShowHidden == true;
+        private static readonly Expression<Func<ThingyView, bool>> PropertyToShowExpression = s => !(s.ShowHidden == true);
         [DisplayExpression(nameof(PropertyToShowExpression))]
         public int PropertyToShow { get; set; }
     }
