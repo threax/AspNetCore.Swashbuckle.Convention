@@ -1,6 +1,4 @@
-﻿///<amd-module name="halcyonapibrowser.index"/>
-
-import * as explorer from 'hr.halcyon-explorer.HalcyonBrowserController';
+﻿import * as explorer from 'hr.halcyon-explorer.HalcyonBrowserController';
 import * as controller from 'hr.controller';
 import * as startup from 'clientlibs.startup';
 
