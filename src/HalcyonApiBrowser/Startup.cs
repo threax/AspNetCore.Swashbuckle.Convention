@@ -12,6 +12,8 @@ namespace HalcyonApiBrowser
 {
     public class Startup
     {
+        private ClientConfig clientConfig = new ClientConfig();
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -27,6 +29,8 @@ namespace HalcyonApiBrowser
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddClientConfig(clientConfig);
+
             // Add framework services.
             services.AddMvc();
         }

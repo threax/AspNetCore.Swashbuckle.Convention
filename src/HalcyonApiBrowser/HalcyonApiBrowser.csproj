@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HtmlRapier.TagHelpers\HtmlRapier.TagHelpers.csproj" />
     <ProjectReference Include="..\Threax.AspNetCore.ExceptionFilter\Threax.AspNetCore.ExceptionFilter.csproj" />
   </ItemGroup>
 
