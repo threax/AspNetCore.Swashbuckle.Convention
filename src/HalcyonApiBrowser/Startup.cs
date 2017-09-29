@@ -29,7 +29,10 @@ namespace HalcyonApiBrowser
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddClientConfig(clientConfig);
+            services.AddClientConfig(clientConfig, o =>
+            {
+                o.RouteArgsToClear = new List<String>() { "inPagePath" };
+            });
 
             // Add framework services.
             services.AddMvc();
@@ -57,7 +60,7 @@ namespace HalcyonApiBrowser
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{*inPagePath}");
             });
         }
     }
