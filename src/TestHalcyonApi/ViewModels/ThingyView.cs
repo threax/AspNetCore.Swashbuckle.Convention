@@ -38,11 +38,23 @@ namespace TestHalcyonApi.ViewModels
         //[DisplayExpression(nameof(PropertyToShowExpression))]
         //public int PropertyToShow { get; set; }
 
+        //public int? TestNullableInt { get; set; }
+
+        //private static readonly Expression<Func<ThingyView, bool>> DisplayIfNullableInt1 = s => s.TestNullableInt == 1;
+        //[DisplayExpression(nameof(DisplayIfNullableInt1))]
+        //public int ShowIfTestNullableIntIs1 { get; set; }
+
         //public enum TestEnum
         //{
         //    On,
         //    Off
         //}
+
+        //public TestEnum? TestNullableDisplayEnum { get; set; }
+
+        //private static readonly Expression<Func<ThingyView, bool>> DisplayIfNullableEnumOn = s => s.TestNullableDisplayEnum == TestEnum.On;
+        //[DisplayExpression(nameof(DisplayIfNullableEnumOn))]
+        //public int ShowIfNullableTestEnumOn { get; set; }
 
         //public TestEnum TestDisplayEnum { get; set; }
 
