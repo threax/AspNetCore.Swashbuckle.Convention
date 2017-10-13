@@ -49,6 +49,30 @@ namespace Threax.AspNetCore.FileRepository.Tests
             TestSuccessVerifier("TestFiles/Ppt.ppt", new FileVerifier().AddPpt(), FileVerifierFactory.PptMimeType);
         }
 
+        [Fact]
+        public void Bitmap()
+        {
+            TestSuccessVerifier("TestFiles/Bitmap.bmp", new FileVerifier().AddBitmap(), FileVerifierFactory.BitmapMimeType);
+        }
+
+        [Fact]
+        public void Gif()
+        {
+            TestSuccessVerifier("TestFiles/Gif.gif", new FileVerifier().AddGif(), FileVerifierFactory.GifMimeType);
+        }
+
+        [Fact]
+        public void Jpeg()
+        {
+            TestSuccessVerifier("TestFiles/Jpeg.jpg", new FileVerifier().AddJpeg(), FileVerifierFactory.JpegMimeType);
+        }
+
+        [Fact]
+        public void Png()
+        {
+            TestSuccessVerifier("TestFiles/Png.png", new FileVerifier().AddPng(), FileVerifierFactory.PngMimeType);
+        }
+
         public void TestSuccessVerifier(String file, IFileVerifier verifier, String mimeType)
         {
             using (var stream = File.Open(file, FileMode.Open, FileAccess.Read, FileShare.Read))
