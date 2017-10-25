@@ -6,9 +6,11 @@ using NJsonSchema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using TestHalcyonApi.ViewModels;
+using Threax.AspNetCore.ExceptionFilter;
 using Threax.AspNetCore.Halcyon.Ext;
 
 namespace TestHalcyonApi.Controllers
@@ -28,7 +30,14 @@ namespace TestHalcyonApi.Controllers
         [HalRel(HalDocEndpointInfo.DefaultRels.Get)]
         public EndpointDoc Get(String groupName, String method, String relativePath)
         {
-            return descriptionProvider.GetDoc(groupName, method, relativePath);
+            try
+            {
+                return descriptionProvider.GetDoc(groupName, method, relativePath, User);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                throw new ErrorResultException("Unauthorized", HttpStatusCode.Unauthorized);
+            }
         }
     }
 }
