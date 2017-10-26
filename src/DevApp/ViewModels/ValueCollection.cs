@@ -1,0 +1,41 @@
+using Halcyon.HAL.Attributes;
+using DevApp.Controllers.Api;
+using DevApp.Models;
+using DevApp.InputModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Threax.AspNetCore.Halcyon.Ext;
+
+namespace DevApp.ViewModels
+{
+    [HalModel]
+    [HalSelfActionLink(typeof(ValuesController), nameof(ValuesController.List))]
+    [HalActionLink(typeof(ValuesController), nameof(ValuesController.Get), DocsOnly = true)] //This provides access to docs for showing items
+    [HalActionLink(typeof(ValuesController), nameof(ValuesController.List), DocsOnly = true)] //This provides docs for searching the list
+    [HalActionLink(typeof(ValuesController), nameof(ValuesController.Add))]
+    [DeclareHalLink(typeof(ValuesController), nameof(ValuesController.List), PagedCollectionView<Object>.Rels.Next, ResponseOnly = true)]
+    [DeclareHalLink(typeof(ValuesController), nameof(ValuesController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]
+    [DeclareHalLink(typeof(ValuesController), nameof(ValuesController.List), PagedCollectionView<Object>.Rels.First, ResponseOnly = true)]
+    [DeclareHalLink(typeof(ValuesController), nameof(ValuesController.List), PagedCollectionView<Object>.Rels.Last, ResponseOnly = true)]
+    public partial class ValueCollection : PagedCollectionView<Value>, IValueQuery
+    {
+        public ValueCollection(ValueQuery query, int total, IEnumerable<Value> items) : base(query, total, items)
+        {
+            this.ValueId = query.ValueId;
+        }
+
+        public Guid? ValueId { get; set; }
+
+        protected override void AddCustomQuery(string rel, QueryStringBuilder queryString)
+        {
+            if (ValueId.HasValue)
+            {
+                queryString.AppendItem("valueId", ValueId.Value.ToString());
+            }
+
+            base.AddCustomQuery(rel, queryString);
+        }
+    }
+}
