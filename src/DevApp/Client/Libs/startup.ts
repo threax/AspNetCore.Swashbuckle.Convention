@@ -25,7 +25,8 @@ export function createBuilder() {
 
         //Set up the access token fetcher
         var config = <ClientConfig>(<any>window).clientConfig;
-        var bearerTokenWhitelist = new AccessTokens.AccessWhitelist([config.ServiceUrl, config.UserDirectoryUrl]); //Default whitelist adds the service and user directory urls, if you add more add them to this array
+        //Below would also need , config.UserDirectoryUrl
+        var bearerTokenWhitelist = new AccessTokens.AccessWhitelist([config.ServiceUrl]); //Default whitelist adds the service and user directory urls, if you add more add them to this array
         builder.Services.tryAddShared(fetcher.Fetcher, s =>
             new AccessTokens.AccessTokenManager(config.AccessTokenPath, bearerTokenWhitelist,
                 new WindowFetch.WindowFetch()));

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -121,16 +122,32 @@ namespace DevApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment())
+            app.UseUrlFix(o =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                o.CorrectPathBase = appConfig.PathBase;
+            });
 
-            app.Run(async (context) =>
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
+            app.UseStaticFiles();
+
+            app.UseCorsManager(corsOptions, loggerFactory);
+
+            app.UseAuthentication();
+
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                routes.MapRoute(
+                    name: "root",
+                    template: "{action=Index}/{*inPagePath}",
+                    defaults: new { controller = "Home" });
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{*inPagePath}");
             });
         }
     }
