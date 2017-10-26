@@ -1,0 +1,9 @@
+[
+  {
+    "pathBase": ".",
+    "outDir": ".",
+    "copy": [
+      "Images/*"
+    ]
+  }
+]

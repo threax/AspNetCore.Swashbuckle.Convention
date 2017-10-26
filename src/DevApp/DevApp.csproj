@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>aspnet-DevApp</UserSecretsId>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="InputModels\" />
+    <Folder Include="Mappers\" />
+    <Folder Include="Models\" />
+    <Folder Include="ModelSchemas\" />
+    <Folder Include="Repository\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="AutoMapper" Version="6.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HtmlRapier.TagHelpers\HtmlRapier.TagHelpers.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.BuiltInTools\Threax.AspNetCore.BuiltInTools.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.CorsManager\Threax.AspNetCore.CorsManager.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.ExceptionFilter\Threax.AspNetCore.ExceptionFilter.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.Halcyon.ClientGen.Tools\Threax.AspNetCore.Halcyon.ClientGen.Tools.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.Halcyon.ClientGen\Threax.AspNetCore.Halcyon.ClientGen.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.Halcyon.Ext\Threax.AspNetCore.Halcyon.Ext.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.Halcyon\Threax.AspNetCore.Halcyon.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.IdServerAuth\Threax.AspNetCore.IdServerAuth.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.Models\Threax.AspNetCore.Models.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.UrlFix\Threax.AspNetCore.UrlFix.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.UserBuilder.Entities.Mvc\Threax.AspNetCore.UserBuilder.Entities.Mvc.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.UserBuilder.Entities\Threax.AspNetCore.UserBuilder.Entities.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.UserBuilder\Threax.AspNetCore.UserBuilder.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.Validators\Threax.AspNetCore.Validators.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DevApp</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/threax.bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+    @RenderSection("css", required: false)
+</head>
+<body>
+    <threax-relogin></threax-relogin>
+    @* the big navbar is mostly filled in with the threax-navbar tag helper *@
+    <threax-navbar brand-text="DevApp">
+        <ul class="nav navbar-nav">
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+            @if (User.IsInRole(Roles.EditValues))
+            {
+                <li><a asp-area="" asp-controller="Home" asp-action="Values">Values</a></li>
+            }
+            @if (User.IsInRole(Threax.AspNetCore.UserBuilder.Entities.AuthorizationAdminRoles.EditRoles))
+            {
+                <li><a asp-area="" asp-controller="Admin" asp-action="Users">Edit Users</a></li>
+            }
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+            }
+        </ul>
+    </threax-navbar>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <div class="container">
+        <hr />
+        <threax-footer>
+        </threax-footer>
+    </div>
+
+    @* this line fills in the client config using the tag helper and what has been defined in the di *@
+    <client-config></client-config>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/lib/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="~/lib/polyfill.js"></script>
+    <script type="text/javascript" src="~/lib/tslib.js"></script>
+    <script type="text/javascript" src="~/lib/tsbin.js"></script>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="~/lib/hr-run.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "title": "Value",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 450
+    }
+  }
+}
