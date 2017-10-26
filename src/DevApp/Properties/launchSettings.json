@@ -12,6 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
+        "ASPNETCORE_preventHostingStartup": "True",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
@@ -22,6 +23,20 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:58587/"
+    },
+    "SetupDb": {
+      "commandName": "Project",
+      "commandLineArgs": "tools migrate seed",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Update Client": {
+      "commandName": "Project",
+      "commandLineArgs": "tools \"clientgen Client\\Libs\\ServiceClient.ts\"",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }
