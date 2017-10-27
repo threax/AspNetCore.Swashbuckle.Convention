@@ -6,7 +6,7 @@
     "@types/node": "^6.0.69"
   },
   "dependencies": {
-    "htmlrapier": "^12.4.0",
+    "htmlrapier": "^14.0.0",
     "htmlrapier.bootstrap": "^6.0.4",
     "htmlrapier.bootstrap.datetime": "^2.0.0",
     "htmlrapier.halcyon": "^6.0.2",
