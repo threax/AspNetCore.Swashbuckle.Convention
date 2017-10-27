@@ -11,6 +11,7 @@
     "htmlrapier.bootstrap.datetime": "^2.0.0",
     "htmlrapier.halcyon": "^6.0.2",
     "htmlrapier.halcyon-explorer": "^6.0.1",
+    "htmlrapier.relogin": "^1.0.3",
     "htmlrapier.widgets": "^12.0.0",
     "jsns": "^5.0.0",
     "threax.bootstrap": "^0.0.3"

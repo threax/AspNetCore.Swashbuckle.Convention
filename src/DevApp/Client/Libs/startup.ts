@@ -6,7 +6,7 @@ import * as fetcher from 'hr.fetcher';
 import * as bootstrap from 'hr.bootstrap.all';
 import * as client from 'clientlibs.ServiceClient';
 import * as xsrf from 'hr.xsrftoken';
-//import * as loginPopup from 'threax.theme.LoginPopup';
+import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as deepLink from 'hr.deeplink';
 
 export interface ClientConfig {
@@ -43,8 +43,8 @@ export function createBuilder() {
         deepLink.setPageUrl(builder.Services, config.PageBasePath);
 
         //Setup relogin
-        //loginPopup.addServices(builder.Services);
-        //builder.create("threax-relogin", loginPopup.LoginPopup);
+        loginPopup.addServices(builder.Services);
+        builder.create("htmlrapier-relogin", loginPopup.LoginPopup);
     }
     return builder;
 }
