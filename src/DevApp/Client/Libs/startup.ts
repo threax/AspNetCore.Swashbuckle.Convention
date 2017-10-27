@@ -44,7 +44,7 @@ export function createBuilder() {
 
         //Setup relogin
         loginPopup.addServices(builder.Services);
-        builder.create("htmlrapier-relogin", loginPopup.LoginPopup);
+        builder.create("hr-relogin", loginPopup.LoginPopup);
     }
     return builder;
 }
