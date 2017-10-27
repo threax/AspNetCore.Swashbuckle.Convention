@@ -1,17 +1,24 @@
 ﻿import * as controller from 'hr.controller';
 import * as WindowFetch from 'hr.windowfetch';
+import * as whitelist from 'hr.whitelist';
 import * as AccessTokens from 'hr.accesstokens';
 import * as fetcher from 'hr.fetcher';
 import * as bootstrap from 'hr.bootstrap.all';
 import * as client from 'clientlibs.ServiceClient';
+import * as xsrf from 'hr.xsrftoken';
 //import * as loginPopup from 'threax.theme.LoginPopup';
 import * as deepLink from 'hr.deeplink';
 
 export interface ClientConfig {
-    ServiceUrl: string,
-    AccessTokenPath: string,
-    UserDirectoryUrl: string,
-    PageBasePath: string
+    ServiceUrl: string;
+    UserDirectoryUrl: string;
+    PageBasePath: string;
+}
+
+export interface TokenConfig {
+    AccessTokenPath?: string;
+    XsrfCookie?: string;
+    XsrfPaths?: string[];
 }
 
 var builder: controller.InjectedControllerBuilder = null;
@@ -25,11 +32,8 @@ export function createBuilder() {
 
         //Set up the access token fetcher
         var config = <ClientConfig>(<any>window).clientConfig;
-        //Below would also need , config.UserDirectoryUrl
-        var bearerTokenWhitelist = new AccessTokens.AccessWhitelist([config.ServiceUrl]); //Default whitelist adds the service and user directory urls, if you add more add them to this array
-        builder.Services.tryAddShared(fetcher.Fetcher, s =>
-            new AccessTokens.AccessTokenManager(config.AccessTokenPath, bearerTokenWhitelist,
-                new WindowFetch.WindowFetch()));
+        builder.Services.tryAddShared(fetcher.Fetcher, s => createFetcher(config, <TokenConfig>(<any>window).xsrfConfig));
+
         builder.Services.tryAddShared(client.EntryPointInjector, s => new client.EntryPointInjector(config.ServiceUrl, s.getRequiredService(fetcher.Fetcher)));
         //Map the role entry point to the service entry point and add the user directory
         //builder.Services.addShared(roleClient.IRoleEntryInjector, s => s.getRequiredService(client.EntryPointInjector));
@@ -43,4 +47,25 @@ export function createBuilder() {
         //builder.create("threax-relogin", loginPopup.LoginPopup);
     }
     return builder;
+}
+
+function createFetcher(config: ClientConfig, tokenConfig: TokenConfig): fetcher.Fetcher {
+    var fetcher = new WindowFetch.WindowFetch();
+
+    if (tokenConfig !== undefined) {
+        fetcher = new xsrf.XsrfTokenFetcher(
+            new xsrf.CookieTokenAccessor(tokenConfig.XsrfCookie),
+            new whitelist.Whitelist(tokenConfig.XsrfPaths),
+            fetcher);
+    }
+
+    if (tokenConfig.AccessTokenPath !== undefined) {
+        fetcher = new AccessTokens.AccessTokenFetcher(
+            tokenConfig.AccessTokenPath,
+            //Below would also need , config.UserDirectoryUrl
+            new whitelist.Whitelist([config.ServiceUrl]),
+            fetcher);
+    }
+
+    return fetcher;
 }
