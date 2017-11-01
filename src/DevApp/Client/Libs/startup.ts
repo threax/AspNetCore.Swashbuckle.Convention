@@ -8,17 +8,19 @@ import * as client from 'clientlibs.ServiceClient';
 import * as xsrf from 'hr.xsrftoken';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as deepLink from 'hr.deeplink';
+import * as pageConfig from 'hr.pageconfig';
 
-export interface ClientConfig {
-    ServiceUrl: string;
-    UserDirectoryUrl: string;
-    PageBasePath: string;
-}
-
-export interface TokenConfig {
-    AccessTokenPath?: string;
-    XsrfCookie?: string;
-    XsrfPaths?: string[];
+export interface Config {
+    client: {
+        ServiceUrl: string;
+        UserDirectoryUrl: string;
+        PageBasePath: string;
+    };
+    tokens?: {
+        AccessTokenPath?: string;
+        XsrfCookie?: string;
+        XsrfPaths?: string[];
+    }
 }
 
 var builder: controller.InjectedControllerBuilder = null;
@@ -31,16 +33,16 @@ export function createBuilder() {
         bootstrap.activate();
 
         //Set up the access token fetcher
-        var config = <ClientConfig>(<any>window).clientConfig;
-        builder.Services.tryAddShared(fetcher.Fetcher, s => createFetcher(config, <TokenConfig>(<any>window).xsrfConfig));
+        var config = pageConfig.read<Config>();
+        builder.Services.tryAddShared(fetcher.Fetcher, s => createFetcher(config));
 
-        builder.Services.tryAddShared(client.EntryPointInjector, s => new client.EntryPointInjector(config.ServiceUrl, s.getRequiredService(fetcher.Fetcher)));
+        builder.Services.tryAddShared(client.EntryPointInjector, s => new client.EntryPointInjector(config.client.ServiceUrl, s.getRequiredService(fetcher.Fetcher)));
         //Map the role entry point to the service entry point and add the user directory
         //builder.Services.addShared(roleClient.IRoleEntryInjector, s => s.getRequiredService(client.EntryPointInjector));
         //builder.Services.addShared(UserDirectoryEntryPointInjector, s => new UserDirectoryEntryPointInjector(config.UserDirectoryUrl, s.getRequiredService(fetcher.Fetcher)));
 
         //Setup Deep Links
-        deepLink.setPageUrl(builder.Services, config.PageBasePath);
+        deepLink.setPageUrl(builder.Services, config.client.PageBasePath);
 
         //Setup relogin
         loginPopup.addServices(builder.Services);
@@ -49,21 +51,21 @@ export function createBuilder() {
     return builder;
 }
 
-function createFetcher(config: ClientConfig, tokenConfig: TokenConfig): fetcher.Fetcher {
+function createFetcher(config: Config): fetcher.Fetcher {
     var fetcher = new WindowFetch.WindowFetch();
 
-    if (tokenConfig !== undefined) {
+    if (config.tokens !== undefined) {
         fetcher = new xsrf.XsrfTokenFetcher(
-            new xsrf.CookieTokenAccessor(tokenConfig.XsrfCookie),
-            new whitelist.Whitelist(tokenConfig.XsrfPaths),
+            new xsrf.CookieTokenAccessor(config.tokens.XsrfCookie),
+            new whitelist.Whitelist(config.tokens.XsrfPaths),
             fetcher);
     }
 
-    if (tokenConfig.AccessTokenPath !== undefined) {
+    if (config.tokens.AccessTokenPath !== undefined) {
         fetcher = new AccessTokens.AccessTokenFetcher(
-            tokenConfig.AccessTokenPath,
+            config.tokens.AccessTokenPath,
             //Below would also need , config.UserDirectoryUrl
-            new whitelist.Whitelist([config.ServiceUrl]),
+            new whitelist.Whitelist([config.client.ServiceUrl]),
             fetcher);
     }
 
