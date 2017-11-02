@@ -31,6 +31,9 @@
       "hr.relogin.*": [
         "node_modules\\htmlrapier.relogin\\src\\*"
       ],
+      "hr.roleclient.*": [
+        "node_modules\\htmlrapier.roleclient\\src\\*"
+      ],
       "hr.widgets.*": [
         "node_modules\\htmlrapier.widgets\\src\\*"
       ],
@@ -48,6 +51,7 @@
     "node_modules\\htmlrapier.halcyon-explorer\\src\\**\\*.ts",
     "node_modules\\htmlrapier.halcyon\\src\\**\\*.ts",
     "node_modules\\htmlrapier.relogin\\src\\**\\*.ts",
+    "node_modules\\htmlrapier.roleclient\\src\\**\\*.ts",
     "node_modules\\htmlrapier.widgets\\src\\**\\*.ts",
     "node_modules\\htmlrapier\\src\\**\\*.ts"
   ],

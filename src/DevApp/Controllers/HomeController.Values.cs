@@ -9,6 +9,7 @@ namespace DevApp.Controllers
 {
     public partial class HomeController
     {
+        [Authorize(Roles = Roles.EditValues)]
         public IActionResult Values()
         {
             return View();

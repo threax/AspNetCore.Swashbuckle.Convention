@@ -13,7 +13,7 @@ namespace DevApp.Controllers.Api
 {
     [Route("api/[controller]")]
     [ResponseCache(NoStore = true)]
-    [Authorize(AuthenticationSchemes = AuthCoreSchemes.Bearer)]
+    [Authorize(AuthenticationSchemes = AuthCoreSchemes.Bearer, Roles = Roles.EditValues)]
     public partial class ValuesController : Controller
     {
         private IValueRepository repo;

@@ -9,6 +9,8 @@ import * as xsrf from 'hr.xsrftoken';
 import * as loginPopup from 'hr.relogin.LoginPopup';
 import * as deepLink from 'hr.deeplink';
 import * as pageConfig from 'hr.pageconfig';
+import * as roleClient from 'hr.roleclient.RoleClient';
+import { EntryPointInjector as UserDirectoryEntryPointInjector } from 'hr.roleclient.UserDirectoryClient';
 
 export interface Config {
     client: {
@@ -38,8 +40,8 @@ export function createBuilder() {
 
         builder.Services.tryAddShared(client.EntryPointInjector, s => new client.EntryPointInjector(config.client.ServiceUrl, s.getRequiredService(fetcher.Fetcher)));
         //Map the role entry point to the service entry point and add the user directory
-        //builder.Services.addShared(roleClient.IRoleEntryInjector, s => s.getRequiredService(client.EntryPointInjector));
-        //builder.Services.addShared(UserDirectoryEntryPointInjector, s => new UserDirectoryEntryPointInjector(config.UserDirectoryUrl, s.getRequiredService(fetcher.Fetcher)));
+        builder.Services.addShared(roleClient.IRoleEntryInjector, s => s.getRequiredService(client.EntryPointInjector));
+        builder.Services.addShared(UserDirectoryEntryPointInjector, s => new UserDirectoryEntryPointInjector(config.client.UserDirectoryUrl, s.getRequiredService(fetcher.Fetcher)));
 
         //Setup Deep Links
         deepLink.setPageUrl(builder.Services, config.client.PageBasePath);
@@ -64,8 +66,7 @@ function createFetcher(config: Config): fetcher.Fetcher {
     if (config.tokens.AccessTokenPath !== undefined) {
         fetcher = new AccessTokens.AccessTokenFetcher(
             config.tokens.AccessTokenPath,
-            //Below would also need , config.UserDirectoryUrl
-            new whitelist.Whitelist([config.client.ServiceUrl]),
+            new whitelist.Whitelist([config.client.ServiceUrl, config.client.UserDirectoryUrl]),
             fetcher);
     }
 
