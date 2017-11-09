@@ -39,6 +39,24 @@ namespace DevApp.Tests
             }, 255, 5);
         }
 
+        [Fact]
+        public async Task TestAdd()
+        {
+            var mappings = AppDatabaseServiceExtensions.SetupMappings();
+            var mapper = mappings.CreateMapper();
+
+            using (var dbContext = CreateDbContext())
+            {
+                var valueRepo = new ValueRepository(dbContext, mapper);
+                await valueRepo.Add(new ValueInput()
+                {
+                    Name = "NewValue"
+                });
+
+                Assert.Equal("NewValue", dbContext.Values.First().Name);
+            }
+        }
+
         private Task TestQuery(ValueQuery query)
         {
             return TestQuery(query, 255, query.Limit);
@@ -54,26 +72,26 @@ namespace DevApp.Tests
             var mappings = AppDatabaseServiceExtensions.SetupMappings();
             var mapper = mappings.CreateMapper();
 
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseSqlite("DataSource=:memory:")
-                .Options;
+            var dbContext = new Mock<AppDbContext>(new DbContextOptions<AppDbContext>());
+            var table = new List<ValueEntity>();
+            dbContext.Setup(c => c.Values).ReturnsDbSet(CreateEntityTestValues(totalItems), table);
 
-            using (var dbContext = new AppDbContext(options))
-            {
-                //await dbContext.Database.EnsureCreatedAsync();
-                await dbContext.Database.MigrateAsync();
-                var valueRepo = new ValueRepository(dbContext, mapper);
-                await valueRepo.AddRange(CreateTestValues(totalItems));
-            }
+            var valueRepo = new ValueRepository(dbContext.Object, mapper);
+            var valueCollection = await valueRepo.List(query);
+            Assert.Equal(totalItems, valueCollection.Total);
+            Assert.Equal(totalReturned, valueCollection.Items.Count());
+            Assert.Equal(query.Limit, valueCollection.Limit);
+            Assert.Equal(query.Offset, valueCollection.Offset);
+        }
 
-            using (var dbContext = new AppDbContext(options))
+        private IEnumerable<ValueEntity> CreateEntityTestValues(int total)
+        {
+            for (int i = 0; i < total; ++i)
             {
-                var valueRepo = new ValueRepository(dbContext, mapper);
-                var valueCollection = await valueRepo.List(query);
-                Assert.Equal(totalItems, valueCollection.Total);
-                Assert.Equal(totalReturned, valueCollection.Items.Count());
-                Assert.Equal(query.Limit, valueCollection.Limit);
-                Assert.Equal(query.Offset, valueCollection.Offset);
+                yield return new ValueEntity()
+                {
+                    Name = "Value " + i
+                };
             }
         }
 
@@ -86,6 +104,15 @@ namespace DevApp.Tests
                     Name = "Value " + i
                 };
             }
+        }
+
+        private static AppDbContext CreateDbContext()
+        {
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .Options;
+
+            return new AppDbContext(options);
         }
     }
 }
