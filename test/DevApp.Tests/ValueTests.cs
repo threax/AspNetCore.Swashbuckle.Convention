@@ -202,6 +202,10 @@ namespace DevApp.Tests
                         }))
                     }
                 });
+                mockup.Add<ValuesController>(m => new ValuesController(m.Create<IValueRepository>())
+                {
+                    ControllerContext = m.Create<ControllerContext>()
+                });
             }
 
             public void Dispose()
@@ -214,10 +218,7 @@ namespace DevApp.Tests
             {
                 var totalItems = 3;
 
-                var controller = new ValuesController(mockup.Create<IValueRepository>())
-                {
-                    ControllerContext = mockup.Create<ControllerContext>()
-                };
+                var controller = mockup.Create<ValuesController>();
 
                 for(var i = 0; i < totalItems; ++i)
                 {
@@ -237,10 +238,7 @@ namespace DevApp.Tests
             {
                 var totalItems = 3;
 
-                var controller = new ValuesController(mockup.Create<IValueRepository>())
-                {
-                    ControllerContext = mockup.Create<ControllerContext>()
-                };
+                var controller = mockup.Create<ValuesController>();
 
                 for (var i = 0; i < totalItems; ++i)
                 {
@@ -256,10 +254,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Add()
             {
-                var controller = new ValuesController(mockup.Create<IValueRepository>())
-                {
-                    ControllerContext = mockup.Create<ControllerContext>()
-                };
+                var controller = mockup.Create<ValuesController>();
 
                 var result = await controller.Add(CreateInput());
                 Assert.NotNull(result);
@@ -268,10 +263,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Update()
             {
-                var controller = new ValuesController(mockup.Create<IValueRepository>())
-                {
-                    ControllerContext = mockup.Create<ControllerContext>()
-                };
+                var controller = mockup.Create<ValuesController>();
 
                 var result = await controller.Add(CreateInput());
                 Assert.NotNull(result);
@@ -283,10 +275,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Delete()
             {
-                var controller = new ValuesController(mockup.Create<IValueRepository>())
-                {
-                    ControllerContext = mockup.Create<ControllerContext>()
-                };
+                var controller = mockup.Create<ValuesController>();
 
                 var result = await controller.Add(CreateInput());
                 Assert.NotNull(result);
