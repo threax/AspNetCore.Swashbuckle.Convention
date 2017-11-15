@@ -27,6 +27,14 @@ namespace DevApp.Tests
                                                                         .Options));
         }
 
+        public static ValueInput CreateInput(String seed = "Don't Care")
+        {
+            return new ValueInput()
+            {
+                Name = seed
+            };
+        }
+
         public class Repository : IDisposable
         {
             private Mockup mockup = new Mockup();
@@ -45,7 +53,7 @@ namespace DevApp.Tests
             async Task Add()
             {
                 var repo = new ValueRepository(mockup.CreateMock<AppDbContext>(), mockup.CreateMock<IMapper>());
-                var result = await repo.Add(new ValueInput());
+                var result = await repo.Add(CreateInput());
                 Assert.NotNull(result);
             }
 
@@ -53,7 +61,7 @@ namespace DevApp.Tests
             async Task AddRange()
             {
                 var repo = new ValueRepository(mockup.CreateMock<AppDbContext>(), mockup.CreateMock<IMapper>());
-                await repo.AddRange(new ValueInput[] { new ValueInput(), new ValueInput(), new ValueInput() });
+                await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
             }
 
             [Fact]
@@ -61,8 +69,8 @@ namespace DevApp.Tests
             {
                 var dbContext = mockup.CreateMock<AppDbContext>();
                 var repo = new ValueRepository(dbContext, mockup.CreateMock<IMapper>());
-                await repo.AddRange(new ValueInput[] { new ValueInput(), new ValueInput(), new ValueInput() });
-                var result = await repo.Add(new ValueInput());
+                await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
+                var result = await repo.Add(CreateInput());
                 Assert.Equal<int>(4, dbContext.Values.Count());
                 await repo.Delete(result.ValueId);
                 Assert.Equal<int>(3, dbContext.Values.Count());
@@ -73,8 +81,8 @@ namespace DevApp.Tests
             {
                 var dbContext = mockup.CreateMock<AppDbContext>();
                 var repo = new ValueRepository(dbContext, mockup.CreateMock<IMapper>());
-                await repo.AddRange(new ValueInput[] { new ValueInput(), new ValueInput(), new ValueInput() });
-                var result = await repo.Add(new ValueInput());
+                await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
+                var result = await repo.Add(CreateInput());
                 Assert.Equal<int>(4, dbContext.Values.Count());
                 var getResult = await repo.Get(result.ValueId);
                 Assert.NotNull(getResult);
@@ -93,7 +101,7 @@ namespace DevApp.Tests
             {
                 var dbContext = mockup.CreateMock<AppDbContext>();
                 var repo = new ValueRepository(dbContext, mockup.CreateMock<IMapper>());
-                await repo.AddRange(new ValueInput[] { new ValueInput(), new ValueInput(), new ValueInput() });
+                await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 Assert.True(await repo.HasValues());
             }
 
@@ -103,7 +111,7 @@ namespace DevApp.Tests
                 //This could be more complete
                 var dbContext = mockup.CreateMock<AppDbContext>();
                 var repo = new ValueRepository(dbContext, mockup.CreateMock<IMapper>());
-                await repo.AddRange(new ValueInput[] { new ValueInput(), new ValueInput(), new ValueInput() });
+                await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 var query = new ValueQuery();
                 var result = await repo.List(query);
                 Assert.Equal(query.Limit, result.Limit);
@@ -116,9 +124,9 @@ namespace DevApp.Tests
             async Task Update()
             {
                 var repo = new ValueRepository(mockup.CreateMock<AppDbContext>(), mockup.CreateMock<IMapper>());
-                var result = await repo.Add(new ValueInput());
+                var result = await repo.Add(CreateInput());
                 Assert.NotNull(result);
-                var updateResult = await repo.Update(result.ValueId, new ValueInput());
+                var updateResult = await repo.Update(result.ValueId, CreateInput());
                 Assert.NotNull(updateResult);
             }
         }
@@ -160,7 +168,7 @@ namespace DevApp.Tests
 
                 for(var i = 0; i < totalItems; ++i)
                 {
-                    Assert.NotNull(await controller.Add(new ValueInput()));
+                    Assert.NotNull(await controller.Add(CreateInput()));
                 }
 
                 var query = new ValueQuery();
@@ -183,11 +191,11 @@ namespace DevApp.Tests
 
                 for (var i = 0; i < totalItems; ++i)
                 {
-                    Assert.NotNull(await controller.Add(new ValueInput()));
+                    Assert.NotNull(await controller.Add(CreateInput()));
                 }
 
                 //Manually add the item we will look back up
-                var lookup = await controller.Add(new ValueInput());
+                var lookup = await controller.Add(CreateInput());
                 var result = await controller.Get(lookup.ValueId);
                 Assert.NotNull(result);
             }
@@ -200,7 +208,7 @@ namespace DevApp.Tests
                     ControllerContext = mockup.CreateMock<ControllerContext>()
                 };
 
-                var result = await controller.Add(new ValueInput());
+                var result = await controller.Add(CreateInput());
                 Assert.NotNull(result);
             }
 
@@ -212,10 +220,10 @@ namespace DevApp.Tests
                     ControllerContext = mockup.CreateMock<ControllerContext>()
                 };
 
-                var result = await controller.Add(new ValueInput());
+                var result = await controller.Add(CreateInput());
                 Assert.NotNull(result);
 
-                var updateResult = await controller.Update(result.ValueId, new ValueInput());
+                var updateResult = await controller.Update(result.ValueId, CreateInput());
                 Assert.NotNull(updateResult);
             }
 
@@ -227,7 +235,7 @@ namespace DevApp.Tests
                     ControllerContext = mockup.CreateMock<ControllerContext>()
                 };
 
-                var result = await controller.Add(new ValueInput());
+                var result = await controller.Add(CreateInput());
                 Assert.NotNull(result);
 
                 var listResult = await controller.List(new ValueQuery());
