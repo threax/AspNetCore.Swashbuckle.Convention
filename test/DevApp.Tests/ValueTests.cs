@@ -3,6 +3,7 @@ using DevApp.Controllers.Api;
 using DevApp.Database;
 using DevApp.InputModels;
 using DevApp.Repository;
+using DevApp.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,57 @@ namespace DevApp.Tests
             {
                 Name = seed
             };
+        }
+
+        public static ValueEntity CreateEntity(String seed = "Don't Care")
+        {
+            return new ValueEntity()
+            {
+                ValueId = Guid.NewGuid(),
+                Name = seed
+            };
+        }
+
+        public class Profiles : IDisposable
+        {
+            private Mockup mockup = new Mockup();
+
+            public Profiles()
+            {
+                SetupCommonMockups(mockup);
+            }
+
+            public void Dispose()
+            {
+                mockup.Dispose();
+            }
+
+            [Fact]
+            void InputToEntity()
+            {
+                var mapper = mockup.Create<IMapper>();
+                var input = CreateInput();
+                var entity = mapper.Map<ValueEntity>(input);
+
+                //Make sure the id does not copy over
+                Assert.Equal(Guid.Empty, entity.ValueId);
+
+                //Data specific assertions
+                Assert.Equal(input.Name, entity.Name);
+            }
+
+            [Fact]
+            void EntityToView()
+            {
+                var mapper = mockup.Create<IMapper>();
+                var entity = CreateEntity();
+                var view = mapper.Map<Value>(entity);
+
+                Assert.Equal(entity.ValueId, view.ValueId);
+
+                //Data specific assertions
+                Assert.Equal(entity.Name, view.Name);
+            }
         }
 
         public class Repository : IDisposable
