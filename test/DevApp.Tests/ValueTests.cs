@@ -22,7 +22,7 @@ namespace DevApp.Tests
     {
         private static void SetupCommonMockups(Mockup mockup)
         {
-            mockup.Add<IMapper>(m => AppDatabaseServiceExtensions.SetupMappings().CreateMapper(mockup.Create));
+            mockup.Add<IMapper>(m => AppDatabaseServiceExtensions.SetupMappings().CreateMapper(mockup.Get));
 
             mockup.Add<AppDbContext>(m => new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
                                                                         .UseInMemoryDatabase(Guid.NewGuid().ToString())
@@ -63,7 +63,7 @@ namespace DevApp.Tests
             [Fact]
             void InputToEntity()
             {
-                var mapper = mockup.Create<IMapper>();
+                var mapper = mockup.Get<IMapper>();
                 var input = CreateInput();
                 var entity = mapper.Map<ValueEntity>(input);
 
@@ -77,7 +77,7 @@ namespace DevApp.Tests
             [Fact]
             void EntityToView()
             {
-                var mapper = mockup.Create<IMapper>();
+                var mapper = mockup.Get<IMapper>();
                 var entity = CreateEntity();
                 var view = mapper.Map<Value>(entity);
 
@@ -105,7 +105,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Add()
             {
-                var repo = new ValueRepository(mockup.Create<AppDbContext>(), mockup.Create<IMapper>());
+                var repo = new ValueRepository(mockup.Get<AppDbContext>(), mockup.Get<IMapper>());
                 var result = await repo.Add(CreateInput());
                 Assert.NotNull(result);
             }
@@ -113,15 +113,15 @@ namespace DevApp.Tests
             [Fact]
             async Task AddRange()
             {
-                var repo = new ValueRepository(mockup.Create<AppDbContext>(), mockup.Create<IMapper>());
+                var repo = new ValueRepository(mockup.Get<AppDbContext>(), mockup.Get<IMapper>());
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
             }
 
             [Fact]
             async Task Delete()
             {
-                var dbContext = mockup.Create<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.Create<IMapper>());
+                var dbContext = mockup.Get<AppDbContext>();
+                var repo = new ValueRepository(dbContext, mockup.Get<IMapper>());
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 var result = await repo.Add(CreateInput());
                 Assert.Equal<int>(4, dbContext.Values.Count());
@@ -132,8 +132,8 @@ namespace DevApp.Tests
             [Fact]
             async Task Get()
             {
-                var dbContext = mockup.Create<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.Create<IMapper>());
+                var dbContext = mockup.Get<AppDbContext>();
+                var repo = new ValueRepository(dbContext, mockup.Get<IMapper>());
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 var result = await repo.Add(CreateInput());
                 Assert.Equal<int>(4, dbContext.Values.Count());
@@ -144,16 +144,16 @@ namespace DevApp.Tests
             [Fact]
             async Task HasValuesEmpty()
             {
-                var dbContext = mockup.Create<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.Create<IMapper>());
+                var dbContext = mockup.Get<AppDbContext>();
+                var repo = new ValueRepository(dbContext, mockup.Get<IMapper>());
                 Assert.False(await repo.HasValues());
             }
 
             [Fact]
             async Task HasValues()
             {
-                var dbContext = mockup.Create<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.Create<IMapper>());
+                var dbContext = mockup.Get<AppDbContext>();
+                var repo = new ValueRepository(dbContext, mockup.Get<IMapper>());
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 Assert.True(await repo.HasValues());
             }
@@ -162,8 +162,8 @@ namespace DevApp.Tests
             async Task List()
             {
                 //This could be more complete
-                var dbContext = mockup.Create<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.Create<IMapper>());
+                var dbContext = mockup.Get<AppDbContext>();
+                var repo = new ValueRepository(dbContext, mockup.Get<IMapper>());
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 var query = new ValueQuery();
                 var result = await repo.List(query);
@@ -176,7 +176,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Update()
             {
-                var repo = new ValueRepository(mockup.Create<AppDbContext>(), mockup.Create<IMapper>());
+                var repo = new ValueRepository(mockup.Get<AppDbContext>(), mockup.Get<IMapper>());
                 var result = await repo.Add(CreateInput());
                 Assert.NotNull(result);
                 var updateResult = await repo.Update(result.ValueId, CreateInput());
@@ -191,7 +191,7 @@ namespace DevApp.Tests
             public Controller()
             {
                 SetupCommonMockups(mockup);
-                mockup.Add<IValueRepository>(m => new ValueRepository(m.Create<AppDbContext>(), m.Create<IMapper>()));
+                mockup.Add<IValueRepository>(m => new ValueRepository(m.Get<AppDbContext>(), m.Get<IMapper>()));
                 mockup.Add<ControllerContext>(m => new ControllerContext()
                 {
                     HttpContext = new DefaultHttpContext()
@@ -202,9 +202,9 @@ namespace DevApp.Tests
                         }))
                     }
                 });
-                mockup.Add<ValuesController>(m => new ValuesController(m.Create<IValueRepository>())
+                mockup.Add<ValuesController>(m => new ValuesController(m.Get<IValueRepository>())
                 {
-                    ControllerContext = m.Create<ControllerContext>()
+                    ControllerContext = m.Get<ControllerContext>()
                 });
             }
 
@@ -218,7 +218,7 @@ namespace DevApp.Tests
             {
                 var totalItems = 3;
 
-                var controller = mockup.Create<ValuesController>();
+                var controller = mockup.Get<ValuesController>();
 
                 for(var i = 0; i < totalItems; ++i)
                 {
@@ -238,7 +238,7 @@ namespace DevApp.Tests
             {
                 var totalItems = 3;
 
-                var controller = mockup.Create<ValuesController>();
+                var controller = mockup.Get<ValuesController>();
 
                 for (var i = 0; i < totalItems; ++i)
                 {
@@ -254,7 +254,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Add()
             {
-                var controller = mockup.Create<ValuesController>();
+                var controller = mockup.Get<ValuesController>();
 
                 var result = await controller.Add(CreateInput());
                 Assert.NotNull(result);
@@ -263,7 +263,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Update()
             {
-                var controller = mockup.Create<ValuesController>();
+                var controller = mockup.Get<ValuesController>();
 
                 var result = await controller.Add(CreateInput());
                 Assert.NotNull(result);
@@ -275,7 +275,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Delete()
             {
-                var controller = mockup.Create<ValuesController>();
+                var controller = mockup.Get<ValuesController>();
 
                 var result = await controller.Add(CreateInput());
                 Assert.NotNull(result);
