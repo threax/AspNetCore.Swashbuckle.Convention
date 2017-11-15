@@ -20,13 +20,11 @@ namespace DevApp.Tests
 {
     public static class ValueTests
     {
-        private static void SetupCommonMockups(Mockup mockup)
+        private static Mockup SetupCommonMockups(this Mockup mockup)
         {
-            mockup.Add<IMapper>(m => AppDatabaseServiceExtensions.SetupMappings().CreateMapper(mockup.Get));
+            mockup.Add<IValueRepository>(m => new ValueRepository(m.Get<AppDbContext>(), m.Get<IMapper>()));
 
-            mockup.Add<AppDbContext>(m => new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
-                                                                        .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                                                                        .Options));
+            return mockup;
         }
 
         public static ValueInput CreateInput(String seed = "Don't Care")
@@ -48,11 +46,11 @@ namespace DevApp.Tests
 
         public class Profiles : IDisposable
         {
-            private Mockup mockup = new Mockup();
+            private Mockup mockup = new Mockup().SetupGlobal().SetupCommonMockups();
 
             public Profiles()
             {
-                SetupCommonMockups(mockup);
+                
             }
 
             public void Dispose()
@@ -90,11 +88,11 @@ namespace DevApp.Tests
 
         public class Repository : IDisposable
         {
-            private Mockup mockup = new Mockup();
+            private Mockup mockup = new Mockup().SetupGlobal().SetupCommonMockups();
 
             public Repository()
             {
-                SetupCommonMockups(mockup);
+                
             }
 
             public void Dispose()
@@ -105,7 +103,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Add()
             {
-                var repo = new ValueRepository(mockup.Get<AppDbContext>(), mockup.Get<IMapper>());
+                var repo = mockup.Get<IValueRepository>();
                 var result = await repo.Add(CreateInput());
                 Assert.NotNull(result);
             }
@@ -113,7 +111,7 @@ namespace DevApp.Tests
             [Fact]
             async Task AddRange()
             {
-                var repo = new ValueRepository(mockup.Get<AppDbContext>(), mockup.Get<IMapper>());
+                var repo = mockup.Get<IValueRepository>();
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
             }
 
@@ -121,7 +119,7 @@ namespace DevApp.Tests
             async Task Delete()
             {
                 var dbContext = mockup.Get<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.Get<IMapper>());
+                var repo = mockup.Get<IValueRepository>();
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 var result = await repo.Add(CreateInput());
                 Assert.Equal<int>(4, dbContext.Values.Count());
@@ -133,7 +131,7 @@ namespace DevApp.Tests
             async Task Get()
             {
                 var dbContext = mockup.Get<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.Get<IMapper>());
+                var repo = mockup.Get<IValueRepository>();
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 var result = await repo.Add(CreateInput());
                 Assert.Equal<int>(4, dbContext.Values.Count());
@@ -144,16 +142,14 @@ namespace DevApp.Tests
             [Fact]
             async Task HasValuesEmpty()
             {
-                var dbContext = mockup.Get<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.Get<IMapper>());
+                var repo = mockup.Get<IValueRepository>();
                 Assert.False(await repo.HasValues());
             }
 
             [Fact]
             async Task HasValues()
             {
-                var dbContext = mockup.Get<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.Get<IMapper>());
+                var repo = mockup.Get<IValueRepository>();
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 Assert.True(await repo.HasValues());
             }
@@ -162,8 +158,7 @@ namespace DevApp.Tests
             async Task List()
             {
                 //This could be more complete
-                var dbContext = mockup.Get<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.Get<IMapper>());
+                var repo = mockup.Get<IValueRepository>();
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 var query = new ValueQuery();
                 var result = await repo.List(query);
@@ -176,7 +171,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Update()
             {
-                var repo = new ValueRepository(mockup.Get<AppDbContext>(), mockup.Get<IMapper>());
+                var repo = mockup.Get<IValueRepository>();
                 var result = await repo.Add(CreateInput());
                 Assert.NotNull(result);
                 var updateResult = await repo.Update(result.ValueId, CreateInput());
@@ -186,22 +181,10 @@ namespace DevApp.Tests
 
         public class Controller : IDisposable
         {
-            private Mockup mockup = new Mockup();
+            private Mockup mockup = new Mockup().SetupGlobal().SetupCommonMockups();
 
             public Controller()
             {
-                SetupCommonMockups(mockup);
-                mockup.Add<IValueRepository>(m => new ValueRepository(m.Get<AppDbContext>(), m.Get<IMapper>()));
-                mockup.Add<ControllerContext>(m => new ControllerContext()
-                {
-                    HttpContext = new DefaultHttpContext()
-                    {
-                        User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
-                        {
-                            new Claim(Threax.AspNetCore.AuthCore.ClaimTypes.ObjectGuid, Guid.NewGuid().ToString()),
-                        }))
-                    }
-                });
                 mockup.Add<ValuesController>(m => new ValuesController(m.Get<IValueRepository>())
                 {
                     ControllerContext = m.Get<ControllerContext>()
@@ -220,7 +203,7 @@ namespace DevApp.Tests
 
                 var controller = mockup.Get<ValuesController>();
 
-                for(var i = 0; i < totalItems; ++i)
+                for (var i = 0; i < totalItems; ++i)
                 {
                     Assert.NotNull(await controller.Add(CreateInput()));
                 }
