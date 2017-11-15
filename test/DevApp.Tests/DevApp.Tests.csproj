@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\DevApp\DevApp.csproj" />
+    <ProjectReference Include="..\..\src\Threax.AspNetCore.Tests\Threax.AspNetCore.Tests.csproj" />
   </ItemGroup>
 
 </Project>

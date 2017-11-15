@@ -12,6 +12,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Threax.AspNetCore.Tests;
 using Xunit;
 
 namespace DevApp.Tests
@@ -20,9 +21,9 @@ namespace DevApp.Tests
     {
         private static void SetupCommonMockups(Mockup mockup)
         {
-            mockup.AddCreateFunc<IMapper>(m => AppDatabaseServiceExtensions.SetupMappings().CreateMapper(mockup.CreateMock));
+            mockup.Add<IMapper>(m => AppDatabaseServiceExtensions.SetupMappings().CreateMapper(mockup.Create));
 
-            mockup.AddCreateFunc<AppDbContext>(m => new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
+            mockup.Add<AppDbContext>(m => new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
                                                                         .UseInMemoryDatabase(Guid.NewGuid().ToString())
                                                                         .Options));
         }
@@ -52,7 +53,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Add()
             {
-                var repo = new ValueRepository(mockup.CreateMock<AppDbContext>(), mockup.CreateMock<IMapper>());
+                var repo = new ValueRepository(mockup.Create<AppDbContext>(), mockup.Create<IMapper>());
                 var result = await repo.Add(CreateInput());
                 Assert.NotNull(result);
             }
@@ -60,15 +61,15 @@ namespace DevApp.Tests
             [Fact]
             async Task AddRange()
             {
-                var repo = new ValueRepository(mockup.CreateMock<AppDbContext>(), mockup.CreateMock<IMapper>());
+                var repo = new ValueRepository(mockup.Create<AppDbContext>(), mockup.Create<IMapper>());
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
             }
 
             [Fact]
             async Task Delete()
             {
-                var dbContext = mockup.CreateMock<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.CreateMock<IMapper>());
+                var dbContext = mockup.Create<AppDbContext>();
+                var repo = new ValueRepository(dbContext, mockup.Create<IMapper>());
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 var result = await repo.Add(CreateInput());
                 Assert.Equal<int>(4, dbContext.Values.Count());
@@ -79,8 +80,8 @@ namespace DevApp.Tests
             [Fact]
             async Task Get()
             {
-                var dbContext = mockup.CreateMock<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.CreateMock<IMapper>());
+                var dbContext = mockup.Create<AppDbContext>();
+                var repo = new ValueRepository(dbContext, mockup.Create<IMapper>());
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 var result = await repo.Add(CreateInput());
                 Assert.Equal<int>(4, dbContext.Values.Count());
@@ -91,16 +92,16 @@ namespace DevApp.Tests
             [Fact]
             async Task HasValuesEmpty()
             {
-                var dbContext = mockup.CreateMock<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.CreateMock<IMapper>());
+                var dbContext = mockup.Create<AppDbContext>();
+                var repo = new ValueRepository(dbContext, mockup.Create<IMapper>());
                 Assert.False(await repo.HasValues());
             }
 
             [Fact]
             async Task HasValues()
             {
-                var dbContext = mockup.CreateMock<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.CreateMock<IMapper>());
+                var dbContext = mockup.Create<AppDbContext>();
+                var repo = new ValueRepository(dbContext, mockup.Create<IMapper>());
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 Assert.True(await repo.HasValues());
             }
@@ -109,8 +110,8 @@ namespace DevApp.Tests
             async Task List()
             {
                 //This could be more complete
-                var dbContext = mockup.CreateMock<AppDbContext>();
-                var repo = new ValueRepository(dbContext, mockup.CreateMock<IMapper>());
+                var dbContext = mockup.Create<AppDbContext>();
+                var repo = new ValueRepository(dbContext, mockup.Create<IMapper>());
                 await repo.AddRange(new ValueInput[] { CreateInput(), CreateInput(), CreateInput() });
                 var query = new ValueQuery();
                 var result = await repo.List(query);
@@ -123,7 +124,7 @@ namespace DevApp.Tests
             [Fact]
             async Task Update()
             {
-                var repo = new ValueRepository(mockup.CreateMock<AppDbContext>(), mockup.CreateMock<IMapper>());
+                var repo = new ValueRepository(mockup.Create<AppDbContext>(), mockup.Create<IMapper>());
                 var result = await repo.Add(CreateInput());
                 Assert.NotNull(result);
                 var updateResult = await repo.Update(result.ValueId, CreateInput());
@@ -138,8 +139,8 @@ namespace DevApp.Tests
             public Controller()
             {
                 SetupCommonMockups(mockup);
-                mockup.AddCreateFunc<IValueRepository>(m => new ValueRepository(m.CreateMock<AppDbContext>(), m.CreateMock<IMapper>()));
-                mockup.AddCreateFunc<ControllerContext>(m => new ControllerContext()
+                mockup.Add<IValueRepository>(m => new ValueRepository(m.Create<AppDbContext>(), m.Create<IMapper>()));
+                mockup.Add<ControllerContext>(m => new ControllerContext()
                 {
                     HttpContext = new DefaultHttpContext()
                     {
@@ -161,9 +162,9 @@ namespace DevApp.Tests
             {
                 var totalItems = 3;
 
-                var controller = new ValuesController(mockup.CreateMock<IValueRepository>())
+                var controller = new ValuesController(mockup.Create<IValueRepository>())
                 {
-                    ControllerContext = mockup.CreateMock<ControllerContext>()
+                    ControllerContext = mockup.Create<ControllerContext>()
                 };
 
                 for(var i = 0; i < totalItems; ++i)
@@ -184,9 +185,9 @@ namespace DevApp.Tests
             {
                 var totalItems = 3;
 
-                var controller = new ValuesController(mockup.CreateMock<IValueRepository>())
+                var controller = new ValuesController(mockup.Create<IValueRepository>())
                 {
-                    ControllerContext = mockup.CreateMock<ControllerContext>()
+                    ControllerContext = mockup.Create<ControllerContext>()
                 };
 
                 for (var i = 0; i < totalItems; ++i)
@@ -203,9 +204,9 @@ namespace DevApp.Tests
             [Fact]
             async Task Add()
             {
-                var controller = new ValuesController(mockup.CreateMock<IValueRepository>())
+                var controller = new ValuesController(mockup.Create<IValueRepository>())
                 {
-                    ControllerContext = mockup.CreateMock<ControllerContext>()
+                    ControllerContext = mockup.Create<ControllerContext>()
                 };
 
                 var result = await controller.Add(CreateInput());
@@ -215,9 +216,9 @@ namespace DevApp.Tests
             [Fact]
             async Task Update()
             {
-                var controller = new ValuesController(mockup.CreateMock<IValueRepository>())
+                var controller = new ValuesController(mockup.Create<IValueRepository>())
                 {
-                    ControllerContext = mockup.CreateMock<ControllerContext>()
+                    ControllerContext = mockup.Create<ControllerContext>()
                 };
 
                 var result = await controller.Add(CreateInput());
@@ -230,9 +231,9 @@ namespace DevApp.Tests
             [Fact]
             async Task Delete()
             {
-                var controller = new ValuesController(mockup.CreateMock<IValueRepository>())
+                var controller = new ValuesController(mockup.Create<IValueRepository>())
                 {
-                    ControllerContext = mockup.CreateMock<ControllerContext>()
+                    ControllerContext = mockup.Create<ControllerContext>()
                 };
 
                 var result = await controller.Add(CreateInput());
