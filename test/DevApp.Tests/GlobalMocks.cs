@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using Threax.AspNetCore.Tests;
 
@@ -21,15 +22,21 @@ namespace DevApp.Tests
                                                                         .UseInMemoryDatabase(Guid.NewGuid().ToString())
                                                                         .Options));
 
+            mockup.Add<IIdentity>(m => new ClaimsIdentity(new Claim[]
+            {
+                new Claim(Threax.AspNetCore.AuthCore.ClaimTypes.ObjectGuid, Guid.NewGuid().ToString()),
+            }));
+
+            mockup.Add<ClaimsPrincipal>(m => new ClaimsPrincipal(m.Get<IIdentity>()));
+
+            mockup.Add<HttpContext>(m => new DefaultHttpContext()
+            {
+                User = m.Get<ClaimsPrincipal>()
+            });
+
             mockup.Add<ControllerContext>(m => new ControllerContext()
             {
-                HttpContext = new DefaultHttpContext()
-                {
-                    User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim(Threax.AspNetCore.AuthCore.ClaimTypes.ObjectGuid, Guid.NewGuid().ToString()),
-                    }))
-                }
+                HttpContext = m.Get<HttpContext>()
             });
 
             return mockup;
