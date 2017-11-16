@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using DevApp.Database;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,15 @@ namespace DevApp.Tests
 {
     public static class GlobalMocks
     {
+        /// <summary>
+        /// Setup global shared mockups that can be used across may tests.
+        /// </summary>
+        /// <param name="mockup">The mockup class to configure.</param>
+        /// <returns>The passed in mockup test.</returns>
         public static Mockup SetupGlobal(this Mockup mockup)
         {
-            mockup.Add<IMapper>(m => AppDatabaseServiceExtensions.SetupMappings().CreateMapper(mockup.Get));
+            mockup.Add<MapperConfiguration>(m => AppDatabaseServiceExtensions.SetupMappings());
+            mockup.Add<IMapper>(m => m.Get<MapperConfiguration>().CreateMapper(mockup.Get));
 
             mockup.Add<AppDbContext>(m => new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
                                                                         .UseInMemoryDatabase(Guid.NewGuid().ToString())
@@ -40,6 +48,32 @@ namespace DevApp.Tests
             mockup.Add<ControllerContext>(m => new ControllerContext()
             {
                 HttpContext = m.Get<HttpContext>()
+            });
+
+            return mockup;
+        }
+
+        /// <summary>
+        /// Setup a IWebHost in the mocks. This will use the configuration files from the test project.
+        /// </summary>
+        /// <param name="mockup">The mockup class to configure.</param>
+        /// <returns>The passed in mockup test.</returns>
+        public static Mockup SetupWebHost(this Mockup mockup)
+        {
+            mockup.Add<IWebHost>(m =>
+            {
+                var hostBuilder = new WebHostBuilder()
+                                    .UseEnvironment("development")
+                                    .UseKestrel()
+                                    .UseStartup<Startup>()
+                                    .ConfigureAppConfiguration(configuration =>
+                                    {
+                                        configuration.Sources.Clear();
+                                        configuration.AddJsonFile("appsettings.json");
+                                        configuration.AddJsonFile("appsettings.Development.json");
+                                    });
+
+                return hostBuilder.Build();
             });
 
             return mockup;

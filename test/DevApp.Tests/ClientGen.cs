@@ -1,0 +1,30 @@
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using Threax.AspNetCore.Halcyon.ClientGen;
+using Threax.AspNetCore.Tests;
+using Xunit;
+
+namespace DevApp.Tests
+{
+    public class ClientGen : IDisposable
+    {
+        private Mockup mockup = new Mockup().SetupWebHost();
+
+        public void Dispose()
+        {
+            mockup.Dispose();
+        }
+
+        [Fact]
+        public void Run()
+        {
+            var host = mockup.Get<IWebHost>();
+            var clientWriter = host.Services.GetRequiredService<IClientGenerator>();
+            var clientTest = new ClientGenTester(clientWriter);
+            clientTest.Verify();
+        }
+    }
+}
