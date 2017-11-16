@@ -15,7 +15,7 @@ using Threax.AspNetCore.Tests;
 
 namespace DevApp.Tests
 {
-    public static class GlobalMocks
+    public static class Mocks
     {
         /// <summary>
         /// Setup global shared mockups that can be used across may tests.
