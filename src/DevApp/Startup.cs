@@ -55,6 +55,10 @@ namespace DevApp
                 o.RouteArgsToClear = new List<string>() { "inPagePath" };
             });
             ApiExplorerController.Allow = appConfig.AllowApiExplorer;
+            services.AddAssetBundle(o =>
+            {
+                o.UseBundles = appConfig.UseAssetBundles;
+            });
 
             services.AddHalClientGen(new HalClientGenOptions()
             {

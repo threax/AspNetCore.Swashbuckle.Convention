@@ -36,5 +36,10 @@ namespace DevApp
         /// off in production.
         /// </summary>
         public bool AllowApiExplorer { get; set; }
+
+        /// <summary>
+        /// Set this to true to use asset bundles instead of individual client side files.
+        /// </summary>
+        public bool UseAssetBundles { get; set; } = false;
     }
 }
