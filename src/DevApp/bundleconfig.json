@@ -2,14 +2,14 @@
 // More info at https://go.microsoft.com/fwlink/?LinkId=808241
 [
   {
-    "outputFileName": "wwwroot/bundle.css",
+    "outputFileName": "wwwroot/bundle.min.css",
     "inputFiles": [
       "wwwroot/lib/bootstrap/dist/css/threax.bootstrap.css",
       "wwwroot/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
     ]
   },
   {
-    "outputFileName": "wwwroot/bundle.js",
+    "outputFileName": "wwwroot/bundle.min.js",
     "inputFiles": [
       "wwwroot/lib/jquery/dist/jquery.min.js",
       "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
