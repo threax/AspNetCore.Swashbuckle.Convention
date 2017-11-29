@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Threax.AspNetCore.Models;
 
-public static partial class ModelDefs
+namespace DevApp.ModelSchemas
 {
     //[PluralName("ValueWoots")]
     public class Value
