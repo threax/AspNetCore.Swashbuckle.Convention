@@ -60,6 +60,8 @@ namespace DevApp
                 o.UseBundles = appConfig.UseAssetBundles;
             });
 
+            services.AddTimeTracking();
+
             services.AddHalClientGen(new HalClientGenOptions()
             {
                 SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly },

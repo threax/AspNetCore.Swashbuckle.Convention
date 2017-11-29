@@ -1,17 +1,8 @@
-﻿using AutoMapper;
 using DevApp.Controllers.Api;
-using DevApp.Database;
 using DevApp.InputModels;
 using DevApp.Repository;
-using DevApp.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Tests;
 using Xunit;

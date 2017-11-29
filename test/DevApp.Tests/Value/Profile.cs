@@ -1,18 +1,7 @@
-﻿using AutoMapper;
-using DevApp.Controllers.Api;
+using AutoMapper;
 using DevApp.Database;
-using DevApp.InputModels;
-using DevApp.Repository;
 using DevApp.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Threax.AspNetCore.Tests;
 using Xunit;
 
@@ -43,9 +32,7 @@ namespace DevApp.Tests
 
                 //Make sure the id does not copy over
                 Assert.Equal(Guid.Empty, entity.ValueId);
-
-                //Data specific assertions
-                Assert.Equal(input.Name, entity.Name);
+                AssertEqual(input, entity);
             }
 
             [Fact]
@@ -56,9 +43,7 @@ namespace DevApp.Tests
                 var view = mapper.Map<Value>(entity);
 
                 Assert.Equal(entity.ValueId, view.ValueId);
-
-                //Data specific assertions
-                Assert.Equal(entity.Name, view.Name);
+                AssertEqual(entity, view);
             }
         }
     }

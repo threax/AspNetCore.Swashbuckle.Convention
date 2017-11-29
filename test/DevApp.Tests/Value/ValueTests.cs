@@ -1,18 +1,10 @@
-﻿using AutoMapper;
-using DevApp.Controllers.Api;
+using AutoMapper;
 using DevApp.Database;
 using DevApp.InputModels;
 using DevApp.Repository;
+using DevApp.Models;
 using DevApp.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Threax.AspNetCore.Tests;
 using Xunit;
 
@@ -27,21 +19,59 @@ namespace DevApp.Tests
             return mockup;
         }
 
-        public static ValueInput CreateInput(String seed = "Don't Care")
+        
+        public static ValueInput CreateInput(String seed = ""
+
+
+                                         , String Name = default(String)
+)
         {
             return new ValueInput()
             {
-                Name = seed
+
+                Name = Name != null ? Name : $"Name {seed}",
             };
         }
 
-        public static ValueEntity CreateEntity(String seed = "Don't Care")
+
+        
+        public static ValueEntity CreateEntity(String seed = "", Guid? ValueId = null
+
+
+                                         , String Name = default(String)
+)
         {
             return new ValueEntity()
             {
-                ValueId = Guid.NewGuid(),
-                Name = seed
+                ValueId = ValueId.HasValue ? ValueId.Value : Guid.NewGuid(),
+
+                Name = Name != null ? Name : $"Name {seed}",
             };
         }
+
+
+        
+        public static Value CreateView(String seed = "", Guid? ValueId = null
+
+
+                                         , String Name = default(String)
+)
+        {
+            return new Value()
+            {
+                ValueId = ValueId.HasValue ? ValueId.Value : Guid.NewGuid(),
+
+                Name = Name != null ? Name : $"Name {seed}",
+            };
+        }
+
+
+        
+        public static void AssertEqual(IValue expected, IValue actual)
+        {
+
+           Assert.Equal(expected.Name, actual.Name);
+        }
+
     }
 }

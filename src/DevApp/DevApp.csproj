@@ -36,6 +36,7 @@
     <ProjectReference Include="..\Threax.AspNetCore.Halcyon\Threax.AspNetCore.Halcyon.csproj" />
     <ProjectReference Include="..\Threax.AspNetCore.IdServerAuth\Threax.AspNetCore.IdServerAuth.csproj" />
     <ProjectReference Include="..\Threax.AspNetCore.Models\Threax.AspNetCore.Models.csproj" />
+    <ProjectReference Include="..\Threax.AspNetCore.Tracking\Threax.AspNetCore.Tracking.csproj" />
     <ProjectReference Include="..\Threax.AspNetCore.UrlFix\Threax.AspNetCore.UrlFix.csproj" />
     <ProjectReference Include="..\Threax.AspNetCore.UserBuilder.Entities.Mvc\Threax.AspNetCore.UserBuilder.Entities.Mvc.csproj" />
     <ProjectReference Include="..\Threax.AspNetCore.UserBuilder.Entities\Threax.AspNetCore.UserBuilder.Entities.csproj" />

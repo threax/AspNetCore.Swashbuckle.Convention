@@ -7,7 +7,9 @@ using Threax.AspNetCore.Models;
 namespace DevApp.ModelSchemas
 {
     //[PluralName("ValueWoots")]
-    public class Value
+    [RequireAuthorization(typeof(Roles), nameof(Roles.EditValues))]
+    //[RequireAuthorization(Roles.EditValues)] //Alt syntax, not ideal
+    public abstract class Value
     {
         [Required]
         [MaxLength(450)]
