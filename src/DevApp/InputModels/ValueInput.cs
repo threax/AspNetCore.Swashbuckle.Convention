@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
-using DevApp.Models;
-namespace DevApp.InputModels 
-{
-    [UiTitle("Value")]
-    [HalModel]
-    public class ValueInput : IValue
-    {
 
-        [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
-        [Required(ErrorMessage = "Name must have a value.")]
-        public String Name { get; set; }
+namespace DevApp.InputModels
+{
+    public partial class ValueInput
+    {
+        //You can add your own customizations here. These will not be overwritten by the model generator.
+        //See ValueInput.Generated for the generated code
     }
 }

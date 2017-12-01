@@ -19,23 +19,14 @@ namespace DevApp.ViewModels
     [DeclareHalLink(typeof(ValuesController), nameof(ValuesController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]
     [DeclareHalLink(typeof(ValuesController), nameof(ValuesController.List), PagedCollectionView<Object>.Rels.First, ResponseOnly = true)]
     [DeclareHalLink(typeof(ValuesController), nameof(ValuesController.List), PagedCollectionView<Object>.Rels.Last, ResponseOnly = true)]
-    public partial class ValueCollection : PagedCollectionView<Value>, IValueQuery
+    public partial class ValueCollection
     {
         public ValueCollection(ValueQuery query, int total, IEnumerable<Value> items) : base(query, total, items)
         {
-            this.ValueId = query.ValueId;
+            this.query = query;
         }
 
-        public Guid? ValueId { get; set; }
-
-        protected override void AddCustomQuery(string rel, QueryStringBuilder queryString)
-        {
-            if (ValueId.HasValue)
-            {
-                queryString.AppendItem("valueId", ValueId.Value.ToString());
-            }
-
-            base.AddCustomQuery(rel, queryString);
-        }
+        //You can add your own customizations here. These will not be overwritten by the model generator.
+        //See ValueCollection.Generated for the generated code
     }
 }
