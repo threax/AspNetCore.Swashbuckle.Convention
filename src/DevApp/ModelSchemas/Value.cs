@@ -10,6 +10,7 @@ namespace DevApp.ModelSchemas
     //[PluralName("ValueWoots")]
     [RequireAuthorization(typeof(Roles), nameof(Roles.EditValues))]
     //[RequireAuthorization(Roles.EditValues)] //Alt syntax, not ideal
+    //[KeyType(typeof(int))]
     public abstract class Value
     {
         [Required]

@@ -31,7 +31,7 @@ namespace DevApp.Tests
                 var entity = mapper.Map<ValueEntity>(input);
 
                 //Make sure the id does not copy over
-                Assert.Equal(Guid.Empty, entity.ValueId);
+                Assert.Equal(default(Guid), entity.ValueId);
                 AssertEqual(input, entity);
             }
 

@@ -20,7 +20,7 @@ namespace DevApp.Tests
             return mockup;
         }
 
-                public static ValueInput CreateInput(String seed = "", String Name = default(String))
+        public static ValueInput CreateInput(String seed = "", String Name = default(String))
         {
             return new ValueInput()
             {
@@ -29,7 +29,7 @@ namespace DevApp.Tests
         }
 
 
-                public static ValueEntity CreateEntity(String seed = "", Guid? ValueId = null, String Name = default(String))
+        public static ValueEntity CreateEntity(String seed = "", Guid? ValueId = default(Guid?), String Name = default(String))
         {
             return new ValueEntity()
             {
@@ -39,7 +39,7 @@ namespace DevApp.Tests
         }
 
 
-                public static Value CreateView(String seed = "", Guid? ValueId = null, String Name = default(String))
+        public static Value CreateView(String seed = "", Guid? ValueId = default(Guid?), String Name = default(String))
         {
             return new Value()
             {
@@ -49,7 +49,7 @@ namespace DevApp.Tests
         }
 
 
-                public static void AssertEqual(IValue expected, IValue actual)
+        public static void AssertEqual(IValue expected, IValue actual)
         {
            Assert.Equal(expected.Name, actual.Name);
         }
