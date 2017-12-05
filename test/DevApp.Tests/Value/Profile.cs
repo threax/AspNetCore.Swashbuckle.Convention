@@ -1,6 +1,7 @@
 using AutoMapper;
 using DevApp.Database;
 using DevApp.ViewModels;
+using DevApp.Models;
 using System;
 using Threax.AspNetCore.Tests;
 using Xunit;

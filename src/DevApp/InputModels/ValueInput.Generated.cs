@@ -15,7 +15,7 @@ namespace DevApp.InputModels
     {
         [Required(ErrorMessage = "Name must have a value.")]
         [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
-        [UiOrder(0, 21)]
+        [UiOrder(0, 22)]
         public String Name { get; set; }
 
     }

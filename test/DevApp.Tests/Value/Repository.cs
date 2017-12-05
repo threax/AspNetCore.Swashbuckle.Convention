@@ -1,6 +1,7 @@
 using DevApp.Database;
 using DevApp.InputModels;
 using DevApp.Repository;
+using DevApp.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

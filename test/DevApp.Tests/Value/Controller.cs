@@ -1,6 +1,7 @@
 using DevApp.Controllers.Api;
 using DevApp.InputModels;
 using DevApp.Repository;
+using DevApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;

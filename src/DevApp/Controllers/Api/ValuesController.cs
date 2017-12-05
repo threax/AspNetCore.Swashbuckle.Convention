@@ -7,6 +7,7 @@ using DevApp.Repository;
 using Threax.AspNetCore.Halcyon.Ext;
 using DevApp.ViewModels;
 using DevApp.InputModels;
+using DevApp.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace DevApp.Controllers.Api
