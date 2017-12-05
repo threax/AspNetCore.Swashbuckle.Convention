@@ -7,6 +7,7 @@ using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 using Threax.AspNetCore.Tracking;
+using Threax.AspNetCore.Models;
 using DevApp.Models;
 
 namespace DevApp.Database 
@@ -16,9 +17,11 @@ namespace DevApp.Database
         [Key]
         public Guid ValueId { get; set; }
 
+        [Required(ErrorMessage = "Name must have a value.")]
         [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
         public String Name { get; set; }
 
+        [IndexProp]
         public DateTime Created { get; set; }
 
         public DateTime Modified { get; set; }

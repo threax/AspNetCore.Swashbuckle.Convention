@@ -12,18 +12,15 @@ using DevApp.Controllers.Api;
 
 namespace DevApp.ViewModels 
 {
-    public partial class Value : IValue, IValueId , ICreatedModified
-    {
-        [UiOrder]
+       public partial class Value : IValue, IValueId , ICreatedModified
+       {
         public Guid ValueId { get; set; }
 
-        [UiOrder]
+        [UiOrder(0, 18)]
         public String Name { get; set; }
 
-        [UiOrder]
         public DateTime Created { get; set; }
 
-        [UiOrder]
         public DateTime Modified { get; set; }
 
     }

@@ -13,9 +13,9 @@ namespace DevApp.InputModels
     [HalModel]
     public partial class ValueInput : IValue
     {
-        [UiOrder]
-        [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
         [Required(ErrorMessage = "Name must have a value.")]
+        [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
+        [UiOrder(0, 18)]
         public String Name { get; set; }
 
     }
