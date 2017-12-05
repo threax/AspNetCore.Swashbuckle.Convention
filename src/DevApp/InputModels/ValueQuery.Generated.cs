@@ -27,7 +27,7 @@ namespace DevApp.InputModels
         /// <returns>The query passed in populated with additional conditions.</returns>
         public IQueryable<T> Create<T>(IQueryable<T> query) where T : IValue, IValueId
         {
-            if (ValueId.HasValue)
+            if (ValueId != null)
             {
                 query = query.Where(i => i.ValueId == ValueId);
             }

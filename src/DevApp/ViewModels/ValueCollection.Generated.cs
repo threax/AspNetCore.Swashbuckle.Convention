@@ -24,7 +24,7 @@ namespace DevApp.ViewModels
         {
             if (ValueId != null)
             {
-                queryString.AppendItem("valueId", ValueId.Value.ToString());
+                queryString.AppendItem("valueId", ValueId.ToString());
             }
 
 

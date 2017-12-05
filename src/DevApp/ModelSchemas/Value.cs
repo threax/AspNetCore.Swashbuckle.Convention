@@ -11,6 +11,8 @@ namespace DevApp.ModelSchemas
     [RequireAuthorization(typeof(Roles), nameof(Roles.EditValues))]
     //[RequireAuthorization(Roles.EditValues)] //Alt syntax, not ideal
     //[KeyType(typeof(int))]
+    //[KeyType(typeof(String))]
+    //[KeyType(typeof(KeyTestEnum))]
     public abstract class Value
     {
         [Required]
