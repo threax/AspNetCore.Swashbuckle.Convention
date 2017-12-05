@@ -21,7 +21,6 @@ namespace DevApp.Database
         [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
         public String Name { get; set; }
 
-        [IndexProp]
         public DateTime Created { get; set; }
 
         public DateTime Modified { get; set; }

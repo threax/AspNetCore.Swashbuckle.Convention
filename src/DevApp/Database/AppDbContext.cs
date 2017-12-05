@@ -19,16 +19,6 @@ namespace DevApp.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            //Use the reflected index finder to lookup entities with [IndexProp] attributes on them
-            var propFinder = new IndexedPropertyFinder(this.GetType(), new Type[] { typeof(DbSet<>) });
-            foreach(var indexable in propFinder.GetIndexProps())
-            {
-                modelBuilder.Entity(indexable.Type)
-                    .HasIndex(indexable.PropertyInfo.Name)
-                        .ForSqlServerIsClustered(indexable.IndexAttribute.IsClustered)
-                        .IsUnique(indexable.IndexAttribute.IsUnique);
-            }
         }
     }
 }
