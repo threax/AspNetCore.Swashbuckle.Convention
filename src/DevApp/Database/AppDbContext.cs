@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using Threax.AspNetCore.Models;
 using Threax.AspNetCore.UserBuilder.Entities;
 
 namespace DevApp.Database
@@ -14,5 +16,19 @@ namespace DevApp.Database
         }
 
         //The dbset declarations are in the other parial classes. Expand the AppDbContext.cs class node to see them.
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            //Use the reflected index finder to lookup entities with [IndexProp] attributes on them
+            var attributeFinder = new IndexAttributeFinder(this.GetType(), new Type[] { typeof(DbSet<>) });
+            foreach(var indexable in attributeFinder.GetIndexProps())
+            {
+                modelBuilder.Entity(indexable.Type)
+                    .HasIndex(indexable.PropertyInfo.Name)
+                        .ForSqlServerIsClustered(indexable.IndexAttribute.IsClustered)
+                        .IsUnique(indexable.IndexAttribute.IsUnique);
+            }
+        }
     }
 }
