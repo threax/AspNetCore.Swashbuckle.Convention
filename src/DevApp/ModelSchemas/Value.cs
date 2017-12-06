@@ -20,6 +20,7 @@ namespace DevApp.ModelSchemas
         [MaxLength(450)]
         //[Display(Name = "WootName")]
         [UiOrder]
+        //[DefineNullValueLabel("Any")]
         public String Name { get; set; }
 
         //public Guid ForeignKey { get; set; }

@@ -9,6 +9,7 @@ using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 using Threax.AspNetCore.Tracking;
 using DevApp.Models;
 using DevApp.Controllers.Api;
+using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace DevApp.ViewModels 
 {
