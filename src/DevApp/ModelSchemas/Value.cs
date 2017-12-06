@@ -22,16 +22,16 @@ namespace DevApp.ModelSchemas
         [UiOrder]
         public String Name { get; set; }
 
-        [NoInputModel]
-        [UiOrder]
-        public int NotOnInput { get; set; }
+        //[NoInputModel]
+        //[UiOrder]
+        //public int NotOnInput { get; set; }
 
-        [NoEntity]
-        [UiOrder]
-        public int NotOnEntity { get; set; }
+        //[NoEntity]
+        //[UiOrder]
+        //public int NotOnEntity { get; set; }
 
-        [NoViewModel]
-        [UiOrder]
-        public int NotOnView { get; set; }
+        //[NoViewModel]
+        //[UiOrder]
+        //public int NotOnView { get; set; }
     }
 }

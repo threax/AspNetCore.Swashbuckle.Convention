@@ -12,7 +12,7 @@ using DevApp.Controllers.Api;
 
 namespace DevApp.ViewModels 
 {
-       public partial class Value : IValue, IValueId , ICreatedModified
+       public partial class Value : IValue, IValueId, ICreatedModified
        {
         public Guid ValueId { get; set; }
 

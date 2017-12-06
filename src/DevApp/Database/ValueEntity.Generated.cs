@@ -12,7 +12,7 @@ using DevApp.Models;
 
 namespace DevApp.Database 
 {
-    public partial class ValueEntity : IValue, IValueId , ICreatedModified
+    public partial class ValueEntity : IValue, IValueId, ICreatedModified
     {
         [Key]
         public Guid ValueId { get; set; }
