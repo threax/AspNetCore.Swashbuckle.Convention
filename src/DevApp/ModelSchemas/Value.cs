@@ -20,9 +20,18 @@ namespace DevApp.ModelSchemas
         [MaxLength(450)]
         //[Display(Name = "WootName")]
         [UiOrder]
-        //[NoInputModel]
-        //[NoEntity]
-        //[NoViewModel]
         public String Name { get; set; }
+
+        [NoInputModel]
+        [UiOrder]
+        public int NotOnInput { get; set; }
+
+        [NoEntity]
+        [UiOrder]
+        public int NotOnEntity { get; set; }
+
+        [NoViewModel]
+        [UiOrder]
+        public int NotOnView { get; set; }
     }
 }
