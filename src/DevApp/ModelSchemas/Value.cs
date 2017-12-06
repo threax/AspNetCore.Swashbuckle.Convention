@@ -21,6 +21,8 @@ namespace DevApp.ModelSchemas
         //[Display(Name = "WootName")]
         [UiOrder]
         //[DefineNullValueLabel("Any")]
+        //[Queryable(required:true, showOnUi:false)]
+        //[Queryable]
         public String Name { get; set; }
 
         //public Guid ForeignKey { get; set; }
