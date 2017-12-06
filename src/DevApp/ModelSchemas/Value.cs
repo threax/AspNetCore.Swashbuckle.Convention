@@ -22,6 +22,8 @@ namespace DevApp.ModelSchemas
         [UiOrder]
         public String Name { get; set; }
 
+        //public Guid ForeignKey { get; set; }
+
         //[NoInputModel]
         //[UiOrder]
         //public int NotOnInput { get; set; }
