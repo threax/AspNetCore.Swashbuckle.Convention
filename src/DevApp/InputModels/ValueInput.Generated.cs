@@ -11,7 +11,7 @@ using DevApp.Models;
 namespace DevApp.InputModels 
 {
     [HalModel]
-    public partial class ValueInput : IValue
+    public partial class ValueInput : IValue 
     {
         [Required(ErrorMessage = "Name must have a value.")]
         [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
