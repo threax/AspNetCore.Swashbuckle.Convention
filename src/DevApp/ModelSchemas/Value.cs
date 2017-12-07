@@ -23,6 +23,7 @@ namespace DevApp.ModelSchemas
         //[DefineNullValueLabel("Any")]
         //[Queryable(required:true, showOnUi:false)]
         //[Queryable]
+        //[AbstractOnQuery]
         //[AbstractOnEntity]
         //[AbstractOnInputModel]
         //[AbstractOnViewModel]
