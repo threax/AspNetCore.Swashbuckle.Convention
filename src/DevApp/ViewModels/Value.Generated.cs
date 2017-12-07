@@ -17,7 +17,7 @@ namespace DevApp.ViewModels
        {
         public Guid ValueId { get; set; }
 
-        [UiOrder(0, 22)]
+        [UiOrder(0, 23)]
         public String Name { get; set; }
 
         [UiOrder(0, 2147483646)]
