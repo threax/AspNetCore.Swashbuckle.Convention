@@ -23,6 +23,9 @@ namespace DevApp.ModelSchemas
         //[DefineNullValueLabel("Any")]
         //[Queryable(required:true, showOnUi:false)]
         //[Queryable]
+        //[AbstractOnEntity]
+        //[AbstractOnInputModel]
+        //[AbstractOnViewModel]
         public String Name { get; set; }
 
         //public Guid ForeignKey { get; set; }
