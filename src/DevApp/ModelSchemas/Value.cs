@@ -29,6 +29,9 @@ namespace DevApp.ModelSchemas
         //[AbstractOnViewModel]
         public String Name { get; set; }
 
+        //[Queryable]
+        //public int CoolThing { get; set; }
+
         //public Guid ForeignKey { get; set; }
 
         //[NoInputModel]

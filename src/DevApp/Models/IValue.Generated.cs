@@ -23,6 +23,6 @@ namespace DevApp.Models
     public partial interface IValueQuery
     {
         Guid? ValueId { get; set; }
-        
+
     }
 }
