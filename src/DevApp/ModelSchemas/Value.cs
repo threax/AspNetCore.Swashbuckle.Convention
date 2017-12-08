@@ -33,6 +33,7 @@ namespace DevApp.ModelSchemas
         //[Queryable]
         //public int CoolThing { get; set; }
 
+        //[Queryable]
         //public Guid ForeignKey { get; set; }
 
         //[NoInputModel]
