@@ -36,6 +36,9 @@ namespace DevApp.ModelSchemas
         //[Queryable]
         //public Guid ForeignKey { get; set; }
 
+        //[Queryable]
+        //public Guid? OptionalForeignKey { get; set; }
+
         //[NoInputModel]
         //[UiOrder]
         //public int NotOnInput { get; set; }
