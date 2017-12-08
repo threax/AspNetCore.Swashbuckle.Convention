@@ -39,6 +39,6 @@ namespace DevApp.InputModels
             return query;
         }
 
-        partial void OnCreate<T>(ref IQueryable<T> query);
+        partial void OnCreate<T>(ref IQueryable<T> query) where T : IValue, IValueId;
     }
 }
