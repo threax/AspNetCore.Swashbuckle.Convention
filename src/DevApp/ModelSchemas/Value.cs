@@ -47,5 +47,9 @@ namespace DevApp.ModelSchemas
         //[NoViewModel]
         //[UiOrder]
         //public int NotOnView { get; set; }
+
+        //public KeyTestEnum? KeyTestEnum { get; set; }
+
+        //public int? NullableIntTest { get; set; }
     }
 }
