@@ -15,6 +15,7 @@ namespace DevApp.ModelSchemas
     //[KeyType(typeof(String))]
     //[KeyType(typeof(KeyTestEnum))]
     //[UiControllerName("Admin")]
+    //[KeyName("DifferentKeyId")]
     public abstract class Value
     {
         [Required]
