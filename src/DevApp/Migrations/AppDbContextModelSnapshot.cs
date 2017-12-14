@@ -35,9 +35,6 @@ namespace DevApp.Migrations
 
                     b.HasKey("ValueId");
 
-                    b.HasIndex("Created")
-                        .HasAnnotation("SqlServer:Clustered", true);
-
                     b.ToTable("Values");
                 });
 

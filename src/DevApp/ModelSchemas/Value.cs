@@ -55,5 +55,8 @@ namespace DevApp.ModelSchemas
         //public KeyTestEnum? KeyTestEnum { get; set; }
 
         //public int? NullableIntTest { get; set; }
+
+        //[TextAreaUiType]
+        //public String Description { get; set; }
     }
 }

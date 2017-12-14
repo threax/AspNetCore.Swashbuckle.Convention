@@ -11,8 +11,8 @@ using System;
 namespace DevApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20171205154454_indexedcreated")]
-    partial class indexedcreated
+    [Migration("20171214155011_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,9 +35,6 @@ namespace DevApp.Migrations
                         .HasMaxLength(450);
 
                     b.HasKey("ValueId");
-
-                    b.HasIndex("Created")
-                        .HasAnnotation("SqlServer:Clustered", true);
 
                     b.ToTable("Values");
                 });
