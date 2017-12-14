@@ -10,6 +10,7 @@ using Threax.AspNetCore.Tracking;
 using DevApp.Models;
 using DevApp.Controllers.Api;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
+using Threax.AspNetCore.Models;
 
 namespace DevApp.ViewModels 
 {

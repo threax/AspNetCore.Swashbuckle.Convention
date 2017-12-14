@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
+using Threax.AspNetCore.Models;
 
 namespace TestHalcyonApi.Models
 {

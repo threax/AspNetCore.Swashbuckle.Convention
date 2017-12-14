@@ -17,6 +17,7 @@ using TestHalcyonApi.ValueProviders;
 using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 using TestHalcyonApi.Customizers;
 using System.ComponentModel.DataAnnotations;
+using Threax.AspNetCore.Models;
 
 namespace TestHalcyonApi.ViewModels
 {
