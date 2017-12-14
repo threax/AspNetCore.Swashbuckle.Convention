@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using TestHalcyonApi.Controllers;
 using TestHalcyonApi.Models;
 using Threax.AspNetCore.Halcyon.Ext;
-using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 
 namespace TestHalcyonApi.ViewModels
 {

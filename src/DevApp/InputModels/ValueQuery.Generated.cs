@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
-using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 using System.ComponentModel.DataAnnotations;
 
 namespace DevApp.InputModels

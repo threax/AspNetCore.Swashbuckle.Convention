@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
-using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 using DevApp.Models;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 using Threax.AspNetCore.Models;

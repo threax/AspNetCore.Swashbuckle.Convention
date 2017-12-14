@@ -14,7 +14,6 @@ using NJsonSchema.Generation;
 using NJsonSchema.Annotations;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 using TestHalcyonApi.ValueProviders;
-using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 using TestHalcyonApi.Customizers;
 using System.ComponentModel.DataAnnotations;
 using Threax.AspNetCore.Models;

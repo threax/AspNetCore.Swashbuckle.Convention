@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using Threax.AspNetCore.Halcyon.Ext.UIAttrs;
 using Threax.AspNetCore.Models;
 
 namespace DevApp.ModelSchemas
